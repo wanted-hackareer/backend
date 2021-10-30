@@ -17,6 +17,10 @@ public class RatingRepository {
         em.persist(rating);
     }
 
+    public Rating findOne(Long id) {
+        return em.find(Rating.class, id);
+    }
+
     public List<Rating> findAll() {
         return em.createQuery(
                         "select r from Rating r", Rating.class)

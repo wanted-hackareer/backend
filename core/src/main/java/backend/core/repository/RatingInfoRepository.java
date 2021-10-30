@@ -18,6 +18,10 @@ public class RatingInfoRepository {
         em.persist(ratingInfo);
     }
 
+    public RatingInfo findOne(Long id) {
+        return em.find(RatingInfo.class, id);
+    }
+
     public List<RatingInfo> findAll(int offset, int limit) {
         return em.createQuery(
                         "select r from RatingInfo r", RatingInfo.class)

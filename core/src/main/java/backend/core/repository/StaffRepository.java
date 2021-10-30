@@ -17,6 +17,10 @@ public class StaffRepository {
         em.persist(staff);
     }
 
+    public Staff findOne(Long id) {
+        return em.find(Staff.class, id);
+    }
+
     public List<Staff> findById(Long id) {
         return em.createQuery(
                         "select s from Staff s" +

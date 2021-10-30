@@ -17,6 +17,10 @@ public class PostRepository {
         em.persist(post);
     }
 
+    public Post findOne(Long id) {
+        return em.find(Post.class, id);
+    }
+
     public List<Post> findById(Long id) {
         return em.createQuery(
                         "select p from Post p" +

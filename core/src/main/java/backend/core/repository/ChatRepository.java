@@ -18,6 +18,10 @@ public class ChatRepository {
         em.persist(chat);
     }
 
+    public Chat findOne(Long id){
+        return em.find(Chat.class, id);
+    }
+
     public List<Chat> findById(Long id) {
         return em.createQuery(
                         "select c from Chat c" +

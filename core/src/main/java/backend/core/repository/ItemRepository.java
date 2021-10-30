@@ -17,6 +17,10 @@ public class ItemRepository {
         em.persist(item);
     }
 
+    public Item findOne(Long id) {
+        return em.find(Item.class, id);
+    }
+
     public List<Item> findById(Long id) {
         return em.createQuery(
                         "select i from Item i" +

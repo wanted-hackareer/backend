@@ -1,5 +1,6 @@
 package backend.core.repository;
 
+import backend.core.domain.Member;
 import backend.core.domain.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,10 @@ public class MessageRepository {
 
     public void save(Message message) {
         em.persist(message);
+    }
+
+    public Message findOne(Long id) {
+        return em.find(Message.class, id);
     }
 
     public List<Message> findById(Long id) {

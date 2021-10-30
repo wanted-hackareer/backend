@@ -17,6 +17,10 @@ public class BasketRepository {
         em.persist(basket);
     }
 
+    public Basket findOne(Long id) {
+        return em.find(Basket.class, id);
+    }
+
     public List<Basket> findById(Long id) {
         return em.createQuery(
                         "select b from Basket b" +

@@ -6,15 +6,17 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class RatingInfoResponseDto {
+public class ResponseDto {
     private Long id;
     private String opinion;
+    private Boolean isLike;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public RatingInfoResponseDto(RatingInfo entity) {
+    public ResponseDto(RatingInfo entity) {
         id = entity.getId();
         opinion = entity.getOpinion();
+        isLike = entity.getIsLike();
         createdAt = entity.getCreatedAt();
         updatedAt = entity.getUpdatedAt();
     }

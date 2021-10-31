@@ -29,31 +29,18 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member")
     private List<Staff> staffList = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "basket_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
     private Basket basket;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rating_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
     private Rating rating;
-
-    //== 연관관계 메서드 ==//
-    public void setBasket(Basket basket) {
-        this.basket = basket;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
-    }
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Member (String email, String picture, Address address, Basket basket, Rating rating) {
+    public Member (String email, String picture, Address address) {
         this.email = email;
         this.picture = picture;
         this.address = address;
         this.role = Role.USER;
-        setBasket(basket);
-        setRating(rating);
     }
 }

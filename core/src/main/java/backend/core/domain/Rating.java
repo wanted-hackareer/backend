@@ -24,15 +24,21 @@ public class Rating extends BaseTimeEntity {
     @OneToMany(mappedBy = "rating")
     private List<RatingInfo> ratingInfoList = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "rating")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     private Member member;
+
+    //== 연관관계 메서드 ==//
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     //== 비즈니스 로직 ==//
     @Builder
     public Rating (Member member) {
         this.likes = 0L;
         this.hates = 0L;
-        this.member = member;
+        setMember(member);
     }
 
     public void plusLike() {

@@ -4,7 +4,8 @@ import backend.core.domain.Rating;
 import backend.core.domain.RatingInfo;
 import backend.core.repository.RatingInfoRepository;
 import backend.core.repository.RatingRepository;
-import backend.core.web.api.ratingInfo.dto.RatingInfoRequestCreateDto;
+import backend.core.web.api.ratingInfo.dto.RequestCreateDto;
+import backend.core.web.api.ratingInfo.dto.RequestUpdateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,13 @@ public class RatingInfoService {
      * 평가 내용 생성
      */
     @Transactional
-    public Long RatingInfo(RatingInfoRequestCreateDto request) {
-        Rating rating = ratingRepository.findOne(request.getRatingId());
+    public Long RatingInfo(RequestCreateDto dto) {
+        Rating rating = ratingRepository.findOne(dto.getRatingId());
+        dto.setRating(rating);
 
-        RatingInfo ratingInfo = RatingInfo.builder().rating(rating).opinion(request.getOpinion()).isLike(request.getIsLike()).build();
+        RatingInfo ratingInfo = dto.toEntity();
         ratingInfoRepository.save(ratingInfo);
 
-        log.info("Created rating info = {}", ratingInfo);
         return ratingInfo.getId();
     }
 
@@ -47,5 +48,16 @@ public class RatingInfoService {
 
     public List<RatingInfo> findAll(int offset, int limit) {
         return ratingInfoRepository.findAll(offset, limit);
+    }
+
+    /**
+     * 평가 내용 수정
+     */
+    @Transactional
+    public Long updateRatingInfo(RequestUpdateDto dto) {
+        RatingInfo ratingInfo = ratingInfoRepository.findOne(dto.getId());
+        ratingInfo.update(dto.getIsLike(), dto.getOpinion());
+
+        return ratingInfo.getId();
     }
 }

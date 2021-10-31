@@ -41,6 +41,11 @@ public class RatingInfo extends BaseTimeEntity {
         this.setLikeHate(isLike);
     }
 
+    public void update(Boolean isLike, String opinion) {
+        this.isLike = isLike;
+        this.opinion = opinion;
+    }
+
     private void setLikeHate(Boolean isLike) {
         if (isLike) {
             this.rating.plusLike();

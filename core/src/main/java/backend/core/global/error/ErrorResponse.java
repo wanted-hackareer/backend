@@ -1,18 +1,35 @@
 package backend.core.global.error;
 
+import backend.core.global.error.exception.ErrorCode;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class ErrorResponse {
 
-    private String message;
-    private int status;
-    private List<FieldError> errorList;
-    private String code;
+    private final LocalDateTime timestamp = LocalDateTime.now();
+    private final int status;
+    private final String error;
+    private final String code;
+    private final String message;
+
+    public static ResponseEntity<ErrorResponse> toResponseEntity(ErrorCode errorCode) {
+        return ResponseEntity
+                .status(errorCode.getHttpStatus())
+                .body(ErrorResponse.builder()
+                        .status(errorCode.getHttpStatus().value())
+                        .error(errorCode.getHttpStatus().name())
+                        .code(errorCode.name())
+                        .message(errorCode.getDetail())
+                        .build());
+    }
+
 }

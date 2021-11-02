@@ -1,36 +1,30 @@
 package backend.core.global.error.exception;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+import static org.springframework.http.HttpStatus.*;
+
+@Getter
 public enum ErrorCode {
 
-    INVALID_INPUT_VALUE(400, "C001", " Invalid Input Value"),
-    METHOD_NOT_ALLOWED(405, "C002", " Invalid Input Value"),
-    ENTITY_NOT_FOUND(400, "C003", " Entity Not Found"),
-    INTERNAL_SERVER_ERROR(500, "C004", "Server Error"),
-    INVALID_TYPE_VALUE(400, "C005", " Invalid Type Value"),
-    HANDLE_ACCESS_DENIED(403, "C006", "Access is Denied");
+    /* 400 BAD_REQUEST : 잘못된 요청 */
 
-    private String code;
-    private String message;
-    private int status;
+    /* 401 UNAUTHORIZED : 인증되지 않은 사용자 */
 
-    ErrorCode(int status, String code, String message) {
-        this.status = status;
-        this.code = code;
-        this.message = message;
-    }
+    /* 404 NOT_FOUND : Resource 를 찾을 수 없음 */
+    RATING_INFO_NOT_FOUND(NOT_FOUND, "평가 내용을 찾을 수 없습니다"),
+    RATING_NOT_FOUND(NOT_FOUND, "사용자 평가를 찾을 수 없습니다"),
 
-    public String getCode() {
-        return code;
-    }
+    /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
+    DUPLICATE_RESOURCE(CONFLICT, "데이터가 이미 존재합니다"),
+    ;
 
-    public String getMessage() {
-        return message;
-    }
+    private final HttpStatus httpStatus;
+    private final String detail;
 
-    public int getStatus() {
-        return status;
+    ErrorCode(HttpStatus httpStatus, String detail) {
+        this.httpStatus = httpStatus;
+        this.detail = detail;
     }
 }

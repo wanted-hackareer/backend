@@ -2,7 +2,10 @@ package backend.core.service;
 
 import backend.core.domain.Rating;
 import backend.core.domain.RatingInfo;
+import backend.core.global.error.exception.CustomException;
+import backend.core.global.error.exception.ErrorCode;
 import backend.core.repository.RatingInfoRepository;
+import backend.core.repository.RatingInfoRepositoryImpl;
 import backend.core.repository.RatingRepository;
 import backend.core.web.api.ratingInfo.dto.RequestCreateDto;
 import backend.core.web.api.ratingInfo.dto.RequestUpdateDto;
@@ -18,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RatingInfoService {
 
-    private final RatingInfoRepository ratingInfoRepository;
+    private final RatingInfoRepositoryImpl ratingInfoRepository;
     private final RatingRepository ratingRepository;
 
     /**
@@ -26,9 +29,11 @@ public class RatingInfoService {
      */
     @Transactional
     public Long RatingInfo(RequestCreateDto dto) {
-        Rating rating = ratingRepository.findOne(dto.getRatingId());
-        dto.setRating(rating);
 
+        Rating rating = ratingRepository.findById(dto.getRatingId())
+                .orElseThrow(() -> new CustomException(ErrorCode.RATING_NOT_FOUND));
+
+        dto.setRating(rating);
         RatingInfo ratingInfo = dto.toEntity();
         ratingInfoRepository.save(ratingInfo);
 
@@ -43,11 +48,11 @@ public class RatingInfoService {
      * GET API 조회 함수
      */
     public List<RatingInfo> findById(Long id) {
-        return ratingInfoRepository.findById(id);
+        return ratingInfoRepository.customFindById(id);
     }
 
     public List<RatingInfo> findAll(int offset, int limit) {
-        return ratingInfoRepository.findAll(offset, limit);
+        return ratingInfoRepository.findAllWithOffsetLimit(offset, limit);
     }
 
     /**

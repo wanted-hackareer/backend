@@ -13,7 +13,8 @@ public class Staff extends BaseTimeEntity {
     @Generated
     private Long id;
 
-    private Boolean isJoin;
+    @Enumerated(EnumType.STRING)
+    private StaffStatus staffStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -43,7 +44,7 @@ public class Staff extends BaseTimeEntity {
     //== 비즈니스 로직 ==//
     @Builder
     public Staff (Member member, Post post) {
-        this.isJoin = false;
+        this.staffStatus = StaffStatus.WAIT;
         setMember(member);
         setPost(post);
     }

@@ -2,37 +2,37 @@ package backend.core.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Basket extends BaseTimeEntity {
+public class Tag extends BaseTimeEntity {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @OneToMany(mappedBy = "basket")
-    private List<Item> itemList = new ArrayList<>();
-
     //== 연관관계 메서드 ==//
     public void setPost(Post post) {
+        if (post != null) {
+            this.post.getTagList().remove(this);
+        }
         this.post = post;
+        post.getTagList().add(this);
     }
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Basket(Post post) {
+    public Tag(Long id, String name, Post post) {
+        this.id = id;
+        this.name = name;
         setPost(post);
     }
 }

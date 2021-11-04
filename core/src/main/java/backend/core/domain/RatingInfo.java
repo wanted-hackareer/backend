@@ -53,14 +53,4 @@ public class RatingInfo extends BaseTimeEntity {
             this.rating.plusHate();
         }
     }
-
-    @Override
-    public String toString() {
-        return "RatingInfo{" +
-                "id=" + id +
-                ", isLike=" + isLike +
-                ", opinion='" + opinion + '\'' +
-                ", rating=" + rating +
-                '}';
-    }
 }

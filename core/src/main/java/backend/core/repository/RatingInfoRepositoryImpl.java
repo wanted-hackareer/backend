@@ -1,7 +1,9 @@
 package backend.core.repository;
 
+import backend.core.domain.Rating;
 import backend.core.domain.RatingInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

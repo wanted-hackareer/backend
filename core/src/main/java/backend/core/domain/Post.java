@@ -28,9 +28,18 @@ public class Post extends BaseTimeEntity {
     @Embedded
     private Address address;
 
+    @Enumerated(EnumType.STRING)
+    private PostStatus postStatus;
+
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post")
     private Chat chat;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post")
+    private Basket basket;
 
     @OneToMany(mappedBy = "post")
     private List<Staff> staffList = new ArrayList<>();
@@ -38,19 +47,23 @@ public class Post extends BaseTimeEntity {
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList = new ArrayList<>();
 
-    //== 연관관계 메서드 ==/
-    public void setChat(Chat chat) {
-        this.chat = chat;
+    @OneToMany(mappedBy = "post")
+    private List<Tag> tagList = new ArrayList<>();
+
+    //== 연관관계 메서드 ==//
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Post(String title, String description, Long maximum, Long participants, Address address, Chat chat) {
+    public Post(String title, String description, Long maximum, Long participants, Member member) {
         this.title = title;
         this.description = description;
         this.maximum = maximum;
         this.participants = participants;
-        this.address = address;
-        setChat(chat);
+        this.postStatus = PostStatus.ACCESS;
+        this.address = member.getAddress();
+        setMember(member);
     }
 }

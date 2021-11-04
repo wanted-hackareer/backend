@@ -15,6 +15,7 @@ public enum ErrorCode {
     /* 404 NOT_FOUND : Resource 를 찾을 수 없음 */
     RATING_INFO_NOT_FOUND(NOT_FOUND, "평가 내용을 찾을 수 없습니다"),
     RATING_NOT_FOUND(NOT_FOUND, "사용자 평가를 찾을 수 없습니다"),
+    MEMBER_NOT_FOUND(NOT_FOUND, "사용자를 찾을 수 없습니다"),
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
     DUPLICATE_RESOURCE(CONFLICT, "데이터가 이미 존재합니다"),

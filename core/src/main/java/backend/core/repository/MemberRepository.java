@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,45 +19,28 @@ public class MemberRepository {
         em.persist(member);
     }
 
-    public Member findOne(Long id) {
-        return em.find(Member.class, id);
-    }
-
-    public List<Member> findAll(int offset, int limit) {
-        return em.createQuery(
+    public Optional<Member> findById(Long id) {
+        return Optional.of(em.createQuery(
                         "select m from Member m" +
-                                " join fetch m.rating r" +
-                                " join fetch m.basket b", Member.class)
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList();
-    }
-
-    public List<Member> findById(Long id) {
-        return em.createQuery(
-                        "select m from Member m" +
-                                " join fetch m.rating r" +
-                                " join fetch m.basket b" +
                                 " where m.id = :id", Member.class)
                 .setParameter("id", id)
-                .getResultList();
+                .getSingleResult());
     }
 
-    public List<Member> findByIdWithRating(Long id) {
-        return em.createQuery(
-                        "select m from Member m" +
-                                " join fetch m.rating r" +
-                                " where m.id = :id", Member.class)
-                .setParameter("id", id)
-                .getResultList();
+    public Optional<List<Member>> findAll(int offset, int limit) {
+        return Optional.of(
+                em.createQuery(
+                                "select m from Member m", Member.class)
+                        .setFirstResult(offset)
+                        .setMaxResults(limit)
+                        .getResultList());
     }
 
-    public List<Member> findByIdWithBasket(int id) {
-        return em.createQuery(
-                        "select m from Member m" +
-                                " join fetch m.basket b" +
-                                " where m.id = :id", Member.class)
-                .setParameter("id", id)
-                .getResultList();
+    public Optional<Member> findByEmail(String email) {
+        return Optional.of(em.createQuery(
+                                "select m from Member m" +
+                                        " where m.email = :email", Member.class)
+                        .setParameter("email", email)
+                        .getSingleResult());
     }
 }

@@ -1,6 +1,8 @@
 package backend.core.security;
 
 import backend.core.domain.Member;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
@@ -30,4 +32,12 @@ public class TokenProvider {
                 .compact();
     }
 
+    public String validateAndGetUserId(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token).getBody();
+
+        return claims.getSubject();
+    }
 }

@@ -18,7 +18,8 @@ public class Member extends BaseTimeEntity {
     private Long id;
 
     private String email;
-    private String picture;
+    private String profile;
+    private String nickName;
 
     @Embedded
     private Address address;
@@ -29,18 +30,25 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member")
     private List<Staff> staffList = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
+/*    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
     private Basket basket;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
-    private Rating rating;
+    private Rating rating;*/
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Member (String email, String picture, Address address) {
+    public Member (String email, String profile, String nickName, Address address) {
         this.email = email;
-        this.picture = picture;
+        this.profile = profile;
+        this.nickName = nickName;
         this.address = address;
         this.role = Role.USER;
+    }
+
+    public void update(String profile, String nickName, Address address) {
+        this.profile = profile;
+        this.nickName = nickName;
+        this.address = address;
     }
 }

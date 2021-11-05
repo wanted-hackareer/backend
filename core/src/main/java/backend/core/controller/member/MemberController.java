@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
-public class MemberApiController {
+public class MemberController {
 
     private final MemberService memberService;
     private final TokenProvider tokenProvider;

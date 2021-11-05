@@ -1,4 +1,4 @@
-package backend.core.web.member.dto;
+package backend.core.controller.member.dto;
 
 import backend.core.domain.Address;
 import backend.core.domain.Profile;

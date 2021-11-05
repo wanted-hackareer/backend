@@ -1,13 +1,13 @@
-package backend.core.web.member;
+package backend.core.controller.member;
 
 import backend.core.domain.Member;
 import backend.core.global.response.ApiResponse;
 import backend.core.security.TokenProvider;
 import backend.core.service.MemberService;
-import backend.core.web.member.dto.MemberCreateRequestDto;
-import backend.core.web.member.dto.MemberResponseDto;
-import backend.core.web.member.dto.MemberSignInRequestDto;
-import backend.core.web.member.dto.MemberSignInResponseDto;
+import backend.core.controller.member.dto.MemberCreateRequestDto;
+import backend.core.controller.member.dto.MemberResponseDto;
+import backend.core.controller.member.dto.MemberSignInRequestDto;
+import backend.core.controller.member.dto.MemberSignInResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

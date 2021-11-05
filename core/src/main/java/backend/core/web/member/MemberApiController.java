@@ -10,7 +10,7 @@ import backend.core.web.member.dto.MemberSignInRequestDto;
 import backend.core.web.member.dto.MemberSignInResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,7 +29,7 @@ public class MemberApiController {
     @PostMapping("/sign-in")
     public MemberSignInResponseDto authenticate(@RequestBody MemberSignInRequestDto dto) {
         Member member = memberService.findByEmail(dto.getEmail());
-        String token = tokenProvider.create(member);
+        String token = tokenProvider.createToken(member);
 
         log.debug("token = {}", token);
         return new MemberSignInResponseDto(member, token);
@@ -46,7 +46,8 @@ public class MemberApiController {
 
     @GetMapping("/member/{id}")
     public MemberResponseDto memberV1(
-            @PathVariable Long id) {
+            @PathVariable Long id, @AuthenticationPrincipal String userId) {
+        log.info("Authenticated userId = {}", userId);
         Member member = memberService.findById(id);
         return new MemberResponseDto(member);
     }

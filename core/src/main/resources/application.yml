@@ -4,7 +4,6 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
   jpa:
     hibernate:
       ddl-auto: create
@@ -12,9 +11,15 @@ spring:
       hibernate:
         default_batch_fetch_size: 100
         format_sql: true
+  servlet:
+    multipart:
+      enabled: true
 
 logging:
   level:
     org.hibernate.SQL: debug
     org.springframework: debug
     org.springframework.web: debug
+
+file:
+  dir: "/Users/piaochung/Documents/GitHub/backend/file"

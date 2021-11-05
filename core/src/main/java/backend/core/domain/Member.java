@@ -18,11 +18,13 @@ public class Member extends BaseTimeEntity {
     private Long id;
 
     private String email;
-    private String profile;
     private String nickName;
 
     @Embedded
     private Address address;
+
+    @Embedded
+    private Profile profile;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -38,7 +40,7 @@ public class Member extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Member (String email, String profile, String nickName, Address address) {
+    public Member (String email, String nickName, Profile profile, Address address) {
         this.email = email;
         this.profile = profile;
         this.nickName = nickName;
@@ -46,7 +48,7 @@ public class Member extends BaseTimeEntity {
         this.role = Role.USER;
     }
 
-    public void update(String profile, String nickName, Address address) {
+    public void update(Profile profile, String nickName, Address address) {
         this.profile = profile;
         this.nickName = nickName;
         this.address = address;

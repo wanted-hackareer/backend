@@ -23,7 +23,7 @@ public class StaffTest {
         //then
         assertThat(staff.getMember().getEmail()).isEqualTo(member.getEmail());
         assertThat(staff.getPost().getTitle()).isEqualTo(post.getTitle());
-        assertThat(staff.getPost().getStaffList()).isEmpty();
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.WAIT);
     }
 
@@ -42,7 +42,7 @@ public class StaffTest {
 
         //then
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.ACCESS);
-        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(2);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class StaffTest {
 
         //then
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.CANCEL);
-        assertThat(staff.getPost().getStaffList()).isEmpty();
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
     }
 
     @Test
@@ -78,6 +78,6 @@ public class StaffTest {
 
         //then
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.DENIED);
-        assertThat(staff.getPost().getStaffList()).isEmpty();
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
     }
 }

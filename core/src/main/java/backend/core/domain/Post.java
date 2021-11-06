@@ -52,6 +52,9 @@ public class Post extends BaseTimeEntity {
     //== 연관관계 메서드 ==//
     public void setMember(Member member) {
         this.member = member;
+
+        Staff staff = Staff.builder().post(this).member(member).build();
+        this.staffList.add(staff);
     }
 
     public void setChat(Chat chat) {

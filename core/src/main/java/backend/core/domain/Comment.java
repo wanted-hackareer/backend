@@ -1,6 +1,7 @@
 package backend.core.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -39,9 +40,14 @@ public class Comment extends BaseTimeEntity {
     }
 
     //== 비즈니스 로직 ==//
+    @Builder
     public Comment (String content, Member member, Post post) {
         this.content = content;
         setMember(member);
         setPost(post);
+    }
+
+    public void update(String content) {
+        this.content = content;
     }
 }

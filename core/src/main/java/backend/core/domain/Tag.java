@@ -2,11 +2,12 @@ package backend.core.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+@Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tag extends BaseTimeEntity {
 
@@ -21,7 +22,7 @@ public class Tag extends BaseTimeEntity {
 
     //== 연관관계 메서드 ==//
     public void setPost(Post post) {
-        if (post != null) {
+        if (this.post != null) {
             this.post.getTagList().remove(this);
         }
         this.post = post;
@@ -30,9 +31,12 @@ public class Tag extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Tag(Long id, String name, Post post) {
-        this.id = id;
+    public Tag(String name, Post post) {
         this.name = name;
         setPost(post);
+    }
+
+    public void update(String name) {
+        this.name = name;
     }
 }

@@ -1,10 +1,13 @@
 package backend.core.repository;
 
 import backend.core.domain.Member;
+import backend.core.global.error.exception.CustomException;
+import backend.core.global.error.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +23,12 @@ public class MemberRepository {
     }
 
     public Optional<Member> findById(Long id) {
-        return Optional.of(em.createQuery(
+        List<Member> member = em.createQuery(
                         "select m from Member m" +
                                 " where m.id = :id", Member.class)
                 .setParameter("id", id)
-                .getSingleResult());
+                .getResultList();
+        return member.stream().findAny();
     }
 
     public Optional<List<Member>> findAll(int offset, int limit) {
@@ -37,10 +41,12 @@ public class MemberRepository {
     }
 
     public Optional<Member> findByEmail(String email) {
-        return Optional.of(em.createQuery(
-                                "select m from Member m" +
-                                        " where m.email = :email", Member.class)
-                        .setParameter("email", email)
-                        .getSingleResult());
+        List<Member> members = em.createQuery(
+                        "select m from Member m" +
+                                " where m.email = :email", Member.class)
+                .setParameter("email", email)
+                .getResultList();
+
+        return members.stream().findAny();
     }
 }

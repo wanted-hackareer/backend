@@ -1,16 +1,18 @@
 package backend.core.controller.member;
 
+import backend.core.controller.member.dto.MemberResponseDto;
+import backend.core.controller.member.dto.MemberSignInRequestDto;
+import backend.core.controller.member.dto.MemberSignInResponseDto;
+import backend.core.controller.member.dto.MemberSignUpRequestDto;
 import backend.core.domain.Member;
 import backend.core.global.response.ApiResponse;
 import backend.core.security.TokenProvider;
 import backend.core.service.MemberService;
-import backend.core.controller.member.dto.MemberCreateRequestDto;
-import backend.core.controller.member.dto.MemberResponseDto;
-import backend.core.controller.member.dto.MemberSignInRequestDto;
-import backend.core.controller.member.dto.MemberSignInResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,30 +27,40 @@ public class MemberController {
 
     private final MemberService memberService;
     private final TokenProvider tokenProvider;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @PostMapping("/sign-in")
-    public MemberSignInResponseDto authenticate(@RequestBody MemberSignInRequestDto dto) {
-        Member member = memberService.findByEmail(dto.getEmail());
-        String token = tokenProvider.createToken(member);
+    public MemberSignInResponseDto signInUser(@RequestBody MemberSignInRequestDto dto) {
+        Member member = memberService.findByCredentials(
+                dto.getEmail(),
+                dto.getPassword(),
+                passwordEncoder);
 
+        String token = tokenProvider.createToken(member);
         log.debug("token = {}", token);
         return new MemberSignInResponseDto(member, token);
     }
 
-    @PostMapping("/member")
+    @PostMapping("/sign-up")
     public MemberResponseDto createMemberV1(
-            @Valid @RequestBody MemberCreateRequestDto dto) {
+            @Valid @RequestBody MemberSignUpRequestDto dto) {
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+
         Long id = memberService.save(dto);
         Member member = memberService.findById(id);
-        log.info("member = {}", member.getEmail());
+
+        log.info("dto.getPassword() = {}", dto.getPassword());
+        log.info("member.getEmail() = {}", member.getEmail());
+        log.info("member.getPassword() = {}", member.getPassword());
         return new MemberResponseDto(member);
     }
 
     @GetMapping("/member/{id}")
     public MemberResponseDto memberV1(
             @PathVariable Long id, @AuthenticationPrincipal String userId) {
-        log.info("Authenticated userId = {}", userId);
         Member member = memberService.findById(id);
+
+        log.info("Authenticated userId = {}", userId);
         return new MemberResponseDto(member);
     }
 

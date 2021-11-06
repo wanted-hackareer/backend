@@ -1,5 +1,6 @@
 package backend.core.domain;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseTimeEntity {
 
     @Id
@@ -18,6 +19,7 @@ public class Member extends BaseTimeEntity {
     private Long id;
 
     private String email;
+    private String password;
     private String nickName;
 
     @Embedded
@@ -40,8 +42,9 @@ public class Member extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Member (String email, String nickName, Profile profile, Address address) {
+    public Member (String email, String password, String nickName, Profile profile, Address address) {
         this.email = email;
+        this.password = password;
         this.profile = profile;
         this.nickName = nickName;
         this.address = address;

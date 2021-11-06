@@ -30,16 +30,6 @@ public class InitDB {
         private final EntityManager em;
 
         public void dbInit() {
-
-            Address address = Address.builder().city("서울시").district("강남구").street("강남로 123-43").build();
-            Member member = Member.builder().address(address).email("test@gmail.com").profile("asdsadsadsa").build();
-            em.persist(member);
-
-            Rating rating = Rating.builder().member(member).build();
-            em.persist(rating);
-
-            RatingInfo ratingInfo = RatingInfo.builder().rating(rating).isLike(true).opinion("테스트1").build();
-            em.persist(ratingInfo);
         }
     }
 }

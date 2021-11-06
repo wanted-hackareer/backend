@@ -28,6 +28,7 @@ public class Chat extends BaseTimeEntity {
     //== 연관관계 메서드 ==//
     public void setPost(Post post) {
         this.post = post;
+        post.setChat(this);
     }
 
     //== 비즈니스 로직 ==//

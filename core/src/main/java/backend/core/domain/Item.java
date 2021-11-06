@@ -17,6 +17,7 @@ public class Item extends BaseTimeEntity {
     private Long id;
 
     private String name;
+    private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "basket_id")
@@ -33,8 +34,18 @@ public class Item extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Item (String name, Basket basket) {
+    public Item (String name, Basket basket, int quantity) {
         this.name = name;
+        this.quantity = quantity;
         setBasket(basket);
+    }
+
+    public void update(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
+    public void delete() {
+        this.basket.getItemList().remove(this);
     }
 }

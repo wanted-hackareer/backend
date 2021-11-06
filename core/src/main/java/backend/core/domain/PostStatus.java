@@ -1,5 +1,5 @@
 package backend.core.domain;
 
 public enum PostStatus {
-    ACCESS, CANCEL
+    ACCESS, CANCEL, DONE
 }

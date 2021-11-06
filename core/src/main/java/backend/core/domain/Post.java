@@ -22,8 +22,7 @@ public class Post extends BaseTimeEntity {
 
     private String description;
 
-    private Long maximum;
-    private Long participants;
+    private Integer maximum;
 
     @Embedded
     private Address address;
@@ -55,15 +54,29 @@ public class Post extends BaseTimeEntity {
         this.member = member;
     }
 
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
+    }
+
     //== 비즈니스 로직 ==//
     @Builder
-    public Post(String title, String description, Long maximum, Long participants, Member member) {
+    public Post(String title, String description, int maximum, Member member) {
         this.title = title;
         this.description = description;
         this.maximum = maximum;
-        this.participants = participants;
         this.postStatus = PostStatus.ACCESS;
         this.address = member.getAddress();
         setMember(member);
+    }
+
+    public void update(String title, String description, int maximum, PostStatus status) {
+        this.title = title;
+        this.description = description;
+        this.maximum = maximum;
+        this.postStatus = status;
     }
 }

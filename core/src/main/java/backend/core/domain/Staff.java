@@ -38,14 +38,20 @@ public class Staff extends BaseTimeEntity {
             this.post.getStaffList().remove(this);
         }
         this.post = post;
-        post.getStaffList().add(this);
     }
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Staff (Member member, Post post) {
+    public Staff(Member member, Post post) {
         this.staffStatus = StaffStatus.WAIT;
-        setMember(member);
         setPost(post);
+        setMember(member);
+    }
+
+    public void update(StaffStatus status) {
+        if (this.post != null && status == StaffStatus.ACCESS) {
+            post.getStaffList().add(this);
+        }
+        this.staffStatus = status;
     }
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 @Slf4j
 @Service
 public class TokenProvider {
-    private static final String SECRET_KEY = "d#nbwj2r^sqlyn=%hiq-nbi9wd88*%@l%+^a5&+$w*gq*1prnz";
+    private final String SECRET_KEY = "d#nbwj2r^sqlyn=%hiq-nbi9wd88*%@l%+^a5&+$w*gq*1prnz";
 
     public String createToken(Member member) {
         Date expireDate = Date.from(Instant.now().plus(30, ChronoUnit.MINUTES));

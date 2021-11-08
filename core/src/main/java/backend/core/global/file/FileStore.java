@@ -1,4 +1,4 @@
-package backend.core.file;
+package backend.core.global.file;
 
 import backend.core.domain.Profile;
 import org.springframework.beans.factory.annotation.Value;

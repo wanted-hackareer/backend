@@ -10,17 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-import static backend.core.global.error.exception.ErrorCode.LOGIN_FAILED;
-import static backend.core.global.error.exception.ErrorCode.MEMBER_NOT_FOUND;
+import static backend.core.global.error.exception.ErrorCode.*;
 
 @Service @Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -61,5 +58,21 @@ public class MemberService {
         List<Member> members = memberRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
         return members;
+    }
+
+    public Boolean isValidEmail(String email) {
+        memberRepository.findByEmail(email)
+                .ifPresent(e -> {
+                    throw new CustomException(EXIST_EMAIL);
+                });
+        return true;
+    }
+
+    public Boolean isValidNickname(String nickName) {
+        memberRepository.findByNickName(nickName)
+                .ifPresent(e -> {
+                    throw new CustomException(EXIST_NICKNAME);
+                });
+        return true;
     }
 }

@@ -44,6 +44,10 @@ public class MemberController {
     @PostMapping("/sign-up")
     public MemberResponseDto createMemberV1(
             @Valid @RequestBody MemberSignUpRequestDto dto) {
+        if (!(memberService.isValidEmail(dto.getEmail()) && memberService.isValidNickname(dto.getNickName()))) {
+            // 임시로 error 처리 따로 경로 만들어서 클라이언트에서 처리할 예정
+        }
+
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         Long id = memberService.save(dto);
@@ -55,10 +59,9 @@ public class MemberController {
         return new MemberResponseDto(member);
     }
 
-    @GetMapping("/member/{id}")
-    public MemberResponseDto memberV1(
-            @PathVariable Long id, @AuthenticationPrincipal String userId) {
-        Member member = memberService.findById(id);
+    @GetMapping("/member")
+    public MemberResponseDto memberV1(@AuthenticationPrincipal String userId) {
+        Member member = memberService.findById(Long.parseLong(userId));
 
         log.info("Authenticated userId = {}", userId);
         return new MemberResponseDto(member);
@@ -66,8 +69,8 @@ public class MemberController {
 
     @GetMapping("/members")
     public ApiResponse membersV1(
-            @RequestParam(name = "offset") int offset,
-            @RequestParam(name = "limit") int limit) {
+            @RequestParam(name = "offset", defaultValue = "0") int offset,
+            @RequestParam(name = "limit", defaultValue = "100") int limit) {
         List<Member> members = memberService.findAll(offset, limit);
         List<MemberResponseDto> result = members.stream()
                 .map(member -> new MemberResponseDto(member))

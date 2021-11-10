@@ -22,6 +22,8 @@ public class Chat extends BaseTimeEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
+    private String chatAddress;
+
     @OneToMany(mappedBy = "chat")
     private List<Message> messageList = new ArrayList<>();
 
@@ -33,7 +35,8 @@ public class Chat extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Chat (Post post) {
+    public Chat (Post post, String chatAddress) {
+        this.chatAddress = chatAddress;
         setPost(post);
     }
 }

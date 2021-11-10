@@ -34,12 +34,6 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member")
     private List<Staff> staffList = new ArrayList<>();
 
-/*    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
-    private Basket basket;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
-    private Rating rating;*/
-
     //== 비즈니스 로직 ==//
     @Builder
     public Member (String email, String password, String nickName, Profile profile, Address address) {

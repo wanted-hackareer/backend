@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,24 +18,23 @@ public class BasketRepository {
         em.persist(basket);
     }
 
-    public Basket findOne(Long id) {
-        return em.find(Basket.class, id);
-    }
-
-    public List<Basket> findById(Long id) {
-        return em.createQuery(
+    public Optional<Basket> findById(Long id) {
+        List<Basket> baskets = em.createQuery(
                         "select b from Basket b" +
-                                " join fetch b.member m" +
+                                " join fetch b.post p" +
                                 " where b.id = :id", Basket.class)
+                .setParameter("id", id)
                 .getResultList();
+        return baskets.stream().findAny();
     }
 
-    public List<Basket> findAll(int offset, int limit) {
-        return em.createQuery(
+    public Optional<List<Basket>> findAll(int offset, int limit) {
+        return Optional.of(
+                em.createQuery(
                         "select b from Basket b" +
-                                " join fetch b.member m", Basket.class)
+                                " join fetct b.post p", Basket.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
-                .getResultList();
+                .getResultList());
     }
 }

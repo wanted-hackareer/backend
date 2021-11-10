@@ -1,11 +1,13 @@
 package backend.core.repository;
 
 import backend.core.domain.Post;
+import backend.core.domain.PostStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,25 +19,41 @@ public class PostRepository {
         em.persist(post);
     }
 
-    public Post findOne(Long id) {
-        return em.find(Post.class, id);
-    }
-
-    public List<Post> findById(Long id) {
-        return em.createQuery(
+    public Optional<Post> findById(Long id) {
+        List<Post> postList = em.createQuery(
                         "select p from Post p" +
+                                " join fetch p.member m" +
+                                " join fetch p.basket b" +
                                 " join fetch p.chat c" +
                                 " where p.id = :id", Post.class)
                 .setParameter("id", id)
                 .getResultList();
+
+        return postList.stream().findAny();
     }
 
-    public List<Post> findAll(int offset, int limit) {
-        return em.createQuery(
-                        "select p from Post p" +
-                                " join fetch p.chat c", Post.class)
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList();
+    public Optional<List<Post>> findAll(int offset, int limit) {
+        return Optional.of(
+                em.createQuery(
+                                "select p from Post p" +
+                                        " join fetch p.member m" +
+                                        " join fetch p.chat c" +
+                                        " join fetch p.basket b", Post.class)
+                        .setFirstResult(offset)
+                        .setMaxResults(limit)
+                        .getResultList());
+    }
+
+    public Optional<List<Post>> findByStatus(PostStatus status) {
+        return Optional.of(
+                em.createQuery(
+                                "select p from Post p" +
+                                        " join fetch p.member m" +
+                                        " join fetch p.chat c" +
+                                        " join fetch p.basket b" +
+                                        " where p.postStatus = :status", Post.class)
+                        .setParameter("status", status)
+                        .getResultList()
+        );
     }
 }

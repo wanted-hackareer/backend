@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,25 +18,24 @@ public class ItemRepository {
         em.persist(item);
     }
 
-    public Item findOne(Long id) {
-        return em.find(Item.class, id);
-    }
-
-    public List<Item> findById(Long id) {
-        return em.createQuery(
+    public Optional<Item> findById(Long id) {
+        List<Item> items = em.createQuery(
                         "select i from Item i" +
                                 " join fetch i.basket b" +
                                 " where i.id = :id", Item.class)
                 .setParameter("id", id)
                 .getResultList();
+
+        return items.stream().findAny();
     }
 
-    public List<Item> findAll(int offset, int limit) {
-        return em.createQuery(
+    public Optional<List<Item>> findAll(int offset, int limit) {
+        return Optional.of(
+                em.createQuery(
                         "select i from Item i" +
                                 " join fetch i.basket b", Item.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
-                .getResultList();
+                .getResultList());
     }
 }

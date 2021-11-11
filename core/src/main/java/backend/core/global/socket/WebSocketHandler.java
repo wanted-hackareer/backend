@@ -14,8 +14,8 @@ import java.util.*;
 @RequiredArgsConstructor
 public class WebSocketHandler extends TextWebSocketHandler {
 
-    private final Set<WebSocketSession> sessions = new HashSet<>();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final List<HashMap<String, Object>> sessionMapList = new ArrayList<>();
+     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -25,7 +25,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        // TO-DO
         String payload = message.getPayload();
         log.info("WebSocketHandler Middle session = {}, payload = {}", session, payload);
         session.sendMessage(message);

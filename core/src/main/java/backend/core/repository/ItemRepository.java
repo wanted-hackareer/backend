@@ -21,7 +21,6 @@ public class ItemRepository {
     public Optional<Item> findById(Long id) {
         List<Item> items = em.createQuery(
                         "select i from Item i" +
-                                " join fetch i.basket b" +
                                 " where i.id = :id", Item.class)
                 .setParameter("id", id)
                 .getResultList();
@@ -32,8 +31,7 @@ public class ItemRepository {
     public Optional<List<Item>> findAll(int offset, int limit) {
         return Optional.of(
                 em.createQuery(
-                        "select i from Item i" +
-                                " join fetch i.basket b", Item.class)
+                        "select i from Item i", Item.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList());

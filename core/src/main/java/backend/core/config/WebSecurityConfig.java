@@ -1,6 +1,6 @@
 package backend.core.config;
 
-import backend.core.global.security.JwtAuthenticationFilter;
+import backend.core.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

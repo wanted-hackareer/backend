@@ -6,7 +6,7 @@ import backend.core.controller.member.dto.MemberSignInResponseDto;
 import backend.core.controller.member.dto.MemberSignUpRequestDto;
 import backend.core.domain.Member;
 import backend.core.global.response.ApiResponse;
-import backend.core.global.security.TokenProvider;
+import backend.core.security.TokenProvider;
 import backend.core.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

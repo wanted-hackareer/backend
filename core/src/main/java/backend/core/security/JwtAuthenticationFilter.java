@@ -1,4 +1,4 @@
-package backend.core.global.security;
+package backend.core.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

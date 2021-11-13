@@ -5,16 +5,15 @@ import backend.core.domain.Chat;
 import backend.core.domain.Post;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.ChatRepository;
-import backend.core.repository.PostRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
-import static backend.core.global.error.exception.ErrorCode.POST_NOT_FOUND;
+import static backend.core.global.error.exception.ErrorCode.CHAT_NOT_FOUND;
 
 @Slf4j @Service
 @RequiredArgsConstructor
@@ -22,13 +21,11 @@ import static backend.core.global.error.exception.ErrorCode.POST_NOT_FOUND;
 public class ChatService {
 
     private final ChatRepository chatRepository;
-    private final PostRepository postRepository;
-    private final ObjectMapper objectMapper;
+    private final PostService postService;
 
     @Transactional
     public Long save(ChatCreateRequestDto dto) {
-        Post post = postRepository.findById(dto.getPostId())
-                .orElseThrow(() -> new CustomException(POST_NOT_FOUND));
+        Post post = postService.findById(dto.getPostId());
         String chatAddress = UUID.randomUUID().toString();
 
         dto.setPost(post);
@@ -39,4 +36,41 @@ public class ChatService {
 
         return chat.getId();
     }
+
+    public Chat findById(Long id){
+        Chat chat = chatRepository.findById(id)
+                .orElseThrow(() -> new CustomException(CHAT_NOT_FOUND));
+        return chat;
+    }
+
+    public List<Chat> findAll(int offset, int limit) {
+        List<Chat> chats = chatRepository.findAll(offset, limit)
+                .orElseThrow(() -> new CustomException(CHAT_NOT_FOUND));
+        return chats;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

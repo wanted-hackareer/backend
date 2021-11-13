@@ -44,7 +44,7 @@ public class Member extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Member (String email, String password, String nickName, Profile profile, Address address) {
+    public Member(String email, String password, String nickName, Profile profile, Address address) {
         this.email = email;
         this.password = password;
         this.profile = profile;
@@ -57,5 +57,9 @@ public class Member extends BaseTimeEntity {
         this.profile = profile;
         this.nickName = nickName;
         this.address = address;
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
     }
 }

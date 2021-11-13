@@ -1,5 +1,6 @@
 package backend.core.service;
 
+import backend.core.controller.member.dto.MemberPasswordUpdateRequestDto;
 import backend.core.controller.member.dto.MemberSignUpRequestDto;
 import backend.core.controller.member.dto.MemberUpdateRequestDto;
 import backend.core.domain.Member;
@@ -15,7 +16,8 @@ import java.util.List;
 
 import static backend.core.global.error.exception.ErrorCode.*;
 
-@Service @Slf4j
+@Service
+@Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
@@ -24,8 +26,20 @@ public class MemberService {
 
     @Transactional
     public Long save(MemberSignUpRequestDto dto) {
+        if (!(isValidEmail(dto.getEmail()) && isValidNickname(dto.getNickName()))) {
+            // 임시로 error 처리 따로 경로 만들어서 클라이언트에서 처리할 예정
+        }
         Member member = dto.toEntity();
         memberRepository.save(member);
+        return member.getId();
+    }
+
+    @Transactional
+    public Long updatePassword(MemberPasswordUpdateRequestDto dto, PasswordEncoder encoder) {
+        Member member = memberRepository.findById(dto.getId())
+                .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+        member.updatePassword(encoder.encode(dto.getPassword()));
+
         return member.getId();
     }
 

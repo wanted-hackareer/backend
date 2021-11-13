@@ -44,10 +44,6 @@ public class MemberController {
     @PostMapping("/sign-up")
     public MemberResponseDto createMemberV1(
             @Valid @RequestBody MemberSignUpRequestDto dto) {
-        if (!(memberService.isValidEmail(dto.getEmail()) && memberService.isValidNickname(dto.getNickName()))) {
-            // 임시로 error 처리 따로 경로 만들어서 클라이언트에서 처리할 예정
-        }
-
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         Long id = memberService.save(dto);

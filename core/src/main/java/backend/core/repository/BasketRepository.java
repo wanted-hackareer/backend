@@ -21,7 +21,6 @@ public class BasketRepository {
     public Optional<Basket> findById(Long id) {
         List<Basket> baskets = em.createQuery(
                         "select b from Basket b" +
-                                " join fetch b.post p" +
                                 " where b.id = :id", Basket.class)
                 .setParameter("id", id)
                 .getResultList();
@@ -31,8 +30,7 @@ public class BasketRepository {
     public Optional<List<Basket>> findAll(int offset, int limit) {
         return Optional.of(
                 em.createQuery(
-                        "select b from Basket b" +
-                                " join fetct b.post p", Basket.class)
+                        "select b from Basket b", Basket.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList());

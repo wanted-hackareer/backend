@@ -23,7 +23,6 @@ public class PostRepository {
         List<Post> postList = em.createQuery(
                         "select p from Post p" +
                                 " join fetch p.member m" +
-                                " join fetch p.basket b" +
                                 " join fetch p.chat c" +
                                 " where p.id = :id", Post.class)
                 .setParameter("id", id)
@@ -37,8 +36,7 @@ public class PostRepository {
                 em.createQuery(
                                 "select p from Post p" +
                                         " join fetch p.member m" +
-                                        " join fetch p.chat c" +
-                                        " join fetch p.basket b", Post.class)
+                                        " join fetch p.chat c", Post.class)
                         .setFirstResult(offset)
                         .setMaxResults(limit)
                         .getResultList());
@@ -50,7 +48,6 @@ public class PostRepository {
                                 "select p from Post p" +
                                         " join fetch p.member m" +
                                         " join fetch p.chat c" +
-                                        " join fetch p.basket b" +
                                         " where p.postStatus = :status", Post.class)
                         .setParameter("status", status)
                         .getResultList()

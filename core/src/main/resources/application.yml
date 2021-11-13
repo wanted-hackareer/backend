@@ -14,6 +14,8 @@ spring:
   servlet:
     multipart:
       enabled: true
+  jwt:
+    secret: "d#nbwj2r^sqlyn=%hiq-nbi9wd88*%@l%+^a5&+$w*gq*1prnz"
 
 logging:
   level:

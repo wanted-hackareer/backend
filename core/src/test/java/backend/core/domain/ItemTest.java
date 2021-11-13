@@ -13,9 +13,7 @@ public class ItemTest {
         //given
         Address address = Address.builder().city("서울시").district("성동구").street("성동로").build();
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-
-        Post post = Post.builder().member(member).description("설명글입니다.").title("성동구 같이 장보러갈 사람").maximum(4).build();
-        Basket basket = Basket.builder().post(post).build();
+        Basket basket = Basket.builder().member(member).build();
 
         //when
         Item item = Item.builder().name("사과").basket(basket).build();
@@ -32,9 +30,7 @@ public class ItemTest {
         //given
         Address address = Address.builder().city("서울시").district("강남구").street("성동로").build();
         Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-
-        Post post = Post.builder().member(member).description("설명글일까요?").title("강남 같이 장보러갈 사람").maximum(2).build();
-        Basket basket = Basket.builder().post(post).build();
+        Basket basket = Basket.builder().member(member).build();
 
         Item item = Item.builder().name("사과").basket(basket).quantity(1).build();
 
@@ -52,9 +48,7 @@ public class ItemTest {
         //given
         Address address = Address.builder().city("서울시").district("강남구").street("성동로").build();
         Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-
-        Post post = Post.builder().member(member).description("설명글일까요?").title("강남 같이 장보러갈 사람").maximum(2).build();
-        Basket basket = Basket.builder().post(post).build();
+        Basket basket = Basket.builder().member(member).build();
 
         Item item = Item.builder().name("사과").basket(basket).quantity(1).build();
 
@@ -72,9 +66,7 @@ public class ItemTest {
         //given
         Address address = Address.builder().city("서울시").district("강남구").street("성동로").build();
         Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-
-        Post post = Post.builder().member(member).description("설명글일까요?").title("강남 같이 장보러갈 사람").maximum(2).build();
-        Basket basket = Basket.builder().post(post).build();
+        Basket basket = Basket.builder().member(member).build();
 
         Item item = Item.builder().name("사과").basket(basket).quantity(1).build();
         

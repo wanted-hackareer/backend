@@ -31,8 +31,16 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
+    private Basket basket;
+
     @OneToMany(mappedBy = "member")
     private List<Staff> staffList = new ArrayList<>();
+
+    //== 연관관계 메서드 ==//
+    public void setBasket(Basket basket) {
+        this.basket = basket;
+    }
 
     //== 비즈니스 로직 ==//
     @Builder

@@ -19,21 +19,21 @@ public class Basket extends BaseTimeEntity {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @OneToMany(mappedBy = "basket")
     private List<Item> itemList = new ArrayList<>();
 
     //== 연관관계 메서드 ==//
-    public void setPost(Post post) {
-        this.post = post;
-        post.setBasket(this);
+    public void setMember(Member member) {
+        this.member = member;
+        member.setBasket(this);
     }
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Basket(Post post) {
-        setPost(post);
+    public Basket(Member member) {
+        setMember(member);
     }
 }

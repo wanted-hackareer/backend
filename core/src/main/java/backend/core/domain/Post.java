@@ -24,6 +24,8 @@ public class Post extends BaseTimeEntity {
 
     private Integer maximum;
 
+    private String dayOfTheWeek;
+
     @Embedded
     private Address address;
 
@@ -36,9 +38,6 @@ public class Post extends BaseTimeEntity {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "post")
     private Chat chat;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post")
-    private Basket basket;
 
     @OneToMany(mappedBy = "post")
     private List<Staff> staffList = new ArrayList<>();
@@ -61,25 +60,27 @@ public class Post extends BaseTimeEntity {
         this.chat = chat;
     }
 
-    public void setBasket(Basket basket) {
-        this.basket = basket;
-    }
-
     //== 비즈니스 로직 ==//
     @Builder
-    public Post(String title, String description, int maximum, Member member) {
+    public Post(String title, String description, int maximum, Member member, String dayOfTheWeek) {
         this.title = title;
         this.description = description;
         this.maximum = maximum;
+        this.dayOfTheWeek = dayOfTheWeek;
         this.postStatus = PostStatus.ACCESS;
         this.address = member.getAddress();
         setMember(member);
     }
 
-    public void update(String title, String description, int maximum, PostStatus status) {
+    public void update(String title, String description, int maximum, PostStatus status, String dayOfTheWeek) {
         this.title = title;
         this.description = description;
         this.maximum = maximum;
         this.postStatus = status;
+        this.dayOfTheWeek = dayOfTheWeek;
+    }
+
+    public int getParticipant() {
+        return staffList.size();
     }
 }

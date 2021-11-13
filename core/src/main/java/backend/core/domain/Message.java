@@ -18,6 +18,9 @@ public class Message extends BaseTimeEntity {
 
     private String content;
 
+    @Enumerated(EnumType.STRING)
+    private MessageStatus status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -41,8 +44,9 @@ public class Message extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Message (String content, Member member, Chat chat) {
+    public Message (String content, Member member, Chat chat, MessageStatus status) {
         this.content = content;
+        this.status = status;
         setMember(member);
         setChat(chat);
     }

@@ -21,7 +21,6 @@ import static backend.core.global.error.exception.ErrorCode.POST_NOT_FOUND;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final MemberService memberService;
 
     @Transactional
     public Long save(PostCreateRequestDto dto) {

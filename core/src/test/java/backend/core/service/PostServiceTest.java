@@ -3,8 +3,6 @@ package backend.core.service;
 import backend.core.controller.post.dto.PostCreateRequestDto;
 import backend.core.controller.post.dto.PostUpdateRequestDto;
 import backend.core.domain.*;
-import backend.core.global.error.exception.CustomException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -94,7 +91,6 @@ public class PostServiceTest {
         assertThat(postService.findByStatus(PostStatus.ACCESS).size()).isEqualTo(2);
         assertThat(postService.findByStatus(PostStatus.DONE).size()).isEqualTo(0);
     }
-//    String title, String description, int maximum, PostStatus status, String dayOfTheWeek
 
     @Test
     @DisplayName("post 수정 - title")

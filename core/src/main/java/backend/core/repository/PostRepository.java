@@ -23,7 +23,6 @@ public class PostRepository {
         List<Post> postList = em.createQuery(
                         "select p from Post p" +
                                 " join fetch p.member m" +
-                                " join fetch p.chat c" +
                                 " where p.id = :id", Post.class)
                 .setParameter("id", id)
                 .getResultList();
@@ -35,8 +34,7 @@ public class PostRepository {
         return Optional.of(
                 em.createQuery(
                                 "select p from Post p" +
-                                        " join fetch p.member m" +
-                                        " join fetch p.chat c", Post.class)
+                                        " join fetch p.member m", Post.class)
                         .setFirstResult(offset)
                         .setMaxResults(limit)
                         .getResultList());
@@ -47,7 +45,6 @@ public class PostRepository {
                 em.createQuery(
                                 "select p from Post p" +
                                         " join fetch p.member m" +
-                                        " join fetch p.chat c" +
                                         " where p.postStatus = :status", Post.class)
                         .setParameter("status", status)
                         .getResultList()

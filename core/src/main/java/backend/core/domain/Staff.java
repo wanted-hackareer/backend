@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Staff extends BaseTimeEntity {
 
     @Id
-    @Generated
+    @GeneratedValue
     private Long id;
 
     @Enumerated(EnumType.STRING)

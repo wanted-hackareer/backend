@@ -1,8 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.member.dto.MemberPasswordUpdateRequestDto;
-import backend.core.controller.member.dto.MemberSignUpRequestDto;
-import backend.core.controller.member.dto.MemberUpdateRequestDto;
 import backend.core.domain.Address;
 import backend.core.domain.Member;
 import backend.core.domain.Profile;
@@ -16,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import static backend.core.controller.member.dto.MemberRequestDto.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

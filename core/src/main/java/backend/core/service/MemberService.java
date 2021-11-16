@@ -1,8 +1,6 @@
 package backend.core.service;
 
-import backend.core.controller.member.dto.MemberPasswordUpdateRequestDto;
-import backend.core.controller.member.dto.MemberSignUpRequestDto;
-import backend.core.controller.member.dto.MemberUpdateRequestDto;
+import backend.core.controller.member.dto.MemberRequestDto;
 import backend.core.domain.Member;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.MemberRepository;
@@ -14,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static backend.core.controller.member.dto.MemberRequestDto.*;
 import static backend.core.global.error.exception.ErrorCode.*;
 
 @Service
@@ -44,7 +43,7 @@ public class MemberService {
     }
 
     @Transactional
-    public Long update(MemberUpdateRequestDto dto) {
+    public Long update(MemberRequestDto.MemberUpdateRequestDto dto) {
         Member member = memberRepository.findById(dto.getId())
                 .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
         member.update(dto.getProfile(), dto.getNickName(), dto.getAddress());

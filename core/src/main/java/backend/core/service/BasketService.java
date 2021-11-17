@@ -1,6 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.basket.dto.BasketCreateRequestDto;
 import backend.core.domain.Basket;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.BasketRepository;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static backend.core.dto.request.BasketRequestDto.BasketCreateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.BASKET_NOT_FOUND;
 
 @Slf4j @Service

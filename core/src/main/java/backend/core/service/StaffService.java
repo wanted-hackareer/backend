@@ -1,7 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.staff.dto.StaffCreateRequestDto;
-import backend.core.controller.staff.dto.StaffUpdateRequestDto;
 import backend.core.domain.Staff;
 import backend.core.domain.StaffStatus;
 import backend.core.global.error.exception.CustomException;
@@ -13,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
+import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.STAFF_NOT_FOUND;
 
 @Slf4j @Service

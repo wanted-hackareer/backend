@@ -1,7 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.staff.dto.StaffCreateRequestDto;
-import backend.core.controller.staff.dto.StaffUpdateRequestDto;
 import backend.core.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
+import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

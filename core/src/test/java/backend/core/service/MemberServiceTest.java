@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import static backend.core.controller.member.dto.MemberRequestDto.*;
+import static backend.core.dto.request.MemberRequestDto.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

@@ -1,6 +1,6 @@
 package backend.core.service;
 
-import backend.core.controller.member.dto.MemberRequestDto;
+import backend.core.dto.request.MemberRequestDto;
 import backend.core.domain.Member;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.MemberRepository;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static backend.core.controller.member.dto.MemberRequestDto.*;
+import static backend.core.dto.request.MemberRequestDto.*;
 import static backend.core.global.error.exception.ErrorCode.*;
 
 @Service

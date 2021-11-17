@@ -1,4 +1,4 @@
-package backend.core.controller.member.dto;
+package backend.core.dto.request;
 
 import backend.core.domain.Address;
 import backend.core.domain.Member;

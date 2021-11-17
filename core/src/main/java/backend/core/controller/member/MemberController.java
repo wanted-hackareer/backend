@@ -1,6 +1,6 @@
 package backend.core.controller.member;
 
-import backend.core.controller.member.dto.MemberResponseDto;
+import backend.core.dto.response.MemberResponseDto;
 import backend.core.domain.Member;
 import backend.core.global.response.ApiResponse;
 import backend.core.security.TokenProvider;
@@ -16,9 +16,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static backend.core.controller.member.dto.MemberRequestDto.MemberSignInRequestDto;
-import static backend.core.controller.member.dto.MemberRequestDto.MemberSignUpRequestDto;
-import static backend.core.controller.member.dto.MemberResponseDto.MemberSignInResponseDto;
+import static backend.core.dto.request.MemberRequestDto.MemberSignInRequestDto;
+import static backend.core.dto.request.MemberRequestDto.MemberSignUpRequestDto;
+import static backend.core.dto.response.MemberResponseDto.MemberSignInResponseDto;
 
 @Slf4j
 @RestController

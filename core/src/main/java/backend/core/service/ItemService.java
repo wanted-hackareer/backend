@@ -1,6 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.item.dto.ItemCreateRequestDto;
 import backend.core.domain.Item;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.ItemRepository;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.ITEM_NOT_FOUND;
 
 @Slf4j @Service

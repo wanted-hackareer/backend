@@ -1,6 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.tag.dto.TagCreateRequestDto;
 import backend.core.domain.Tag;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.TagRepository;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static backend.core.dto.request.TagRequestDto.TagCreateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.TAG_NOT_FOUND;
 
 @Slf4j @Service

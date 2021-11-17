@@ -1,4 +1,4 @@
-package backend.core.controller.message;
+package backend.core.controller;
 
 import backend.core.domain.Message;
 import lombok.extern.slf4j.Slf4j;

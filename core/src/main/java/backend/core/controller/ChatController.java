@@ -1,4 +1,4 @@
-package backend.core.controller.chat;
+package backend.core.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

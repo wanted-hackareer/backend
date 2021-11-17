@@ -1,6 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.chat.dto.ChatCreateRequestDto;
 import backend.core.domain.Chat;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.ChatRepository;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static backend.core.dto.request.ChatRequestDto.*;
 import static backend.core.global.error.exception.ErrorCode.CHAT_NOT_FOUND;
 
 @Slf4j @Service

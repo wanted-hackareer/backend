@@ -1,4 +1,4 @@
-package backend.core.controller.member;
+package backend.core.controller;
 
 import backend.core.dto.response.MemberResponseDto;
 import backend.core.domain.Member;

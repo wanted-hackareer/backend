@@ -1,7 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.post.dto.PostCreateRequestDto;
-import backend.core.controller.post.dto.PostUpdateRequestDto;
 import backend.core.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
+import static backend.core.controller.post.dto.PostRequestDto.PostCreateRequestDto;
+import static backend.core.controller.post.dto.PostRequestDto.PostUpdateRequestDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -35,7 +35,7 @@ public class PostServiceTest {
         //when
         PostCreateRequestDto postCreateRequestDto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
         postCreateRequestDto.setMember(member);
-        
+
         Long postId = postService.save(postCreateRequestDto);
 
         //then

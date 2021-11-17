@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static backend.core.controller.post.dto.PostRequestDto.PostCreateRequestDto;
-import static backend.core.controller.post.dto.PostRequestDto.PostUpdateRequestDto;
+import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
+import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

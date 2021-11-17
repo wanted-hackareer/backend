@@ -1,4 +1,4 @@
-package backend.core.controller.post.dto;
+package backend.core.dto.response;
 
 import backend.core.domain.Post;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package backend.core.controller.post.dto;
+package backend.core.dto.request;
 
 import backend.core.domain.Member;
 import backend.core.domain.Post;

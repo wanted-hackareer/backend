@@ -1,6 +1,5 @@
 package backend.core.service;
 
-import backend.core.controller.post.dto.PostRequestDto;
 import backend.core.domain.Post;
 import backend.core.domain.PostStatus;
 import backend.core.global.error.exception.CustomException;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static backend.core.controller.post.dto.PostRequestDto.*;
+import static backend.core.dto.request.PostRequestDto.*;
 import static backend.core.global.error.exception.ErrorCode.POST_NOT_FOUND;
 
 @Slf4j @Service

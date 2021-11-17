@@ -1,7 +1,6 @@
-package backend.core.controller.post;
+package backend.core.controller;
 
-import backend.core.controller.post.dto.PostRequestDto;
-import backend.core.controller.post.dto.PostResponseDto;
+import backend.core.dto.response.PostResponseDto;
 import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.global.error.exception.CustomException;
@@ -12,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import static backend.core.controller.post.dto.PostRequestDto.*;
+import static backend.core.dto.request.PostRequestDto.*;
 import static backend.core.global.error.exception.ErrorCode.MEMBER_NOT_ACCEPTABLE;
 
 @Slf4j

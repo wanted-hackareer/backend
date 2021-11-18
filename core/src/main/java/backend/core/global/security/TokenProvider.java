@@ -1,4 +1,4 @@
-package backend.core.security;
+package backend.core.global.security;
 
 import backend.core.domain.Member;
 import io.jsonwebtoken.Claims;

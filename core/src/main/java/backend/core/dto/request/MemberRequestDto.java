@@ -4,17 +4,12 @@ import backend.core.domain.Address;
 import backend.core.domain.Member;
 import backend.core.domain.Profile;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-/**
- * @author euise
- *
- * 멤버 요청 api 정리 클래스
- */
 public class MemberRequestDto {
 
-    @Data
+    @Getter
     public static class MemberPasswordUpdateRequestDto {
         private Long id;
         private String password;
@@ -25,13 +20,13 @@ public class MemberRequestDto {
         }
     }
 
-    @Data
+    @Getter
     public static class MemberSignInRequestDto {
         private String email;
         private String password;
     }
 
-    @Data
+    @Getter
     public static class MemberUpdateRequestDto {
         private Long id;
         private Profile profile;
@@ -46,7 +41,7 @@ public class MemberRequestDto {
         }
     }
 
-    @Data
+    @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class MemberSignUpRequestDto {
         private String email;

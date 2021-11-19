@@ -1,17 +1,17 @@
 package backend.core.dto.response;
 
 import backend.core.domain.Post;
-import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 public class PostResponseDto {
-    // 수정 필요
     private String title;
     private String description;
     private String author;
     private String dayOfTheWeek;
+    private String chatAddress;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -20,6 +20,7 @@ public class PostResponseDto {
         this.description = entity.getDescription();
         this.author = entity.getMember().getNickName();
         this.dayOfTheWeek = entity.getDayOfTheWeek();
+        this.chatAddress = entity.getChat().getChatAddress();
         this.updatedAt = entity.getUpdatedAt();
         this.createdAt = entity.getCreatedAt();
     }

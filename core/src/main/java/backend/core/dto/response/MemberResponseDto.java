@@ -3,8 +3,9 @@ package backend.core.dto.response;
 import backend.core.domain.Address;
 import backend.core.domain.Member;
 import backend.core.domain.Profile;
-import lombok.Data;
+import lombok.Getter;
 
+@Getter
 public class MemberResponseDto {
 
     private Long id;
@@ -12,7 +13,7 @@ public class MemberResponseDto {
     private String nickName;
     private Address address;
     private Profile profile;
-    // staff, profile 추가하기
+    // TODO: staff 추가
 
     public MemberResponseDto(Member entity) {
         this.id = entity.getId();
@@ -22,7 +23,7 @@ public class MemberResponseDto {
         this.profile = entity.getProfile();
     }
 
-    @Data
+    @Getter
     public static class MemberSignInResponseDto {
         private Long id;
         private String email;

@@ -38,8 +38,7 @@ public class StaffServiceTest {
 
         //when
         StaffCreateRequestDto staffCreateRequestDto = new StaffCreateRequestDto(post.getId(), member2.getId());
-        staffCreateRequestDto.setMember(member2);
-        staffCreateRequestDto.setPost(post);
+        staffCreateRequestDto.setMemberAndPost(member2, post);
         Long staffId = staffService.save(staffCreateRequestDto);
 
         //then

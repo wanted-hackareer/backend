@@ -26,7 +26,7 @@ public class MemberService {
     @Transactional
     public Long save(MemberSignUpRequestDto dto) {
         if (!(isValidEmail(dto.getEmail()) && isValidNickname(dto.getNickName()))) {
-            // 임시로 error 처리 따로 경로 만들어서 클라이언트에서 처리할 예정
+            // FIXME: 임시로 error 처리 따로 경로 만들어서 클라이언트에서 처리할 예정
         }
         Member member = dto.toEntity();
         memberRepository.save(member);

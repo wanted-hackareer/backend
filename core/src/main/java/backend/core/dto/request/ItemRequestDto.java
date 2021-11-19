@@ -2,11 +2,11 @@ package backend.core.dto.request;
 
 import backend.core.domain.Basket;
 import backend.core.domain.Item;
-import lombok.Data;
+import lombok.Getter;
 
 public class ItemRequestDto {
 
-    @Data
+    @Getter
     public static class ItemCreateRequestDto {
         private Long basketId;
         private String name;
@@ -26,6 +26,10 @@ public class ItemRequestDto {
                     .name(name)
                     .basket(basket)
                     .build();
+        }
+
+        public void setBasket(Basket basket) {
+            this.basket = basket;
         }
     }
 }

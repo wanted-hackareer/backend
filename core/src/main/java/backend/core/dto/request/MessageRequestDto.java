@@ -5,12 +5,12 @@ import backend.core.domain.Member;
 import backend.core.domain.Message;
 import backend.core.domain.MessageStatus;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 public class MessageRequestDto {
 
-    @Data
+    @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class MessageCreateRequestDto {
         private String content;
@@ -35,6 +35,11 @@ public class MessageRequestDto {
                     .chat(chat)
                     .status(status)
                     .build();
+        }
+
+        public void setMemberAndChat(Member member, Chat chat) {
+            this.member = member;
+            this.chat = chat;
         }
     }
 }

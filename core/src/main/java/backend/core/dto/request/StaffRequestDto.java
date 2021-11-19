@@ -4,11 +4,11 @@ import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.Staff;
 import backend.core.domain.StaffStatus;
-import lombok.Data;
+import lombok.Getter;
 
 public class StaffRequestDto {
 
-    @Data
+    @Getter
     public static class StaffCreateRequestDto {
         private Long postId;
         private Long memberId;
@@ -27,9 +27,14 @@ public class StaffRequestDto {
                     .post(post)
                     .build();
         }
+
+        public void setMemberAndPost(Member member, Post post) {
+            this.member = member;
+            this.post = post;
+        }
     }
 
-    @Data
+    @Getter
     public static class StaffUpdateRequestDto {
         private Long staffId;
         private StaffStatus status;

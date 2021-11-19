@@ -4,12 +4,12 @@ import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.PostStatus;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 public class PostRequestDto {
 
-    @Data
+    @Getter
     public static class PostCreateRequestDto {
 
         private Long memberId;
@@ -36,9 +36,13 @@ public class PostRequestDto {
                     .dayOfTheWeek(dayOfTheWeek)
                     .maximum(maximum).build();
         }
+
+        public void setMember(Member member) {
+            this.member = member;
+        }
     }
 
-    @Data
+    @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class PostUpdateRequestDto {
         private Long postId;

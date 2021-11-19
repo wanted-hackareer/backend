@@ -2,11 +2,11 @@ package backend.core.dto.request;
 
 import backend.core.domain.Chat;
 import backend.core.domain.Post;
-import lombok.Data;
+import lombok.Getter;
 
 public class ChatRequestDto {
 
-    @Data
+    @Getter
     public static class ChatCreateRequestDto {
         private Long postId;
 
@@ -22,6 +22,10 @@ public class ChatRequestDto {
                     .post(post)
                     .chatAddress(chatAddress)
                     .build();
+        }
+
+        public void setPost(Post post) {
+            this.post = post;
         }
     }
 }

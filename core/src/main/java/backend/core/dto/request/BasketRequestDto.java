@@ -2,11 +2,11 @@ package backend.core.dto.request;
 
 import backend.core.domain.Basket;
 import backend.core.domain.Member;
-import lombok.Data;
+import lombok.Getter;
 
 public class BasketRequestDto {
 
-    @Data
+    @Getter
     public static class BasketCreateRequestDto {
         private Long memberId;
 
@@ -20,6 +20,10 @@ public class BasketRequestDto {
             return Basket.builder()
                     .member(member)
                     .build();
+        }
+
+        public void setMember(Member member) {
+            this.member = member;
         }
     }
 }

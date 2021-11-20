@@ -34,13 +34,13 @@ public class ChatService {
         return chat.getId();
     }
 
-    public Chat findById(Long id){
+    public Chat findByIdOrThrow(Long id){
         Chat chat = chatRepository.findById(id)
                 .orElseThrow(() -> new CustomException(CHAT_NOT_FOUND));
         return chat;
     }
 
-    public List<Chat> findAll(int offset, int limit) {
+    public List<Chat> findAllOrThrow(int offset, int limit) {
         List<Chat> chats = chatRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(CHAT_NOT_FOUND));
         return chats;

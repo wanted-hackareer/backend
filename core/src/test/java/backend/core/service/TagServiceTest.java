@@ -38,9 +38,9 @@ public class TagServiceTest {
         Long tagId = tagService.save(dto);
 
         //then
-        assertThat(tagService.findById(tagId)).isInstanceOf(Tag.class);
-        assertThat(tagService.findById(tagId).getName()).isEqualTo("아이언맨");
-        assertThat(tagService.findById(tagId).getPost().getId()).isEqualTo(post.getId());
+        assertThat(tagService.findByIdOrThrow(tagId)).isInstanceOf(Tag.class);
+        assertThat(tagService.findByIdOrThrow(tagId).getName()).isEqualTo("아이언맨");
+        assertThat(tagService.findByIdOrThrow(tagId).getPost().getId()).isEqualTo(post.getId());
     }
 
     @Test
@@ -60,6 +60,6 @@ public class TagServiceTest {
         em.persist(tagB);
 
         //then
-        assertThat(tagService.findAll(0, 100).size()).isEqualTo(2);
+        assertThat(tagService.findAllOrThrow(0, 100).size()).isEqualTo(2);
     }
 }

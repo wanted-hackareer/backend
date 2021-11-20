@@ -28,14 +28,14 @@ public class TagService {
         return tag.getId();
     }
 
-    public Tag findById(Long id) {
+    public Tag findByIdOrThrow(Long id) {
         Tag tag = tagRepository.findById(id)
                 .orElseThrow(() -> new CustomException(TAG_NOT_FOUND));
 
         return tag;
     }
 
-    public List<Tag> findAll(int offset, int limit) {
+    public List<Tag> findAllOrThrow(int offset, int limit) {
         List<Tag> tags = tagRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(TAG_NOT_FOUND));
 

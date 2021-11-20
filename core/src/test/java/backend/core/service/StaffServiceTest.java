@@ -42,11 +42,11 @@ public class StaffServiceTest {
         Long staffId = staffService.save(staffCreateRequestDto);
 
         //then
-        assertThat(staffService.findById(staffId).getMember()).isInstanceOf(Member.class);
-        assertThat(staffService.findById(staffId).getPost()).isInstanceOf(Post.class);
-        assertThat(staffService.findById(staffId).getMember().getEmail()).isEqualTo(member2.getEmail());
-        assertThat(staffService.findById(staffId).getPost().getTitle()).isEqualTo(post.getTitle());
-        assertThat(staffService.findById(staffId).getStaffStatus()).isEqualTo(StaffStatus.WAIT);
+        assertThat(staffService.findByIdOrThrow(staffId).getMember()).isInstanceOf(Member.class);
+        assertThat(staffService.findByIdOrThrow(staffId).getPost()).isInstanceOf(Post.class);
+        assertThat(staffService.findByIdOrThrow(staffId).getMember().getEmail()).isEqualTo(member2.getEmail());
+        assertThat(staffService.findByIdOrThrow(staffId).getPost().getTitle()).isEqualTo(post.getTitle());
+        assertThat(staffService.findByIdOrThrow(staffId).getStaffStatus()).isEqualTo(StaffStatus.WAIT);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class StaffServiceTest {
         em.persist(staffB);
 
         //then
-        assertThat(staffService.findAll(0, 100).size()).isEqualTo(2);
+        assertThat(staffService.findAllOrThrow(0, 100).size()).isEqualTo(2);
     }
 
     @Test
@@ -99,8 +99,8 @@ public class StaffServiceTest {
         em.persist(staffB);
 
         //then
-        assertThat(staffService.findByStatus(StaffStatus.WAIT).size()).isEqualTo(1);
-        assertThat(staffService.findByStatus(StaffStatus.ACCESS).size()).isEqualTo(1);
+        assertThat(staffService.findByStatusOrThrow(StaffStatus.WAIT).size()).isEqualTo(1);
+        assertThat(staffService.findByStatusOrThrow(StaffStatus.ACCESS).size()).isEqualTo(1);
     }
 
     @Test
@@ -120,10 +120,10 @@ public class StaffServiceTest {
 
         //when
         StaffUpdateRequestDto staffUpdateRequestDto = new StaffUpdateRequestDto(staff.getId(), StaffStatus.ACCESS);
-        Long staffId = staffService.update(staffUpdateRequestDto);
+        Long staffId = staffService.updateOrThrow(staffUpdateRequestDto);
 
         //then
-        assertThat(staffService.findById(staffId).getStaffStatus()).isEqualTo(StaffStatus.ACCESS);
+        assertThat(staffService.findByIdOrThrow(staffId).getStaffStatus()).isEqualTo(StaffStatus.ACCESS);
     }
 
     @Test
@@ -143,10 +143,10 @@ public class StaffServiceTest {
 
         //when
         StaffUpdateRequestDto staffUpdateRequestDto = new StaffUpdateRequestDto(staff.getId(), StaffStatus.CANCEL);
-        Long staffId = staffService.update(staffUpdateRequestDto);
+        Long staffId = staffService.updateOrThrow(staffUpdateRequestDto);
 
         //then
-        assertThat(staffService.findById(staffId).getStaffStatus()).isEqualTo(StaffStatus.CANCEL);
+        assertThat(staffService.findByIdOrThrow(staffId).getStaffStatus()).isEqualTo(StaffStatus.CANCEL);
     }
 
     @Test
@@ -166,9 +166,9 @@ public class StaffServiceTest {
 
         //when
         StaffUpdateRequestDto staffUpdateRequestDto = new StaffUpdateRequestDto(staff.getId(), StaffStatus.DENIED);
-        Long staffId = staffService.update(staffUpdateRequestDto);
+        Long staffId = staffService.updateOrThrow(staffUpdateRequestDto);
 
         //then
-        assertThat(staffService.findById(staffId).getStaffStatus()).isEqualTo(StaffStatus.DENIED);
+        assertThat(staffService.findByIdOrThrow(staffId).getStaffStatus()).isEqualTo(StaffStatus.DENIED);
     }
 }

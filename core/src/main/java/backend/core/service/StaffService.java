@@ -31,7 +31,7 @@ public class StaffService {
     }
 
     @Transactional
-    public Long update(StaffUpdateRequestDto dto) {
+    public Long updateOrThrow(StaffUpdateRequestDto dto) {
         Staff staff = staffRepository.findById(dto.getStaffId())
                 .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
 
@@ -39,21 +39,21 @@ public class StaffService {
         return staff.getId();
     }
 
-    public Staff findById(Long id) {
+    public Staff findByIdOrThrow(Long id) {
         Staff staff = staffRepository.findById(id)
                 .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
 
         return staff;
     }
 
-    public List<Staff> findAll(int offset, int limit) {
+    public List<Staff> findAllOrThrow(int offset, int limit) {
         List<Staff> staffs = staffRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
 
         return staffs;
     }
 
-    public List<Staff> findByStatus(StaffStatus status) {
+    public List<Staff> findByStatusOrThrow(StaffStatus status) {
         List<Staff> staffs = staffRepository.findByStatus(status)
                 .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
 

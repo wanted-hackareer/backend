@@ -28,14 +28,14 @@ public class BasketService {
         return basket.getId();
     }
 
-    public Basket findById(Long id) {
+    public Basket findByIdOrThrow(Long id) {
         Basket basket = basketRepository.findById(id)
                 .orElseThrow(() -> new CustomException(BASKET_NOT_FOUND));
 
         return basket;
     }
 
-    public List<Basket> findAll(int offset, int limit) {
+    public List<Basket> findAllOrThrow(int offset, int limit) {
         List<Basket> baskets = basketRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(BASKET_NOT_FOUND));
         return baskets;

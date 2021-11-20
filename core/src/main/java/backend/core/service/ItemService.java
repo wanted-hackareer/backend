@@ -28,14 +28,14 @@ public class ItemService {
         return item.getId();
     }
 
-    public Item findById(Long id) {
+    public Item findByIdOrThrow(Long id) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
 
         return item;
     }
 
-    public List<Item> findAll(int offset, int limit) {
+    public List<Item> findAllOrThrow(int offset, int limit) {
         List<Item> items = itemRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
 

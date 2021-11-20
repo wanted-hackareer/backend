@@ -39,10 +39,10 @@ public class ItemServiceTest {
         Long itemId = itemService.save(dto);
 
         //then
-        assertThat(itemService.findById(itemId)).isInstanceOf(Item.class);
-        assertThat(itemService.findById(itemId).getName()).isEqualTo("사과");
-        assertThat(itemService.findById(itemId).getQuantity()).isEqualTo(3);
-        assertThat(itemService.findById(itemId).getBasket().getId()).isEqualTo(basket.getId());
+        assertThat(itemService.findByIdOrThrow(itemId)).isInstanceOf(Item.class);
+        assertThat(itemService.findByIdOrThrow(itemId).getName()).isEqualTo("사과");
+        assertThat(itemService.findByIdOrThrow(itemId).getQuantity()).isEqualTo(3);
+        assertThat(itemService.findByIdOrThrow(itemId).getBasket().getId()).isEqualTo(basket.getId());
     }
 
     @Test
@@ -63,6 +63,6 @@ public class ItemServiceTest {
         em.persist(itemB);
 
         //then
-        assertThat(itemService.findAll(0, 100).size()).isEqualTo(2);
+        assertThat(itemService.findAllOrThrow(0, 100).size()).isEqualTo(2);
     }
 }

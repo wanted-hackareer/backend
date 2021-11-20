@@ -28,14 +28,14 @@ public class MessageService {
         return message.getId();
     }
 
-    public Message findById(Long id) {
+    public Message findByIdOrThrow(Long id) {
         Message message = messageRepository.findById(id)
                 .orElseThrow(() -> new CustomException(MESSAGE_NOT_FOUND));
 
         return message;
     }
 
-    public List<Message> findAll(int offset, int limit) {
+    public List<Message> findAllOrThrow(int offset, int limit) {
         List<Message> messages = messageRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(MESSAGE_NOT_FOUND));
 

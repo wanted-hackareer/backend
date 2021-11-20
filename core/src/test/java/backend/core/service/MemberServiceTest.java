@@ -36,9 +36,9 @@ public class MemberServiceTest {
         Long memberId = memberService.save(dto);
 
         //then
-        assertThat(memberService.findById(memberId).getNickName()).isEqualTo("테스트10");
-        assertThat(memberService.findById(memberId).getEmail()).isEqualTo("test10@gmail.com");
-        assertThat(memberService.findById(memberId)).isInstanceOf(Member.class);
+        assertThat(memberService.findByIdOrThrow(memberId).getNickName()).isEqualTo("테스트10");
+        assertThat(memberService.findByIdOrThrow(memberId).getEmail()).isEqualTo("test10@gmail.com");
+        assertThat(memberService.findByIdOrThrow(memberId)).isInstanceOf(Member.class);
     }
 
     @Test
@@ -89,7 +89,7 @@ public class MemberServiceTest {
         memberService.save(dto2);
 
         //then
-        assertThat(memberService.findAll(0, 100).size()).isEqualTo(2);
+        assertThat(memberService.findAllOrThrow(0, 100).size()).isEqualTo(2);
     }
 
     @Test
@@ -103,14 +103,14 @@ public class MemberServiceTest {
 
         //when
         Long memberId = memberService.save(dto);
-        Member member = memberService.findById(memberId);
+        Member member = memberService.findByIdOrThrow(memberId);
         MemberUpdateRequestDto memberUpdateRequestDto = new MemberUpdateRequestDto(memberId, member.getProfile(), member.getNickName(), updateAddress);
-        memberService.update(memberUpdateRequestDto);
+        memberService.updateOrThrow(memberUpdateRequestDto);
 
         //then
-        assertThat(memberService.findById(memberId).getAddress().getCity()).isEqualTo(updateAddress.getCity());
-        assertThat(memberService.findById(memberId).getAddress().getDistrict()).isEqualTo(updateAddress.getDistrict());
-        assertThat(memberService.findById(memberId).getAddress().getStreet()).isEqualTo(updateAddress.getStreet());
+        assertThat(memberService.findByIdOrThrow(memberId).getAddress().getCity()).isEqualTo(updateAddress.getCity());
+        assertThat(memberService.findByIdOrThrow(memberId).getAddress().getDistrict()).isEqualTo(updateAddress.getDistrict());
+        assertThat(memberService.findByIdOrThrow(memberId).getAddress().getStreet()).isEqualTo(updateAddress.getStreet());
     }
 
     @Test
@@ -123,12 +123,12 @@ public class MemberServiceTest {
 
         //when
         Long memberId = memberService.save(dto);
-        Member member = memberService.findById(memberId);
+        Member member = memberService.findByIdOrThrow(memberId);
         MemberUpdateRequestDto memberUpdateRequestDto = new MemberUpdateRequestDto(memberId, member.getProfile(), "수정된 닉네임", member.getAddress());
-        memberService.update(memberUpdateRequestDto);
+        memberService.updateOrThrow(memberUpdateRequestDto);
 
         //then
-        assertThat(memberService.findById(memberId).getNickName()).isEqualTo("수정된 닉네임");
+        assertThat(memberService.findByIdOrThrow(memberId).getNickName()).isEqualTo("수정된 닉네임");
     }
 
     @Test
@@ -142,13 +142,13 @@ public class MemberServiceTest {
 
         //when
         Long memberId = memberService.save(dto);
-        Member member = memberService.findById(memberId);
+        Member member = memberService.findByIdOrThrow(memberId);
         MemberUpdateRequestDto memberUpdateRequestDto = new MemberUpdateRequestDto(memberId, updateProfile, member.getNickName(), member.getAddress());
-        memberService.update(memberUpdateRequestDto);
+        memberService.updateOrThrow(memberUpdateRequestDto);
 
         //then
-        assertThat(memberService.findById(memberId).getProfile().getUploadFileName()).isEqualTo(updateProfile.getUploadFileName());
-        assertThat(memberService.findById(memberId).getProfile().getStoreFileName()).isEqualTo(updateProfile.getStoreFileName());
+        assertThat(memberService.findByIdOrThrow(memberId).getProfile().getUploadFileName()).isEqualTo(updateProfile.getUploadFileName());
+        assertThat(memberService.findByIdOrThrow(memberId).getProfile().getStoreFileName()).isEqualTo(updateProfile.getStoreFileName());
     }
 
     @Test
@@ -162,9 +162,9 @@ public class MemberServiceTest {
         //when
         Long memberId = memberService.save(dto);
         MemberPasswordUpdateRequestDto memberPasswordUpdateRequestDto = new MemberPasswordUpdateRequestDto(memberId, "newPassword");
-        memberService.updatePassword(memberPasswordUpdateRequestDto, passwordEncoder);
+        memberService.updatePasswordOrThrow(memberPasswordUpdateRequestDto, passwordEncoder);
 
         //then
-        Assertions.assertTrue(passwordEncoder.matches("newPassword", memberService.findById(memberId).getPassword()));
+        Assertions.assertTrue(passwordEncoder.matches("newPassword", memberService.findByIdOrThrow(memberId).getPassword()));
     }
 }

@@ -25,7 +25,7 @@ public class PostController {
 
     @PostMapping("/post")
     public PostResponseDto save(@RequestBody PostCreateRequestDto dto) {
-        Member member = memberService.findById(dto.getMemberId());
+        Member member = memberService.findByIdOrThrow(dto.getMemberId());
         dto.setMember(member);
 
         Long postId = postService.save(dto);

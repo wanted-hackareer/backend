@@ -32,7 +32,7 @@ public class MemberController {
 
     @PostMapping("/sign-in")
     public MemberSignInResponseDto signInUser(@RequestBody MemberSignInRequestDto dto) {
-        Member member = memberService.findByCredentials(
+        Member member = memberService.findByCredentialsOrThrow(
                 dto.getEmail(),
                 dto.getPassword(),
                 passwordEncoder);
@@ -48,7 +48,7 @@ public class MemberController {
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         Long id = memberService.save(dto);
-        Member member = memberService.findById(id);
+        Member member = memberService.findByIdOrThrow(id);
 
         log.info("dto.getPassword() = {}", dto.getPassword());
         log.info("member.getEmail() = {}", member.getEmail());
@@ -58,7 +58,7 @@ public class MemberController {
 
     @GetMapping("/member")
     public MemberResponseDto memberV1(@AuthenticationPrincipal String userId) {
-        Member member = memberService.findById(Long.parseLong(userId));
+        Member member = memberService.findByIdOrThrow(Long.parseLong(userId));
 
         log.info("Authenticated userId = {}", userId);
         return new MemberResponseDto(member);
@@ -68,7 +68,7 @@ public class MemberController {
     public ApiResponse membersV1(
             @RequestParam(name = "offset", defaultValue = "0") int offset,
             @RequestParam(name = "limit", defaultValue = "100") int limit) {
-        List<Member> members = memberService.findAll(offset, limit);
+        List<Member> members = memberService.findAllOrThrow(offset, limit);
         List<MemberResponseDto> result = members.stream()
                 .map(member -> new MemberResponseDto(member))
                 .collect(Collectors.toList());

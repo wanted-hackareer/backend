@@ -25,7 +25,7 @@ public class MemberService {
 
     @Transactional
     public Long save(MemberSignUpRequestDto dto) {
-        if (!(isValidEmail(dto.getEmail()) && isValidNickname(dto.getNickName()))) {
+        if (!(isValidEmailOrThrow(dto.getEmail()) && isValidNicknameOrThrow(dto.getNickName()))) {
             // FIXME: 임시로 error 처리 따로 경로 만들어서 클라이언트에서 처리할 예정
         }
         Member member = dto.toEntity();
@@ -34,7 +34,7 @@ public class MemberService {
     }
 
     @Transactional
-    public Long updatePassword(MemberPasswordUpdateRequestDto dto, PasswordEncoder encoder) {
+    public Long updatePasswordOrThrow(MemberPasswordUpdateRequestDto dto, PasswordEncoder encoder) {
         Member member = memberRepository.findById(dto.getId())
                 .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
         member.updatePassword(encoder.encode(dto.getPassword()));
@@ -43,14 +43,14 @@ public class MemberService {
     }
 
     @Transactional
-    public Long update(MemberRequestDto.MemberUpdateRequestDto dto) {
+    public Long updateOrThrow(MemberRequestDto.MemberUpdateRequestDto dto) {
         Member member = memberRepository.findById(dto.getId())
                 .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
         member.update(dto.getProfile(), dto.getNickName(), dto.getAddress());
         return member.getId();
     }
 
-    public Member findByCredentials(String email, String password, PasswordEncoder encoder) {
+    public Member findByCredentialsOrThrow(String email, String password, PasswordEncoder encoder) {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
 
@@ -61,19 +61,19 @@ public class MemberService {
         throw new CustomException(LOGIN_FAILED);
     }
 
-    public Member findById(Long id) {
+    public Member findByIdOrThrow(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
         return member;
     }
 
-    public List<Member> findAll(int offset, int limit) {
+    public List<Member> findAllOrThrow(int offset, int limit) {
         List<Member> members = memberRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
         return members;
     }
 
-    public Boolean isValidEmail(String email) {
+    public Boolean isValidEmailOrThrow(String email) {
         memberRepository.findByEmail(email)
                 .ifPresent(e -> {
                     throw new CustomException(EXIST_EMAIL);
@@ -81,7 +81,7 @@ public class MemberService {
         return true;
     }
 
-    public Boolean isValidNickname(String nickName) {
+    public Boolean isValidNicknameOrThrow(String nickName) {
         memberRepository.findByNickName(nickName)
                 .ifPresent(e -> {
                     throw new CustomException(EXIST_NICKNAME);

@@ -25,7 +25,7 @@ public class ProfileController {
 
     @GetMapping("/profile/{id}")
     public String profileV1(@PathVariable Long id) {
-        Member member = memberService.findById(id);
+        Member member = memberService.findByIdOrThrow(id);
         return member.getProfile().getStoreFileName();
     }
 

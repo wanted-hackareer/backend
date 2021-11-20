@@ -29,7 +29,7 @@ public class PostService {
     }
 
     @Transactional
-    public Long update(PostUpdateRequestDto dto) {
+    public Long updateOrThrow(PostUpdateRequestDto dto) {
         Post post = postRepository.findById(dto.getPostId())
                 .orElseThrow(() -> new CustomException(POST_NOT_FOUND));
 
@@ -37,19 +37,19 @@ public class PostService {
         return post.getId();
     }
 
-    public Post findById(Long id) {
+    public Post findByIdOrThrow(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new CustomException(POST_NOT_FOUND));
         return post;
     }
 
-    public List<Post> findByStatus(PostStatus status) {
+    public List<Post> findByStatusOrThrow(PostStatus status) {
         List<Post> posts = postRepository.findByStatus(status)
                 .orElseThrow(() -> new CustomException(POST_NOT_FOUND));
         return posts;
     }
 
-    public List<Post> findAll(int offset, int limit) {
+    public List<Post> findAllOrThrow(int offset, int limit) {
         List<Post> posts = postRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(POST_NOT_FOUND));
         return posts;

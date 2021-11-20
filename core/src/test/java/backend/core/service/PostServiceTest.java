@@ -39,10 +39,10 @@ public class PostServiceTest {
         Long postId = postService.save(postCreateRequestDto);
 
         //then
-        assertThat(postService.findById(postId).getTitle()).isEqualTo("테스트 제목");
-        assertThat(postService.findById(postId).getDescription()).isEqualTo("테스트 본문");
-        assertThat(postService.findById(postId).getDayOfTheWeek()).isEqualTo("월, 화, 수");
-        assertThat(postService.findById(postId)).isInstanceOf(Post.class);
+        assertThat(postService.findByIdOrThrow(postId).getTitle()).isEqualTo("테스트 제목");
+        assertThat(postService.findByIdOrThrow(postId).getDescription()).isEqualTo("테스트 본문");
+        assertThat(postService.findByIdOrThrow(postId).getDayOfTheWeek()).isEqualTo("월, 화, 수");
+        assertThat(postService.findByIdOrThrow(postId)).isInstanceOf(Post.class);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PostServiceTest {
         postService.save(dto2);
 
         //then
-        assertThat(postService.findAll(0, 100).size()).isEqualTo(2);
+        assertThat(postService.findAllOrThrow(0, 100).size()).isEqualTo(2);
     }
 
     @Test
@@ -88,8 +88,8 @@ public class PostServiceTest {
         postService.save(dto2);
 
         //then
-        assertThat(postService.findByStatus(PostStatus.ACCESS).size()).isEqualTo(2);
-        assertThat(postService.findByStatus(PostStatus.DONE).size()).isEqualTo(0);
+        assertThat(postService.findByStatusOrThrow(PostStatus.ACCESS).size()).isEqualTo(2);
+        assertThat(postService.findByStatusOrThrow(PostStatus.DONE).size()).isEqualTo(0);
     }
 
     @Test
@@ -103,14 +103,14 @@ public class PostServiceTest {
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
         dto.setMember(member);
-        Post post = postService.findById(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), "수정된 제목", post.getDescription(), post.getMaximum(), post.getPostStatus(), post.getDayOfTheWeek());
-        Long updateId = postService.update(updateDto);
+        Long updateId = postService.updateOrThrow(updateDto);
 
         //then
-        assertThat(postService.findById(updateId).getTitle()).isEqualTo("수정된 제목");
+        assertThat(postService.findByIdOrThrow(updateId).getTitle()).isEqualTo("수정된 제목");
     }
 
     @Test
@@ -124,14 +124,14 @@ public class PostServiceTest {
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
         dto.setMember(member);
-        Post post = postService.findById(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), "수정된 본문", post.getMaximum(), post.getPostStatus(), post.getDayOfTheWeek());
-        Long updateId = postService.update(updateDto);
+        Long updateId = postService.updateOrThrow(updateDto);
 
         //then
-        assertThat(postService.findById(updateId).getDescription()).isEqualTo("수정된 본문");
+        assertThat(postService.findByIdOrThrow(updateId).getDescription()).isEqualTo("수정된 본문");
     }
 
     @Test
@@ -145,14 +145,14 @@ public class PostServiceTest {
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
         dto.setMember(member);
-        Post post = postService.findById(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), post.getDescription(), 2, post.getPostStatus(), post.getDayOfTheWeek());
-        Long updateId = postService.update(updateDto);
+        Long updateId = postService.updateOrThrow(updateDto);
 
         //then
-        assertThat(postService.findById(updateId).getMaximum()).isEqualTo(2);
+        assertThat(postService.findByIdOrThrow(updateId).getMaximum()).isEqualTo(2);
     }
 
     @Test
@@ -166,14 +166,14 @@ public class PostServiceTest {
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
         dto.setMember(member);
-        Post post = postService.findById(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), post.getDescription(), post.getMaximum(), PostStatus.DONE, post.getDayOfTheWeek());
-        Long updateId = postService.update(updateDto);
+        Long updateId = postService.updateOrThrow(updateDto);
 
         //then
-        assertThat(postService.findById(updateId).getPostStatus()).isEqualTo(PostStatus.DONE);
+        assertThat(postService.findByIdOrThrow(updateId).getPostStatus()).isEqualTo(PostStatus.DONE);
     }
 
     @Test
@@ -187,13 +187,13 @@ public class PostServiceTest {
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
         dto.setMember(member);
-        Post post = postService.findById(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), post.getDescription(), post.getMaximum(), post.getPostStatus(), "월, 화");
-        Long updateId = postService.update(updateDto);
+        Long updateId = postService.updateOrThrow(updateDto);
 
         //then
-        assertThat(postService.findById(updateId).getDayOfTheWeek()).isEqualTo("월, 화");
+        assertThat(postService.findByIdOrThrow(updateId).getDayOfTheWeek()).isEqualTo("월, 화");
     }
 }

@@ -29,7 +29,7 @@ public class PostController {
         dto.setMember(member);
 
         Long postId = postService.save(dto);
-        Post post = postService.findById(postId);
+        Post post = postService.findByIdOrThrow(postId);
 
         return new PostResponseDto(post);
     }
@@ -37,7 +37,7 @@ public class PostController {
     @GetMapping("/post/{id}")
     public PostResponseDto postV1(
             @PathVariable Long id) {
-        Post post = postService.findById(id);
+        Post post = postService.findByIdOrThrow(id);
         return new PostResponseDto(post);
     }
 
@@ -46,11 +46,11 @@ public class PostController {
             @AuthenticationPrincipal String userId,
             @PathVariable Long id,
             @RequestBody PostUpdateRequestDto dto) {
-        Post post = postService.findById(id);
+        Post post = postService.findByIdOrThrow(id);
         validateMemberIsAuthor(userId, post);
 
-        Long postId = postService.update(dto);
-        Post updatedPost = postService.findById(postId);
+        Long postId = postService.updateOrThrow(dto);
+        Post updatedPost = postService.findByIdOrThrow(postId);
         return new PostResponseDto(updatedPost);
     }
 

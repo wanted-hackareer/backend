@@ -1,7 +1,7 @@
 package backend.core.controller;
 
-import backend.core.dto.response.MemberResponseDto;
 import backend.core.domain.Member;
+import backend.core.dto.response.MemberResponseDto;
 import backend.core.global.response.ApiResponse;
 import backend.core.global.security.TokenProvider;
 import backend.core.service.MemberService;
@@ -31,7 +31,8 @@ public class MemberController {
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @PostMapping("/sign-in")
-    public MemberSignInResponseDto signInUser(@RequestBody MemberSignInRequestDto dto) {
+    public MemberSignInResponseDto signIn(
+            @Valid @RequestBody MemberSignInRequestDto dto) {
         Member member = memberService.findByCredentialsOrThrow(
                 dto.getEmail(),
                 dto.getPassword(),
@@ -57,7 +58,8 @@ public class MemberController {
     }
 
     @GetMapping("/member")
-    public MemberResponseDto memberV1(@AuthenticationPrincipal String userId) {
+    public MemberResponseDto memberV1(
+            @AuthenticationPrincipal String userId) {
         Member member = memberService.findByIdOrThrow(Long.parseLong(userId));
 
         log.info("Authenticated userId = {}", userId);

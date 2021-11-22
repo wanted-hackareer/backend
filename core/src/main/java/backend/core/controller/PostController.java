@@ -1,8 +1,8 @@
 package backend.core.controller;
 
-import backend.core.dto.response.PostResponseDto;
 import backend.core.domain.Member;
 import backend.core.domain.Post;
+import backend.core.dto.response.PostResponseDto;
 import backend.core.global.error.exception.CustomException;
 import backend.core.service.MemberService;
 import backend.core.service.PostService;
@@ -11,7 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import static backend.core.dto.request.PostRequestDto.*;
+import javax.validation.Valid;
+
+import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
+import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.MEMBER_NOT_ACCEPTABLE;
 
 @Slf4j
@@ -24,7 +27,7 @@ public class PostController {
     private final MemberService memberService;
 
     @PostMapping("/post")
-    public PostResponseDto save(@RequestBody PostCreateRequestDto dto) {
+    public PostResponseDto save(@Valid @RequestBody PostCreateRequestDto dto) {
         Member member = memberService.findByIdOrThrow(dto.getMemberId());
         dto.setMember(member);
 
@@ -45,7 +48,7 @@ public class PostController {
     public PostResponseDto postV1(
             @AuthenticationPrincipal String userId,
             @PathVariable Long id,
-            @RequestBody PostUpdateRequestDto dto) {
+            @Valid @RequestBody PostUpdateRequestDto dto) {
         Post post = postService.findByIdOrThrow(id);
         validateMemberIsAuthor(userId, post);
 

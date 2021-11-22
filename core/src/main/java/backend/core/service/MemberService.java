@@ -35,8 +35,7 @@ public class MemberService {
 
     @Transactional
     public Long updatePasswordOrThrow(MemberPasswordUpdateRequestDto dto, PasswordEncoder encoder) {
-        Member member = memberRepository.findById(dto.getId())
-                .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+        Member member = findByIdOrThrow(dto.getId());
         member.updatePassword(encoder.encode(dto.getPassword()));
 
         return member.getId();
@@ -44,8 +43,7 @@ public class MemberService {
 
     @Transactional
     public Long updateOrThrow(MemberRequestDto.MemberUpdateRequestDto dto) {
-        Member member = memberRepository.findById(dto.getId())
-                .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+        Member member = findByIdOrThrow(dto.getId());
         member.update(dto.getProfile(), dto.getNickName(), dto.getAddress());
         return member.getId();
     }

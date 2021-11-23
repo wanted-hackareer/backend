@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Getter
 public class ItemResponseDto {
-
     private Long id;
     private String name;
     private int quantity;
@@ -15,10 +14,10 @@ public class ItemResponseDto {
     private LocalDateTime updatedAt;
 
     public ItemResponseDto(Item entity) {
-        this.id = entity.getId();
-        this.name = entity.getName();
-        this.quantity = entity.getQuantity();
-        this.createdAt = entity.getCreatedAt();
-        this.updatedAt = entity.getUpdatedAt();
+        id = entity.getId();
+        name = entity.getName();
+        quantity = entity.getQuantity();
+        createdAt = entity.getCreatedAt();
+        updatedAt = entity.getUpdatedAt();
     }
 }

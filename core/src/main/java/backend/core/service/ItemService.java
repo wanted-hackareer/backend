@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
+import static backend.core.dto.request.ItemRequestDto.ItemUpdateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.ITEM_NOT_FOUND;
 
-@Slf4j @Service
+@Slf4j
+@Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ItemService {
@@ -25,6 +27,13 @@ public class ItemService {
         Item item = dto.toEntity();
         itemRepository.save(item);
 
+        return item.getId();
+    }
+
+    @Transactional
+    public Long update(ItemUpdateRequestDto dto) {
+        Item item = findByIdOrThrow(dto.getId());
+        item.update(dto.getName(), dto.getQuantity());
         return item.getId();
     }
 

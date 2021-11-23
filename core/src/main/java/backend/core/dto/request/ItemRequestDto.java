@@ -32,4 +32,17 @@ public class ItemRequestDto {
             this.basket = basket;
         }
     }
+
+    @Getter
+    public static class ItemUpdateRequestDto {
+        private Long id;
+        private String name;
+        private int quantity;
+
+        public ItemUpdateRequestDto(Long id, String name, int quantity) {
+            this.id = id;
+            this.name = name;
+            this.quantity = quantity;
+        }
+    }
 }

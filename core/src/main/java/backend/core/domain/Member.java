@@ -31,7 +31,7 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "basket_id")
     private Basket basket;
 
@@ -41,17 +41,19 @@ public class Member extends BaseTimeEntity {
     //== 연관관계 메서드 ==//
     public void setBasket(Basket basket) {
         this.basket = basket;
+        basket.setMember(this);
     }
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Member(String email, String password, String nickName, Profile profile, Address address) {
+    public Member(String email, String password, String nickName, Profile profile, Address address, Basket basket) {
         this.email = email;
         this.password = password;
         this.profile = profile;
         this.nickName = nickName;
         this.address = address;
         this.role = Role.USER;
+        setBasket(basket);
     }
 
     public void update(Profile profile, String nickName, Address address) {

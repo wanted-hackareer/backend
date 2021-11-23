@@ -18,8 +18,7 @@ public class Basket extends BaseTimeEntity {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "basket")
     private Member member;
 
     @OneToMany(mappedBy = "basket")

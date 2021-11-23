@@ -2,8 +2,10 @@ package backend.core.controller;
 
 import backend.core.domain.Member;
 import backend.core.domain.Post;
+import backend.core.domain.Staff;
 import backend.core.dto.response.PostResponseDto;
 import backend.core.global.error.exception.CustomException;
+import backend.core.repository.StaffRepository;
 import backend.core.service.MemberService;
 import backend.core.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ import static backend.core.global.error.exception.ErrorCode.MEMBER_NOT_ACCEPTABL
 public class PostController {
 
     private final PostService postService;
+    private final StaffRepository staffRepository;
     private final MemberService memberService;
 
     @PostMapping("/post")
@@ -33,6 +36,9 @@ public class PostController {
 
         Long postId = postService.save(dto);
         Post post = postService.findByIdOrThrow(postId);
+
+        Staff staff = Staff.builder().post(post).member(member).build();
+        staffRepository.save(staff);
 
         return new PostResponseDto(post);
     }

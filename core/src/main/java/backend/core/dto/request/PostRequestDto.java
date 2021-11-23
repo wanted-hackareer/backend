@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class PostRequestDto {
 
     @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class PostCreateRequestDto {
 
         private Long memberId;

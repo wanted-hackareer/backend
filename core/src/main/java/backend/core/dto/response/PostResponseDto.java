@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 
 @Getter
 public class PostResponseDto {
+    private Long id;
     private String title;
     private String description;
     private String author;
     private String dayOfTheWeek;
-    private String chatAddress;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     // TODO: staffList, tagList 추가
@@ -21,11 +21,11 @@ public class PostResponseDto {
     private List<TagResponseDto> tagList;
 
     public PostResponseDto(Post entity) {
+        id = entity.getId();
         title = entity.getTitle();
         description = entity.getDescription();
         author = entity.getMember().getNickName();
         dayOfTheWeek = entity.getDayOfTheWeek();
-        chatAddress = entity.getChat().getChatAddress();
         updatedAt = entity.getUpdatedAt();
         createdAt = entity.getCreatedAt();
 

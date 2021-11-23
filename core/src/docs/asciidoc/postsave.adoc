@@ -1,0 +1,10 @@
+=== post
+
+=== request
+include::{snippets}/post-생성/http-request.adoc[]
+
+=== response
+include::{snippets}/post-생성/http-response.adoc[]
+
+=== parameters
+include::{snippets}/post-생성/request-fields.adoc[]

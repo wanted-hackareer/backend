@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static backend.core.dto.request.BasketRequestDto.BasketCreateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.BASKET_NOT_FOUND;
 
-@Slf4j @Service
+@Slf4j
+@Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class BasketService {
@@ -21,10 +21,9 @@ public class BasketService {
     private final BasketRepository basketRepository;
 
     @Transactional
-    public Long save(BasketCreateRequestDto dto) {
-        Basket basket = dto.toEntity();
+    public Long save() {
+        Basket basket = Basket.builder().build();
         basketRepository.save(basket);
-
         return basket.getId();
     }
 

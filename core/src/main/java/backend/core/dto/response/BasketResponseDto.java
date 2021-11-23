@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 @Getter
 public class BasketResponseDto {
     private Long id;
-    private String owner;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     // TODO: itemList 추가
@@ -18,7 +17,6 @@ public class BasketResponseDto {
 
     public BasketResponseDto(Basket entity) {
         id = entity.getId();
-        owner = entity.getMember().getNickName();
         createdAt = entity.getCreatedAt();
         updatedAt = entity.getUpdatedAt();
         items = entity.getItemList().stream()

@@ -1,6 +1,7 @@
 package backend.core.dto.request;
 
 import backend.core.domain.Address;
+import backend.core.domain.Basket;
 import backend.core.domain.Member;
 import backend.core.domain.Profile;
 import lombok.AccessLevel;
@@ -14,7 +15,7 @@ public class MemberRequestDto {
         private Long id;
         private String password;
 
-        public MemberPasswordUpdateRequestDto (Long id, String password) {
+        public MemberPasswordUpdateRequestDto(Long id, String password) {
             this.id = id;
             this.password = password;
         }
@@ -50,6 +51,8 @@ public class MemberRequestDto {
         private Address address;
         private Profile profile;
 
+        private Basket basket;
+
         public MemberSignUpRequestDto(String email, String nickName, String password, Address address, Profile profile) {
             this.email = email;
             this.nickName = nickName;
@@ -65,11 +68,13 @@ public class MemberRequestDto {
                     .password(password)
                     .address(address)
                     .nickName(nickName)
+                    .basket(basket)
                     .build();
         }
 
-        public void setPassword(String password) {
+        public void setPasswordAndBasket(String password) {
             this.password = password;
+            this.basket = Basket.builder().build();
         }
     }
 }

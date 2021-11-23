@@ -4,6 +4,7 @@ import backend.core.domain.Member;
 import backend.core.dto.response.MemberResponseDto;
 import backend.core.global.response.ApiResponse;
 import backend.core.global.security.TokenProvider;
+import backend.core.service.BasketService;
 import backend.core.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ import static backend.core.dto.response.MemberResponseDto.MemberSignInResponseDt
 public class MemberController {
 
     private final MemberService memberService;
+    private final BasketService basketService;
     private final TokenProvider tokenProvider;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -46,7 +48,7 @@ public class MemberController {
     @PostMapping("/sign-up")
     public MemberResponseDto createMemberV1(
             @Valid @RequestBody MemberSignUpRequestDto dto) {
-        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
 
         Long id = memberService.save(dto);
         Member member = memberService.findByIdOrThrow(id);

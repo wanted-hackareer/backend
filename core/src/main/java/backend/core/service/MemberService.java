@@ -1,8 +1,9 @@
 package backend.core.service;
 
-import backend.core.dto.request.MemberRequestDto;
 import backend.core.domain.Member;
+import backend.core.dto.request.MemberRequestDto;
 import backend.core.global.error.exception.CustomException;
+import backend.core.repository.BasketRepository;
 import backend.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,16 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static backend.core.dto.request.MemberRequestDto.*;
+import static backend.core.dto.request.MemberRequestDto.MemberPasswordUpdateRequestDto;
+import static backend.core.dto.request.MemberRequestDto.MemberSignUpRequestDto;
 import static backend.core.global.error.exception.ErrorCode.*;
 
-@Service
 @Slf4j
+@Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final BasketRepository basketRepository;
 
     @Transactional
     public Long save(MemberSignUpRequestDto dto) {

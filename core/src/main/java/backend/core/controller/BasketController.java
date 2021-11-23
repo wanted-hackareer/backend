@@ -1,7 +1,6 @@
 package backend.core.controller;
 
 import backend.core.domain.Basket;
-import backend.core.domain.Member;
 import backend.core.dto.response.BasketResponseDto;
 import backend.core.global.response.ApiResponse;
 import backend.core.service.BasketService;
@@ -10,11 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static backend.core.dto.request.BasketRequestDto.BasketCreateRequestDto;
 
 @RestController
 @Slf4j
@@ -25,7 +21,7 @@ public class BasketController {
     private final BasketService basketService;
     private final MemberService memberService;
 
-    @PostMapping("/basket")
+/*    @PostMapping("/basket")
     public BasketResponseDto saveBasketV1(
             @Valid @RequestBody BasketCreateRequestDto dto) {
         Member member = memberService.findByIdOrThrow(dto.getMemberId());
@@ -35,7 +31,7 @@ public class BasketController {
         Basket basket = basketService.findByIdOrThrow(basketId);
 
         return new BasketResponseDto(basket);
-    }
+    }*/
 
     @GetMapping("/baskets")
     public ApiResponse findAllBasketV1(

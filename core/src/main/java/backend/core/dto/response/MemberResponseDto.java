@@ -5,6 +5,9 @@ import backend.core.domain.Member;
 import backend.core.domain.Profile;
 import lombok.Getter;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 public class MemberResponseDto {
 
@@ -13,14 +16,21 @@ public class MemberResponseDto {
     private String nickName;
     private Address address;
     private Profile profile;
-    // TODO: staff 추가
+    // TODO: staffList, basket 추가
+    private List<StaffResponseDto> staffList;
+
+
 
     public MemberResponseDto(Member entity) {
-        this.id = entity.getId();
-        this.email = entity.getEmail();
-        this.nickName = entity.getNickName();
-        this.address = entity.getAddress();
-        this.profile = entity.getProfile();
+        id = entity.getId();
+        email = entity.getEmail();
+        nickName = entity.getNickName();
+        address = entity.getAddress();
+        profile = entity.getProfile();
+
+        staffList = entity.getStaffList().stream()
+                .map(staff -> new StaffResponseDto(staff))
+                .collect(Collectors.toList());
     }
 
     @Getter
@@ -30,8 +40,8 @@ public class MemberResponseDto {
         private String token;
 
         public MemberSignInResponseDto(Member entity, String token) {
-            this.id = entity.getId();
-            this.email = entity.getEmail();
+            id = entity.getId();
+            email = entity.getEmail();
             this.token = token;
         }
     }

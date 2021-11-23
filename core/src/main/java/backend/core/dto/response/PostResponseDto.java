@@ -4,6 +4,8 @@ import backend.core.domain.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class PostResponseDto {
@@ -14,14 +16,24 @@ public class PostResponseDto {
     private String chatAddress;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    // TODO: staffList, tagList 추가
+    private List<StaffResponseDto> staffList;
+    private List<TagResponseDto> tagList;
 
     public PostResponseDto(Post entity) {
-        this.title = entity.getTitle();
-        this.description = entity.getDescription();
-        this.author = entity.getMember().getNickName();
-        this.dayOfTheWeek = entity.getDayOfTheWeek();
-        this.chatAddress = entity.getChat().getChatAddress();
-        this.updatedAt = entity.getUpdatedAt();
-        this.createdAt = entity.getCreatedAt();
+        title = entity.getTitle();
+        description = entity.getDescription();
+        author = entity.getMember().getNickName();
+        dayOfTheWeek = entity.getDayOfTheWeek();
+        chatAddress = entity.getChat().getChatAddress();
+        updatedAt = entity.getUpdatedAt();
+        createdAt = entity.getCreatedAt();
+
+        staffList = entity.getStaffList().stream()
+                .map(staff -> new StaffResponseDto(staff))
+                .collect(Collectors.toList());
+        tagList = entity.getTagList().stream()
+                .map(tag -> new TagResponseDto(tag))
+                .collect(Collectors.toList());
     }
 }

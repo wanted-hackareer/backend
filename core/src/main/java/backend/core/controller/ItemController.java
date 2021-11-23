@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
 import static backend.core.dto.request.ItemRequestDto.ItemUpdateRequestDto;
@@ -37,8 +38,11 @@ public class ItemController {
             @RequestParam(name = "offset", defaultValue = "0") int offset,
             @RequestParam(name = "limit", defaultValue = "100") int limit) {
         List<Item> items = itemService.findAllOrThrow(offset, limit);
+        List<ItemResponseDto> result = items.stream()
+                .map(item -> new ItemResponseDto(item))
+                .collect(Collectors.toList());
 
-        return ApiResponse.builder().count(items.size()).data(items).build();
+        return ApiResponse.builder().count(result.size()).data(result).build();
     }
 
     @PostMapping("/item")

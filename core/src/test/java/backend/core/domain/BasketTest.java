@@ -12,11 +12,11 @@ public class BasketTest {
     public void createBasket() {
         //given
         Address address = Address.builder().city("서울시").district("성동구").street("성동로").build();
-        Member member = Member.builder()
-                .email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
 
         //when
-        Basket basket = Basket.builder().member(member).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder()
+                .email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").basket(basket).build();
 
         //then
         assertThat(basket.getMember().getId()).isEqualTo(member.getId());

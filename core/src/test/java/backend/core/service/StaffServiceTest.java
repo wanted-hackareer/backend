@@ -29,8 +29,10 @@ public class StaffServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member1 = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
-        Member member2 = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
+        Basket basket1 = Basket.builder().build();
+        Basket basket2 = Basket.builder().build();
+        Member member1 = Member.builder().email("test1@gmail.com").basket(basket1).password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
+        Member member2 = Member.builder().email("test3@gmail.com").basket(basket2).password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member1).dayOfTheWeek("월, 금").maximum(2).build();
 
         em.persist(member2);
@@ -55,9 +57,12 @@ public class StaffServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member memberA = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
-        Member memberB = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
-        Member memberC = Member.builder().email("test4@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트4").profile(profile).build();
+        Basket basketA = Basket.builder().build();
+        Basket basketB = Basket.builder().build();
+        Basket basketC = Basket.builder().build();
+        Member memberA = Member.builder().email("test1@gmail.com").basket(basketA).password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
+        Member memberB = Member.builder().email("test3@gmail.com").basket(basketB).password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
+        Member memberC = Member.builder().email("test4@gmail.com").basket(basketC).password("DF#Q$FWAD").address(address).nickName("테스트4").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(memberA).dayOfTheWeek("월, 금").maximum(2).build();
         em.persist(memberB);
         em.persist(memberC);
@@ -82,9 +87,12 @@ public class StaffServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member memberA = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
-        Member memberB = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
-        Member memberC = Member.builder().email("test4@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트4").profile(profile).build();
+        Basket basketA = Basket.builder().build();
+        Basket basketB = Basket.builder().build();
+        Basket basketC = Basket.builder().build();
+        Member memberA = Member.builder().email("test1@gmail.com").basket(basketA).password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
+        Member memberB = Member.builder().email("test3@gmail.com").basket(basketB).password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
+        Member memberC = Member.builder().email("test4@gmail.com").basket(basketC).password("DF#Q$FWAD").address(address).nickName("테스트4").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(memberA).dayOfTheWeek("월, 금").maximum(2).build();
         em.persist(memberB);
         em.persist(memberC);
@@ -109,11 +117,12 @@ public class StaffServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member1 = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
-        Member member2 = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
+        Basket basket1 = Basket.builder().build();
+        Basket basket2 = Basket.builder().build();
+        Member member1 = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").basket(basket1).address(address).nickName("테스트1").profile(profile).build();
+        Member member2 = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").basket(basket2).address(address).nickName("테스트3").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member1).dayOfTheWeek("월, 금").maximum(2).build();
         Staff staff = Staff.builder().member(member2).post(post).build();
-
         em.persist(member2);
         em.persist(post);
         em.persist(staff);
@@ -132,11 +141,14 @@ public class StaffServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member1 = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
-        Member member2 = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
+
+        Basket basket1 = Basket.builder().build();
+        Basket basket2 = Basket.builder().build();
+
+        Member member1 = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").basket(basket1).address(address).nickName("테스트1").profile(profile).build();
+        Member member2 = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").basket(basket2).address(address).nickName("테스트3").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member1).dayOfTheWeek("월, 금").maximum(2).build();
         Staff staff = Staff.builder().member(member2).post(post).build();
-
         em.persist(member2);
         em.persist(post);
         em.persist(staff);
@@ -155,8 +167,11 @@ public class StaffServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member1 = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
-        Member member2 = Member.builder().email("test3@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
+        Basket basket1 = Basket.builder().build();
+        Basket basket2 = Basket.builder().build();
+
+        Member member1 = Member.builder().email("test1@gmail.com").basket(basket1).password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
+        Member member2 = Member.builder().email("test3@gmail.com").basket(basket2).password("DF#Q$FWAD").address(address).nickName("테스트3").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member1).dayOfTheWeek("월, 금").maximum(2).build();
         Staff staff = Staff.builder().member(member2).post(post).build();
 

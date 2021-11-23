@@ -12,8 +12,8 @@ public class ItemTest {
     public void createItem() {
         //given
         Address address = Address.builder().city("서울시").district("성동구").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-        Basket basket = Basket.builder().member(member).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         //when
         Item item = Item.builder().name("사과").basket(basket).build();
@@ -29,8 +29,8 @@ public class ItemTest {
     public void updateName() {
         //given
         Address address = Address.builder().city("서울시").district("강남구").street("성동로").build();
-        Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-        Basket basket = Basket.builder().member(member).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         Item item = Item.builder().name("사과").basket(basket).quantity(1).build();
 
@@ -47,8 +47,8 @@ public class ItemTest {
     public void updateQuantity() {
         //given
         Address address = Address.builder().city("서울시").district("강남구").street("성동로").build();
-        Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-        Basket basket = Basket.builder().member(member).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         Item item = Item.builder().name("사과").basket(basket).quantity(1).build();
 
@@ -65,8 +65,8 @@ public class ItemTest {
     public void deleteItem() {
         //given
         Address address = Address.builder().city("서울시").district("강남구").street("성동로").build();
-        Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
-        Basket basket = Basket.builder().member(member).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         Item item = Item.builder().name("사과").basket(basket).quantity(1).build();
         

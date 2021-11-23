@@ -29,7 +29,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         //when
@@ -51,7 +52,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         //when
@@ -74,7 +76,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         //when
@@ -98,7 +101,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
@@ -119,7 +123,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
@@ -140,7 +145,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
@@ -161,7 +167,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
@@ -182,7 +189,8 @@ public class PostServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");

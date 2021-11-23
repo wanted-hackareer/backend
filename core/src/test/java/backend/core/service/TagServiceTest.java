@@ -28,7 +28,8 @@ public class TagServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트1").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member).dayOfTheWeek("월, 금").maximum(2).build();
         em.persist(post);
 
@@ -49,7 +50,8 @@ public class TagServiceTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트1").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트1").profile(profile).build();
         Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member).dayOfTheWeek("월, 금").maximum(2).build();
         em.persist(post);
 

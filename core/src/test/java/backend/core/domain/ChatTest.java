@@ -12,7 +12,8 @@ public class ChatTest {
     public void createChat() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member author = Member.builder().email("haha@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member author = Member.builder().email("haha@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
         Post post = Post.builder().member(author).description("테스트 설명글").title("테스트 제목").maximum(3).build();
 
         //when

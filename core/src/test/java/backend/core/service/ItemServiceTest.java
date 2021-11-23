@@ -28,8 +28,8 @@ public class ItemServiceTest {
         //given
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().profile(profile).address(address).nickName("삐약삐약").password("sdkjfa-caiasnc=ascsabkck").email("god@gmail.com").build();
-        Basket basket = Basket.builder().member(member).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().profile(profile).address(address).nickName("삐약삐약").password("sdkjfa-caiasnc=ascsabkck").basket(basket).email("god@gmail.com").build();
         em.persist(member);
         em.persist(basket);
 
@@ -51,8 +51,8 @@ public class ItemServiceTest {
         //given
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().profile(profile).address(address).nickName("삐약삐약").password("sdkjfa-caiasnc=ascsabkck").email("god@gmail.com").build();
-        Basket basket = Basket.builder().member(member).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().profile(profile).address(address).nickName("삐약삐약").password("sdkjfa-caiasnc=ascsabkck").basket(basket).email("god@gmail.com").build();
         em.persist(member);
         em.persist(basket);
 

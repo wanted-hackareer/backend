@@ -1,6 +1,5 @@
 package backend.core.domain;
 
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +13,10 @@ public class MemberTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
+        Basket basket = Basket.builder().build();
 
         //when
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).basket(basket).build();
 
         //then
         assertThat(member.getEmail()).isEqualTo("test@gmail.com");
@@ -33,7 +33,8 @@ public class MemberTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").basket(basket).profile(profile).build();
         
         //when
         Address updateAddress = Address.builder().city("서울시").district("강남구").street("강남로").build();
@@ -51,7 +52,8 @@ public class MemberTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").basket(basket).profile(profile).build();
 
         //when
         member.update(member.getProfile(), "와바라바덥덥", member.getAddress());
@@ -66,7 +68,8 @@ public class MemberTest {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA").uploadFileName("프로필 이미지").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").profile(profile).build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
 
         //when
         Profile updateProfile = Profile.builder().storeFileName("SADASF-asDASDSA-ADSADSA").uploadFileName("업데이트 이미지").build();

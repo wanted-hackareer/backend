@@ -13,7 +13,8 @@ public class StaffTest {
     public void createStaff() {
         //given
         Address address = Address.builder().city("서울시").district("성동구").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("설명글입니다.").title("성동구 같이 장보러갈 사람").maximum(3).build();
 
@@ -23,7 +24,7 @@ public class StaffTest {
         //then
         assertThat(staff.getMember().getEmail()).isEqualTo(member.getEmail());
         assertThat(staff.getPost().getTitle()).isEqualTo(post.getTitle());
-        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(0);
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.WAIT);
     }
 
@@ -32,7 +33,8 @@ public class StaffTest {
     public void updateStaffAccess() {
         //given
         Address address = Address.builder().city("서울시").district("성동구").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("설명글입니다.").title("성동구 같이 장보러갈 사람").maximum(3).build();
         Staff staff = Staff.builder().member(member).post(post).build();
@@ -42,7 +44,7 @@ public class StaffTest {
 
         //then
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.ACCESS);
-        assertThat(staff.getPost().getStaffList().size()).isEqualTo(2);
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
     }
 
     @Test
@@ -50,7 +52,8 @@ public class StaffTest {
     public void updateStatusCancel() {
         //given
         Address address = Address.builder().city("서울시").district("성동구").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("설명글입니다.").title("성동구 같이 장보러갈 사람").maximum(3).build();
         Staff staff = Staff.builder().member(member).post(post).build();
@@ -60,7 +63,7 @@ public class StaffTest {
 
         //then
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.CANCEL);
-        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(0);
     }
 
     @Test
@@ -68,7 +71,8 @@ public class StaffTest {
     public void updateStatusDenied() {
         //given
         Address address = Address.builder().city("서울시").district("성동구").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("설명글입니다.").title("성동구 같이 장보러갈 사람").maximum(3).build();
         Staff staff = Staff.builder().member(member).post(post).build();
@@ -78,6 +82,6 @@ public class StaffTest {
 
         //then
         assertThat(staff.getStaffStatus()).isEqualTo(StaffStatus.DENIED);
-        assertThat(staff.getPost().getStaffList().size()).isEqualTo(1);
+        assertThat(staff.getPost().getStaffList().size()).isEqualTo(0);
     }
 }

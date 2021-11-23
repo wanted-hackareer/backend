@@ -12,11 +12,13 @@ public class MessageTest {
     public void createMessage() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member author = Member.builder().email("haha@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member author = Member.builder().email("haha@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
         Post post = Post.builder().member(author).description("테스트 설명글").title("테스트 제목").maximum(3).build();
 
         Chat chat = Chat.builder().post(post).build();
-        Member member = Member.builder().email("asdas@gmail.com").password("DF#asdsaw12").address(address).nickName("띠용이").build();
+        Basket basket1 = Basket.builder().build();
+        Member member = Member.builder().email("asdas@gmail.com").password("DF#asdsaw12").address(address).basket(basket1).nickName("띠용이").build();
 
         //when
         Message message = Message.builder().chat(chat).member(member).content("테스트 대화 내용 하하").build();

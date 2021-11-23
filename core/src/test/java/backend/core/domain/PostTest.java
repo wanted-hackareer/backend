@@ -12,7 +12,8 @@ public class PostTest {
     public void createPost() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("와바라바덥덥").build();
 
         //when
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").dayOfTheWeek("월, 화, 수").maximum(3).build();
@@ -31,7 +32,8 @@ public class PostTest {
     public void updateDescription() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").dayOfTheWeek("월, 화").maximum(3).build();
 
@@ -51,7 +53,8 @@ public class PostTest {
     public void updateTitle() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").dayOfTheWeek("월, 화").maximum(3).build();
 
@@ -71,7 +74,8 @@ public class PostTest {
     public void updateStatus() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").dayOfTheWeek("월, 화").maximum(3).build();
 
@@ -91,7 +95,8 @@ public class PostTest {
     public void updateMaximum() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").dayOfTheWeek("월, 화").maximum(3).build();
 
@@ -111,7 +116,8 @@ public class PostTest {
     public void updateDayOfTheWeek() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("와바라바덥덥").build();
 
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").dayOfTheWeek("월, 화").maximum(3).build();
 

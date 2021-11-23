@@ -13,7 +13,8 @@ public class TagTest {
     public void createTag() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").maximum(3).build();
 
         //when
@@ -29,7 +30,8 @@ public class TagTest {
     public void updateName() {
         //given
         Address address = Address.builder().city("서울시").district("테스트").street("성동로").build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("와바라바덥덥").build();
+        Basket basket = Basket.builder().build();
+        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
         Post post = Post.builder().member(member).description("테스트 설명글").title("테스트 제목").maximum(3).build();
         Tag tag = Tag.builder().name("이마트 트레이더스").post(post).build();
 

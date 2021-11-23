@@ -1,6 +1,7 @@
 package backend.core.service;
 
 import backend.core.domain.Address;
+import backend.core.domain.Basket;
 import backend.core.domain.Member;
 import backend.core.domain.Profile;
 import backend.core.global.error.exception.CustomException;
@@ -33,9 +34,11 @@ public class MemberServiceTest {
 
         //when
         MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test10@gmail.com", "테스트10", "DF#Q$FWAD", address, profile);
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
         Long memberId = memberService.save(dto);
 
         //then
+        assertThat(memberService.findByIdOrThrow(memberId).getBasket().getId()).isEqualTo(dto.getBasket().getId());
         assertThat(memberService.findByIdOrThrow(memberId).getNickName()).isEqualTo("테스트10");
         assertThat(memberService.findByIdOrThrow(memberId).getEmail()).isEqualTo("test10@gmail.com");
         assertThat(memberService.findByIdOrThrow(memberId)).isInstanceOf(Member.class);
@@ -47,8 +50,12 @@ public class MemberServiceTest {
         //given
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
+
         MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test12@gmail.com", "테스트12", "DF#Q$FWAD", address, profile);
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
+
         MemberSignUpRequestDto dtoSameEmail = new MemberSignUpRequestDto("test12@gmail.com", "테스트13", "ajsdhiedds", address, profile);
+        dtoSameEmail.setPasswordAndBasket(passwordEncoder.encode(dtoSameEmail.getPassword()));
 
         //when
         memberService.save(dto);
@@ -64,9 +71,12 @@ public class MemberServiceTest {
         //given
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
-        MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test4@gmail.com", "테스트4", "DF#Q$FWAD", address, profile);
-        MemberSignUpRequestDto dtoSameNickname = new MemberSignUpRequestDto("test5@gmail.com", "테스트4", "ajsdhiedds", address, profile);
 
+        MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test4@gmail.com", "테스트4", "DF#Q$FWAD", address, profile);
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
+
+        MemberSignUpRequestDto dtoSameNickname = new MemberSignUpRequestDto("test5@gmail.com", "테스트4", "ajsdhiedds", address, profile);
+        dtoSameNickname.setPasswordAndBasket(passwordEncoder.encode(dtoSameNickname.getPassword()));
         //when
         memberService.save(dto);
 
@@ -81,8 +91,12 @@ public class MemberServiceTest {
         //given
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
+
         MemberSignUpRequestDto dto1 = new MemberSignUpRequestDto("test2@gmail.com", "테스트2", "DF#Q$FWAD", address, profile);
+        dto1.setPasswordAndBasket(passwordEncoder.encode(dto1.getPassword()));
+
         MemberSignUpRequestDto dto2 = new MemberSignUpRequestDto("test3@gmail.com", "테스트3", "ajsdhiedds", address, profile);
+        dto2.setPasswordAndBasket(passwordEncoder.encode(dto2.getPassword()));
 
         //when
         memberService.save(dto1);
@@ -99,7 +113,9 @@ public class MemberServiceTest {
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Address updateAddress = Address.builder().city("부산광역시").district("동래구").street("아무개").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
+
         MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test1@gmail.com", "테스트1", "DF#Q$FWAD", address, profile);
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
 
         //when
         Long memberId = memberService.save(dto);
@@ -119,7 +135,9 @@ public class MemberServiceTest {
         //given
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
+
         MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test19@gmail.com", "테스트19", "DF#Q$FWAD", address, profile);
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
 
         //when
         Long memberId = memberService.save(dto);
@@ -138,7 +156,9 @@ public class MemberServiceTest {
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
         Profile updateProfile = Profile.builder().storeFileName("asddkjd-ddqwdeg-afawdqwd.jpg").uploadFileName("수정 후 프로필").build();
+
         MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test15@gmail.com", "테스트15", "DF#Q$FWAD", address, profile);
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
 
         //when
         Long memberId = memberService.save(dto);
@@ -157,7 +177,9 @@ public class MemberServiceTest {
         //given
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
+
         MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test15@gmail.com", "테스트15", "DF#Q$FWAD", address, profile);
+        dto.setPasswordAndBasket(passwordEncoder.encode(dto.getPassword()));
 
         //when
         Long memberId = memberService.save(dto);

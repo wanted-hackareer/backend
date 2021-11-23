@@ -25,6 +25,7 @@ public class MemberRepository {
     public Optional<Member> findById(Long id) {
         List<Member> member = em.createQuery(
                         "select m from Member m" +
+                                " join fetch m.basket b" +
                                 " where m.id = :id", Member.class)
                 .setParameter("id", id)
                 .getResultList();

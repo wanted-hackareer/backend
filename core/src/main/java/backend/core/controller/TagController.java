@@ -2,7 +2,6 @@ package backend.core.controller;
 
 import backend.core.domain.Post;
 import backend.core.domain.Tag;
-import backend.core.dto.request.TagRequestDto;
 import backend.core.dto.response.TagResponseDto;
 import backend.core.global.response.ApiResponse;
 import backend.core.service.PostService;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static backend.core.dto.request.TagRequestDto.TagCreateRequestDto;
 
 @RestController
 @Slf4j
@@ -46,7 +47,7 @@ public class TagController {
 
     @PostMapping("/tag")
     public TagResponseDto save(
-            @Valid @RequestBody TagRequestDto.TagCreateRequestDto dto) {
+            @Valid @RequestBody TagCreateRequestDto dto) {
         Post post = postService.findByIdOrThrow(dto.getPostId());
         dto.setPost(post);
 

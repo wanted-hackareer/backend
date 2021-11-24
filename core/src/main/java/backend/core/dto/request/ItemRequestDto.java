@@ -2,11 +2,14 @@ package backend.core.dto.request;
 
 import backend.core.domain.Basket;
 import backend.core.domain.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class ItemRequestDto {
 
     @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class ItemCreateRequestDto {
         private Long basketId;
         private String name;
@@ -34,6 +37,7 @@ public class ItemRequestDto {
     }
 
     @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class ItemUpdateRequestDto {
         private Long id;
         private String name;

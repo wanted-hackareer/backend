@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -30,21 +30,28 @@ public class ProfileController {
     }
 
     @PostMapping("/profile")
-    public String saveProfile(@RequestParam String profileName,
-                              @RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
-        log.info("saveProfile profileName = {}", profileName);
-        log.info("saveProfile file = {}", file);
-        log.info("saveProfile request = {}", request);
+    public String saveProfile(
+            @RequestParam MultipartFile file) throws IOException {
+        String storeFilename = createStoreFilename(file.getOriginalFilename());
+        log.info("saveProfile storeFilename = {}", storeFilename);
+        log.info("saveProfile originalFilename = {}", file.getOriginalFilename());
 
         if (!file.isEmpty()) {
-            String fullPath = fileDir + file.getOriginalFilename();
+            String fullPath = fileDir + storeFilename;
             log.info("saveProfile fullPath = {}", fullPath);
-
             file.transferTo(new File(fullPath));
         }
-
-        return profileName;
+        return storeFilename;
     }
 
+    private String createStoreFilename(String originalFilename) {
+        String uuid = UUID.randomUUID().toString();
+        String ext = extractExt(originalFilename);
+        return uuid + "." + ext;
+    }
 
+    private String extractExt(String originalFilename) {
+        int pos = originalFilename.lastIndexOf(".");
+        return originalFilename.substring(pos + 1);
+    }
 }

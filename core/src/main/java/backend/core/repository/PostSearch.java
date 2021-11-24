@@ -6,5 +6,6 @@ import lombok.Getter;
 @Getter
 public class PostSearch {
     private String title;
+    private String district;
     private PostStatus status;
 }

@@ -24,4 +24,4 @@ logging:
     org.springframework.web: debug
 
 file:
-  dir: "/Users/piaochung/Documents/GitHub/backend/file"
+  dir: "/Users/piaochung/Documents/GitHub/backend/file/"

@@ -13,6 +13,7 @@ public class PostResponseDto {
     private String title;
     private String description;
     private String author;
+    private Long memberId;
     private String dayOfTheWeek;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -25,6 +26,7 @@ public class PostResponseDto {
         title = entity.getTitle();
         description = entity.getDescription();
         author = entity.getMember().getNickName();
+        memberId = entity.getMember().getId();
         dayOfTheWeek = entity.getDayOfTheWeek();
         updatedAt = entity.getUpdatedAt();
         createdAt = entity.getCreatedAt();

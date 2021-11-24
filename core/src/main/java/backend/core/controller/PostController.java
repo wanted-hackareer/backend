@@ -2,25 +2,26 @@ package backend.core.controller;
 
 import backend.core.domain.Member;
 import backend.core.domain.Post;
-import backend.core.domain.Staff;
+import backend.core.domain.StaffStatus;
 import backend.core.dto.response.PostResponseDto;
 import backend.core.global.error.exception.CustomException;
 import backend.core.global.response.ApiResponse;
-import backend.core.repository.StaffRepository;
 import backend.core.service.MemberService;
 import backend.core.service.PostService;
+import backend.core.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
 import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
+import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
+import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.MEMBER_NOT_ACCEPTABLE;
 
 @Slf4j
@@ -30,7 +31,7 @@ import static backend.core.global.error.exception.ErrorCode.MEMBER_NOT_ACCEPTABL
 public class PostController {
 
     private final PostService postService;
-    private final StaffRepository staffRepository;
+    private final StaffService staffService;
     private final MemberService memberService;
 
     @PostMapping("/post")
@@ -41,10 +42,26 @@ public class PostController {
         Long postId = postService.save(dto);
         Post post = postService.findByIdOrThrow(postId);
 
-        Staff staff = Staff.builder().post(post).member(member).build();
-        staffRepository.save(staff);
+        setAuthorToStaff(dto, member, post);
 
         return new PostResponseDto(post);
+    }
+
+    private void setAuthorToStaff(PostCreateRequestDto dto, Member member, Post post) {
+        Long staffId = createStaff(dto, member, post);
+        updateStaffStatusToAccept(staffId);
+    }
+
+    private Long createStaff(PostCreateRequestDto dto, Member member, Post post) {
+        StaffCreateRequestDto createDto = new StaffCreateRequestDto(post.getId(), dto.getMemberId());
+        createDto.setMemberAndPost(member, post);
+        Long staffId = staffService.save(createDto);
+        return staffId;
+    }
+
+    private void updateStaffStatusToAccept(Long staffId) {
+        StaffUpdateRequestDto updateDto = new StaffUpdateRequestDto(staffId, StaffStatus.ACCESS);
+        staffService.updateOrThrow(updateDto);
     }
 
     @GetMapping("/posts")
@@ -76,8 +93,7 @@ public class PostController {
         validateMemberIsAuthor(userId, post);
 
         Long postId = postService.updateOrThrow(dto);
-        Post updatedPost = postService.findByIdOrThrow(postId);
-        return new PostResponseDto(updatedPost);
+        return new PostResponseDto(post);
     }
 
     private void validateMemberIsAuthor(String userId, Post post) {

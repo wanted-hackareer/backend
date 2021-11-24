@@ -15,9 +15,9 @@ public class MemberResponseDto {
     private Long id;
     private String email;
     private String nickName;
+    private Long basketId;
     private Address address;
     private Profile profile;
-    private Basket basket;
     // TODO: staffList, basket 추가
     private List<StaffResponseDto> staffList;
 
@@ -25,9 +25,9 @@ public class MemberResponseDto {
         id = entity.getId();
         email = entity.getEmail();
         nickName = entity.getNickName();
+        basketId = entity.getBasket().getId();
         address = entity.getAddress();
         profile = entity.getProfile();
-        basket = entity.getBasket();
         staffList = entity.getStaffList().stream()
                 .map(staff -> new StaffResponseDto(staff))
                 .collect(Collectors.toList());

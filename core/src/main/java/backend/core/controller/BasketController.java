@@ -19,19 +19,6 @@ import java.util.stream.Collectors;
 public class BasketController {
 
     private final BasketService basketService;
-    private final MemberService memberService;
-
-/*    @PostMapping("/basket")
-    public BasketResponseDto saveBasketV1(
-            @Valid @RequestBody BasketCreateRequestDto dto) {
-        Member member = memberService.findByIdOrThrow(dto.getMemberId());
-        dto.setMember(member);
-
-        Long basketId = basketService.save(dto);
-        Basket basket = basketService.findByIdOrThrow(basketId);
-
-        return new BasketResponseDto(basket);
-    }*/
 
     @GetMapping("/baskets")
     public ApiResponse findAllBasketV1(

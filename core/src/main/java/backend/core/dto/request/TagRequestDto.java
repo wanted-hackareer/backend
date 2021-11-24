@@ -8,13 +8,13 @@ public class TagRequestDto {
 
     @Getter
     public static class TagCreateRequestDto {
-        private Long post_id;
+        private Long postId;
         private String name;
 
         private Post post;
 
-        public TagCreateRequestDto(Long post_id, String name) {
-            this.post_id = post_id;
+        public TagCreateRequestDto(Long postId, String name) {
+            this.postId = postId;
             this.name = name;
         }
 

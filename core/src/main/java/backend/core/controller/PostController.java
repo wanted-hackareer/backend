@@ -5,6 +5,7 @@ import backend.core.domain.Post;
 import backend.core.domain.Staff;
 import backend.core.dto.response.PostResponseDto;
 import backend.core.global.error.exception.CustomException;
+import backend.core.global.response.ApiResponse;
 import backend.core.repository.StaffRepository;
 import backend.core.service.MemberService;
 import backend.core.service.PostService;
@@ -14,6 +15,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
 import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
@@ -41,6 +45,19 @@ public class PostController {
         staffRepository.save(staff);
 
         return new PostResponseDto(post);
+    }
+
+    @GetMapping("/posts")
+    public ApiResponse postsV1(
+            @RequestParam(name = "offset", defaultValue = "0") int offset,
+            @RequestParam(name = "limit", defaultValue = "100") int limit) {
+        List<Post> postList = postService.findAllOrThrow(offset, limit);
+
+        List<PostResponseDto> result = postList.stream()
+                .map(post -> new PostResponseDto(post))
+                .collect(Collectors.toList());
+
+        return ApiResponse.builder().count(result.size()).data(result).build();
     }
 
     @GetMapping("/post/{id}")

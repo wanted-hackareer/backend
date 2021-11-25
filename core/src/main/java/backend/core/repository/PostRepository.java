@@ -65,7 +65,7 @@ public class PostRepository {
         if (!StringUtils.hasText(district)) {
             return null;
         }
-        return QPost.post.address.city.like(district);
+        return QPost.post.address.district.like(district);
     }
 
     private BooleanExpression titleLike(String title) {

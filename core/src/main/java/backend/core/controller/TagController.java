@@ -8,6 +8,7 @@ import backend.core.service.PostService;
 import backend.core.service.TagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,7 +27,7 @@ public class TagController {
     private final PostService postService;
 
     @GetMapping("/tags")
-    public ApiResponse findAll(
+    public ApiResponse tagsV1(
             @RequestParam(name = "offset", defaultValue = "0") int offset,
             @RequestParam(name = "limit", defaultValue = "100") int limit) {
         List<Tag> tagList = tagService.findAllOrThrow(offset, limit);
@@ -39,21 +40,34 @@ public class TagController {
     }
 
     @GetMapping("/tag/{id}")
-    public TagResponseDto findById(
+    public TagResponseDto tagV1(
             @PathVariable Long id) {
         Tag tag = tagService.findByIdOrThrow(id);
         return new TagResponseDto(tag);
     }
 
     @PostMapping("/tag")
-    public TagResponseDto save(
+    public TagResponseDto saveTagV1(
             @Valid @RequestBody TagCreateRequestDto dto) {
+        return new TagResponseDto(saveTag(dto));
+    }
+
+    @PostMapping("/tags")
+    public HttpStatus saveTagsV1(
+            @Valid @RequestBody List<TagCreateRequestDto> dtoList) {
+        dtoList.stream()
+                .map(dto -> saveTag(dto))
+                .collect(Collectors.toList());
+        return HttpStatus.OK;
+    }
+
+    private Tag saveTag(TagCreateRequestDto dto) {
         Post post = postService.findByIdOrThrow(dto.getPostId());
         dto.setPost(post);
 
         Long tagId = tagService.save(dto);
         Tag tag = tagService.findByIdOrThrow(tagId);
-        return new TagResponseDto(tag);
+        return tag;
     }
 
     // TODO 추가 태그 수정 api

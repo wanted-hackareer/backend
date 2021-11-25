@@ -9,6 +9,7 @@ import backend.core.service.BasketService;
 import backend.core.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -48,7 +49,7 @@ public class ItemController {
 
     @GetMapping("/item/search")
     public ApiResponse itemSearchV1(
-            @RequestParam(value = "name", defaultValue = "") String name) {
+            @RequestParam(name = "name", defaultValue = "") String name) {
         List<Item> itemList = itemService.findAllBySearch(new ItemSearch(name));
 
         List<ItemResponseDto> result = itemList.stream()
@@ -60,12 +61,25 @@ public class ItemController {
     @PostMapping("/item")
     public ItemResponseDto saveItemV1(
             @Valid @RequestBody ItemCreateRequestDto dto) {
+        return new ItemResponseDto(saveItem(dto));
+    }
+
+    @PostMapping("/items")
+    public HttpStatus saveItemsV1(
+            @Valid @RequestBody List<ItemCreateRequestDto> dtoList) {
+        dtoList.stream()
+                .map(dto -> saveItem(dto))
+                .collect(Collectors.toList());
+        return HttpStatus.OK;
+    }
+
+    private Item saveItem(ItemCreateRequestDto dto) {
         Basket basket = basketService.findByIdOrThrow(dto.getBasketId());
         dto.setBasket(basket);
 
         Long itemId = itemService.save(dto);
         Item item = itemService.findByIdOrThrow(itemId);
-        return new ItemResponseDto(item);
+        return item;
     }
 
     @PutMapping("/item")

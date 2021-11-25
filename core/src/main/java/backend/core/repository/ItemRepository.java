@@ -52,7 +52,6 @@ public class ItemRepository {
                 .offset(0)
                 .limit(100)
                 .fetch();
-
         return Optional.of(itemList);
     }
 

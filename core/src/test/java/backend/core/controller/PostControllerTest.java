@@ -36,7 +36,7 @@ public class PostControllerTest extends ApiDocumentationTest {
     private PostController postController;
 
     @Test
-    @DisplayName("post 저장 (api)")
+    @DisplayName("[api] post 저장")
     public void save() throws Exception {
         //given
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
@@ -69,4 +69,6 @@ public class PostControllerTest extends ApiDocumentationTest {
                             fieldWithPath("dayOfTheWeek").type(JsonFieldType.STRING).description("가능한 요일 정보")
                         )));
     }
+
+    //TODO 전체 조회, id 조회, 수정, 검색 테스트
 }

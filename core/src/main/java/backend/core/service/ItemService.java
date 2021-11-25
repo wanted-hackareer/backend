@@ -3,6 +3,7 @@ package backend.core.service;
 import backend.core.domain.Item;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.ItemRepository;
+import backend.core.repository.ItemSearch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -40,14 +41,18 @@ public class ItemService {
     public Item findByIdOrThrow(Long id) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
-
         return item;
     }
 
     public List<Item> findAllOrThrow(int offset, int limit) {
-        List<Item> items = itemRepository.findAll(offset, limit)
+        List<Item> itemList = itemRepository.findAll(offset, limit)
                 .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
+        return itemList;
+    }
 
-        return items;
+    public List<Item> findAllBySearch(ItemSearch itemSearch) {
+        List<Item> itemList = itemRepository.findAllBySearch(itemSearch)
+                .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
+        return itemList;
     }
 }

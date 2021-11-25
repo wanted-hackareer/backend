@@ -4,6 +4,7 @@ import backend.core.domain.Basket;
 import backend.core.domain.Item;
 import backend.core.dto.response.ItemResponseDto;
 import backend.core.global.response.ApiResponse;
+import backend.core.repository.ItemSearch;
 import backend.core.service.BasketService;
 import backend.core.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ import java.util.stream.Collectors;
 import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
 import static backend.core.dto.request.ItemRequestDto.ItemUpdateRequestDto;
 
-@RestController
 @Slf4j
+@RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class ItemController {
@@ -37,11 +38,22 @@ public class ItemController {
     public ApiResponse itemsV1(
             @RequestParam(name = "offset", defaultValue = "0") int offset,
             @RequestParam(name = "limit", defaultValue = "100") int limit) {
-        List<Item> items = itemService.findAllOrThrow(offset, limit);
-        List<ItemResponseDto> result = items.stream()
+        List<Item> itemList = itemService.findAllOrThrow(offset, limit);
+
+        List<ItemResponseDto> result = itemList.stream()
                 .map(item -> new ItemResponseDto(item))
                 .collect(Collectors.toList());
+        return ApiResponse.builder().count(result.size()).data(result).build();
+    }
 
+    @GetMapping("/item/search")
+    public ApiResponse itemSearchV1(
+            @RequestParam(value = "name", defaultValue = "") String name) {
+        List<Item> itemList = itemService.findAllBySearch(new ItemSearch(name));
+
+        List<ItemResponseDto> result = itemList.stream()
+                .map(item -> new ItemResponseDto(item))
+                .collect(Collectors.toList());
         return ApiResponse.builder().count(result.size()).data(result).build();
     }
 

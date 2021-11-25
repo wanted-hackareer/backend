@@ -2,10 +2,12 @@ package backend.core.controller;
 
 import backend.core.domain.Member;
 import backend.core.domain.Post;
+import backend.core.domain.PostStatus;
 import backend.core.domain.StaffStatus;
 import backend.core.dto.response.PostResponseDto;
 import backend.core.global.error.exception.CustomException;
 import backend.core.global.response.ApiResponse;
+import backend.core.repository.PostSearch;
 import backend.core.service.MemberService;
 import backend.core.service.PostService;
 import backend.core.service.StaffService;
@@ -82,6 +84,19 @@ public class PostController {
             @PathVariable Long id) {
         Post post = postService.findByIdOrThrow(id);
         return new PostResponseDto(post);
+    }
+
+    @GetMapping("/post/search")
+    public ApiResponse postSearchV1(
+            @RequestParam(value = "title", defaultValue = "") String title,
+            @RequestParam(value = "district", defaultValue = "") String district) {
+        log.info("title = {}, district = {}", title, district);
+        List<Post> postList = postService.findAllBySearchOrThrow(new PostSearch(title, district, PostStatus.ACCESS));
+
+        List<PostResponseDto> result = postList.stream()
+                .map(post -> new PostResponseDto(post))
+                .collect(Collectors.toList());
+        return ApiResponse.builder().count(result.size()).data(result).build();
     }
 
     @PutMapping("/post/{id}")

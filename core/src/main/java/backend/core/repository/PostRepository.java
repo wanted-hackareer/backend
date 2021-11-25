@@ -54,10 +54,10 @@ public class PostRepository {
                 .select(post)
                 .from(post)
                 .join(post.member, member)
+                .fetchJoin()
                 .where(statusEq(postSearch.getStatus()), titleLike(postSearch.getTitle()), districtLike(postSearch.getDistrict()))
                 .limit(100)
                 .fetch();
-
         return Optional.of(postList);
     }
 

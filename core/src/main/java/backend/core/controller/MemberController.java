@@ -28,7 +28,6 @@ import static backend.core.dto.response.MemberResponseDto.MemberSignInResponseDt
 public class MemberController {
 
     private final MemberService memberService;
-    private final BasketService basketService;
     private final TokenProvider tokenProvider;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -41,7 +40,7 @@ public class MemberController {
                 passwordEncoder);
 
         String token = tokenProvider.createToken(member);
-        log.debug("token = {}", token);
+        log.debug("signIn token = {}", token);
         return new MemberSignInResponseDto(member, token);
     }
 
@@ -53,9 +52,6 @@ public class MemberController {
         Long id = memberService.save(dto);
         Member member = memberService.findByIdOrThrow(id);
 
-        log.info("dto.getPassword() = {}", dto.getPassword());
-        log.info("member.getEmail() = {}", member.getEmail());
-        log.info("member.getPassword() = {}", member.getPassword());
         return new MemberResponseDto(member);
     }
 

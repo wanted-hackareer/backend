@@ -1,7 +1,6 @@
 package backend.core.dto.response;
 
 import backend.core.domain.Address;
-import backend.core.domain.Basket;
 import backend.core.domain.Member;
 import backend.core.domain.Profile;
 import lombok.Getter;
@@ -15,19 +14,20 @@ public class MemberResponseDto {
     private Long id;
     private String email;
     private String nickName;
-    private Long basketId;
     private Address address;
     private Profile profile;
     // TODO: staffList, basket 추가
+    private BasketResponseDto basket;
     private List<StaffResponseDto> staffList;
 
     public MemberResponseDto(Member entity) {
         id = entity.getId();
         email = entity.getEmail();
         nickName = entity.getNickName();
-        basketId = entity.getBasket().getId();
         address = entity.getAddress();
         profile = entity.getProfile();
+
+        basket = new BasketResponseDto(entity.getBasket());
         staffList = entity.getStaffList().stream()
                 .map(staff -> new StaffResponseDto(staff))
                 .collect(Collectors.toList());

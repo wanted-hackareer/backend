@@ -22,12 +22,7 @@ public class ChatService {
 
     @Transactional
     public Long save(ChatCreateRequestDto dto) {
-/*        Post post = postService.findById(dto.getPostId());
-        String chatAddress = UUID.randomUUID().toString();
-
-        dto.setPost(post);
-        dto.setChatAddress(chatAddress);*/
-
+        //TODO dto.setPost 기능 추가
         Chat chat = dto.toEntity();
         chatRepository.save(chat);
 

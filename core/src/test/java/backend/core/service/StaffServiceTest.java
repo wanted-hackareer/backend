@@ -39,7 +39,7 @@ public class StaffServiceTest {
         em.persist(post);
 
         //when
-        StaffCreateRequestDto staffCreateRequestDto = new StaffCreateRequestDto(post.getId(), member2.getId());
+        StaffCreateRequestDto staffCreateRequestDto = new StaffCreateRequestDto(post.getId());
         staffCreateRequestDto.setMemberAndPost(member2, post);
         Long staffId = staffService.save(staffCreateRequestDto);
 

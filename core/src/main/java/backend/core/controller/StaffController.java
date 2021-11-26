@@ -12,6 +12,7 @@ import backend.core.service.PostService;
 import backend.core.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,8 +31,9 @@ public class StaffController {
 
     @PostMapping("/staff")
     public StaffResponseDto save(
+            @AuthenticationPrincipal String userId,
             @Valid @RequestBody StaffRequestDto.StaffCreateRequestDto dto) {
-        Member member = memberService.findByIdOrThrow(dto.getMemberId());
+        Member member = memberService.findByIdOrThrow(Long.parseLong(userId));
         Post post = postService.findByIdOrThrow(dto.getPostId());
         dto.setMemberAndPost(member, post);
 

@@ -45,7 +45,8 @@ public class PostControllerTest extends ApiDocumentationTest {
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").basket(basket).profile(profile).build();
         em.persist(member);
 
-        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
+        dto.setMember(member);
 
         //when
         ResultActions result = mockMvc.perform(post("/api/v1/post")

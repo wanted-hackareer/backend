@@ -12,8 +12,6 @@ public class PostRequestDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class PostCreateRequestDto {
-
-        private Long memberId;
         private String title;
         private String description;
         private String dayOfTheWeek;
@@ -21,10 +19,9 @@ public class PostRequestDto {
 
         private Member member;
 
-        public PostCreateRequestDto(String title, String description, Long memberId, int maximum, String dayOfTheWeek) {
+        public PostCreateRequestDto(String title, String description, int maximum, String dayOfTheWeek) {
             this.title = title;
             this.description = description;
-            this.memberId = memberId;
             this.maximum = maximum;
             this.dayOfTheWeek = dayOfTheWeek;
         }

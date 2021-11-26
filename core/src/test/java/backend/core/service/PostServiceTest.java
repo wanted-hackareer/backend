@@ -57,10 +57,10 @@ public class PostServiceTest {
         em.persist(member);
 
         //when
-        PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         dto1.setMember(member);
 
-        PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", 3, "월, 화, 수");
         dto2.setMember(member);
 
         postService.save(dto1);
@@ -81,10 +81,10 @@ public class PostServiceTest {
         em.persist(member);
 
         //when
-        PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         dto1.setMember(member);
 
-        PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", 3, "월, 화, 수");
         dto2.setMember(member);
 
         postService.save(dto1);
@@ -105,7 +105,7 @@ public class PostServiceTest {
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
-        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         dto.setMember(member);
         Post post = postService.findByIdOrThrow(postService.save(dto));
 
@@ -127,7 +127,7 @@ public class PostServiceTest {
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
-        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         dto.setMember(member);
         Post post = postService.findByIdOrThrow(postService.save(dto));
 
@@ -149,7 +149,7 @@ public class PostServiceTest {
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
-        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         dto.setMember(member);
         Post post = postService.findByIdOrThrow(postService.save(dto));
 
@@ -171,7 +171,7 @@ public class PostServiceTest {
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
-        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         dto.setMember(member);
         Post post = postService.findByIdOrThrow(postService.save(dto));
 
@@ -193,7 +193,7 @@ public class PostServiceTest {
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
         em.persist(member);
 
-        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         dto.setMember(member);
         Post post = postService.findByIdOrThrow(postService.save(dto));
 

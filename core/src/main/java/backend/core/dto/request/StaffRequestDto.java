@@ -14,14 +14,12 @@ public class StaffRequestDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class StaffCreateRequestDto {
         private Long postId;
-        private Long memberId;
 
         private Member member;
         private Post post;
 
-        public StaffCreateRequestDto(Long postId, Long memberId) {
+        public StaffCreateRequestDto(Long postId) {
             this.postId = postId;
-            this.memberId = memberId;
         }
 
         public Staff toEntity() {

@@ -37,25 +37,27 @@ public class PostController {
     private final MemberService memberService;
 
     @PostMapping("/post")
-    public PostResponseDto save(@Valid @RequestBody PostCreateRequestDto dto) {
-        Member member = memberService.findByIdOrThrow(dto.getMemberId());
+    public PostResponseDto save(
+            @AuthenticationPrincipal String userId,
+            @Valid @RequestBody PostCreateRequestDto dto) {
+        Member member = memberService.findByIdOrThrow(Long.parseLong(userId));
         dto.setMember(member);
 
         Long postId = postService.save(dto);
         Post post = postService.findByIdOrThrow(postId);
 
-        setAuthorToStaff(dto, member, post);
+        setAuthorToStaff(member, post);
 
         return new PostResponseDto(post);
     }
 
-    private void setAuthorToStaff(PostCreateRequestDto dto, Member member, Post post) {
-        Long staffId = createStaff(dto, member, post);
+    private void setAuthorToStaff(Member member, Post post) {
+        Long staffId = createStaff(member, post);
         updateStaffStatusToAccept(staffId);
     }
 
-    private Long createStaff(PostCreateRequestDto dto, Member member, Post post) {
-        StaffCreateRequestDto createDto = new StaffCreateRequestDto(post.getId(), dto.getMemberId());
+    private Long createStaff(Member member, Post post) {
+        StaffCreateRequestDto createDto = new StaffCreateRequestDto(post.getId());
         createDto.setMemberAndPost(member, post);
         Long staffId = staffService.save(createDto);
         return staffId;

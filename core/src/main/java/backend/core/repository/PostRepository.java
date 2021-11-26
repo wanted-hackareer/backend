@@ -55,19 +55,21 @@ public class PostRepository {
                 .from(post)
                 .join(post.member, member)
                 .fetchJoin()
-                .where(statusEq(postSearch.getStatus()), titleLike(postSearch.getTitle()))
-                .where(streetLike(postSearch.getStreetA()))
-                .where(streetLike(postSearch.getStreetB()))
+                .where(statusEq(postSearch.getStatus()),
+                        titleLike(postSearch.getTitle()),
+                        streetLike(postSearch.getStreetA()).or(
+                                streetLike(postSearch.getStreetB())
+                        ))
                 .limit(100)
                 .fetch();
         return Optional.of(postList);
     }
 
-    private BooleanExpression streetLike(String district) {
-        if (!StringUtils.hasText(district)) {
+    private BooleanExpression streetLike(String street) {
+        if (!StringUtils.hasText(street)) {
             return null;
         }
-        return QPost.post.address.district.like(district);
+        return QPost.post.address.street.like(street);
     }
 
     private BooleanExpression titleLike(String title) {

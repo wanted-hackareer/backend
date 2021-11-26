@@ -89,9 +89,10 @@ public class PostController {
     @GetMapping("/post/search")
     public ApiResponse postSearchV1(
             @RequestParam(name = "title", defaultValue = "") String title,
-            @RequestParam(name = "district", defaultValue = "") String district) {
-        log.info("title = {}, district = {}", title, district);
-        List<Post> postList = postService.findAllBySearchOrThrow(new PostSearch(title, district, PostStatus.ACCESS));
+            @RequestParam(name = "streetA", defaultValue = "") String streetA,
+            @RequestParam(name = "streetB", defaultValue = "") String streetB) {
+        log.info("title = {}, streetA = {}, districtB = {}", title, streetA, streetB);
+        List<Post> postList = postService.findAllBySearchOrThrow(new PostSearch(title, streetA, streetB, PostStatus.ACCESS));
 
         List<PostResponseDto> result = postList.stream()
                 .map(post -> new PostResponseDto(post))

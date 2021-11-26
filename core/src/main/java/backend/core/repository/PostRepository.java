@@ -55,13 +55,15 @@ public class PostRepository {
                 .from(post)
                 .join(post.member, member)
                 .fetchJoin()
-                .where(statusEq(postSearch.getStatus()), titleLike(postSearch.getTitle()), districtLike(postSearch.getDistrict()))
+                .where(statusEq(postSearch.getStatus()), titleLike(postSearch.getTitle()))
+                .where(streetLike(postSearch.getStreetA()))
+                .where(streetLike(postSearch.getStreetB()))
                 .limit(100)
                 .fetch();
         return Optional.of(postList);
     }
 
-    private BooleanExpression districtLike(String district) {
+    private BooleanExpression streetLike(String district) {
         if (!StringUtils.hasText(district)) {
             return null;
         }

@@ -18,6 +18,7 @@ public class PostResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     // TODO: staffList, tagList 추가
+    private BasketResponseDto basket;
     private List<StaffResponseDto> staffList;
     private List<TagResponseDto> tagList;
 
@@ -31,6 +32,7 @@ public class PostResponseDto {
         updatedAt = entity.getUpdatedAt();
         createdAt = entity.getCreatedAt();
 
+        basket = new BasketResponseDto(entity.getMember().getBasket());
         staffList = entity.getStaffList().stream()
                 .map(staff -> new StaffResponseDto(staff))
                 .collect(Collectors.toList());

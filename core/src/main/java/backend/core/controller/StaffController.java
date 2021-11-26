@@ -3,6 +3,7 @@ package backend.core.controller;
 import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.Staff;
+import backend.core.domain.StaffStatus;
 import backend.core.dto.request.StaffRequestDto;
 import backend.core.dto.response.StaffResponseDto;
 import backend.core.global.response.ApiResponse;
@@ -17,7 +18,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController @Slf4j
+@RestController
+@Slf4j
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class StaffController {
@@ -55,6 +57,17 @@ public class StaffController {
                 .map(staff -> new StaffResponseDto(staff))
                 .collect(Collectors.toList());
 
+        return ApiResponse.builder().count(result.size()).data(result).build();
+    }
+
+    @GetMapping("/staff")
+    public ApiResponse findByStatus(
+            @RequestParam(name = "status", defaultValue = "WAIT") String status) {
+        List<Staff> staffList = staffService.findByStatusOrThrow(StaffStatus.valueOf(status));
+
+        List<StaffResponseDto> result = staffList.stream()
+                .map(staff -> new StaffResponseDto(staff))
+                .collect(Collectors.toList());
         return ApiResponse.builder().count(result.size()).data(result).build();
     }
 }

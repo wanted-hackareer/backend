@@ -1,0 +1,751 @@
+{
+	"info": {
+		"_postman_id": "4d593c3d-8599-4e4c-9619-cd90c5e48352",
+		"name": "hackareer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "member",
+			"item": [
+				{
+					"name": "http://{{URL}}/api/v1/sign-up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test2@gmail.com\",\n    \"nickName\": \"와라바덥덥\",\n    \"password\": \"12312311\",\n    \"address\": {\n        \"city\": \"서울\",\n        \"district\": \"강서구\",\n        \"street\": \"화곡동\"\n    },\n    \"profile\": {\n        \n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/sign-up",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/sign-in",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test2@gmail.com\",\n    \"password\": \"12312311\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/sign-in",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/member",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNyIsImlzcyI6ImhhY2thcmVlciIsImlhdCI6MTYzNzkxNTkxMiwiZXhwIjoxNjM3OTE3NzEyfQ.g-WLCkB_JkoBYWglKiECame7liI7QnNbkkr-5jWn-_PzIqK7kz5t8TYP0ty89i5roATN6HkavM3hPndwRAi76A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/members/?offset=0&limit=100",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"members",
+								""
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/piaochung/Downloads/cat-g3982a248f_1280.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/profile/3",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/member",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMyIsImlzcyI6ImhhY2thcmVlciIsImlhdCI6MTYzNzk0MzQ4OCwiZXhwIjoxNjM3OTQ1Mjg4fQ.q0LSeVX3cg2G5EJ1kBNu_5pizJ0UaPxq2uE1UlHC2w7NwCeLNxxYl3OX8p_IIaXBwnit3_5-YpDubKNGZ17DzQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/member",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"member"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tag",
+			"item": [
+				{
+					"name": "http://{{URL}}/api/v1/tag",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\": 8,\n    \"name\": \"테스트 태그\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/tag",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/tags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/tags?offset=0&limit=100",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/tag/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/tag/9",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tag",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/tags",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n    \"postId\": 9,\n    \"name\": \"자차보유\"\n    },\n    {\n    \"postId\": 9,\n    \"name\": \"친목\"\n    },\n    {\n    \"postId\": 9,\n    \"name\": \"신입생\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/tags",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "basket",
+			"item": [
+				{
+					"name": "http://{{URL}}/api/v1/baskets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/baskets?offset=0&limit=100",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"baskets"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/basket/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/basket/6",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"basket",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "post",
+			"item": [
+				{
+					"name": "http://{{URL}}/api/v1/post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaXNzIjoiaGFja2FyZWVyIiwiaWF0IjoxNjM3OTQ0NzY4LCJleHAiOjE2Mzc5NDY1Njh9.ZMVXxCxf5r1ruK7c4yVlA1JrbCaF40-bxHIEiUOAj5STTq_gyrriGThOaCBUpoNYZXywYKiSGAQMBxTI533rsQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"물 대량 구매 할 사람\",\n    \"description\": \"차로 근처 마트 갈건데 같이 갈래? 픽업 해드림\",\n    \"dayOfTheWeek\": \"수, 목\",\n    \"maximum\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/post",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/post/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\": 24,\n    \"title\": \"테스트 수정 제목4\",\n    \"description\": \"테스트 수정 소개글4\",\n    \"dayOfTheWeek\": \"월, 화\",\n    \"maximum\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/post/8",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/post/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/post/7",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/posts?offset=0&limit=100",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/post/search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/post/search?streetA=탄방동",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"search"
+							],
+							"query": [
+								{
+									"key": "streetA",
+									"value": "탄방동"
+								},
+								{
+									"key": "streetB",
+									"value": "천호동",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "item",
+			"item": [
+				{
+					"name": "http://{{URL}}/api/v1/item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"basketId\": 2,\n    \"name\": \"두부\",\n    \"quantity\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/item",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/item",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 105,\n    \"name\": \"고기\",\n    \"quantity\": 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/item",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/item/search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/item/search?name=바나나",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"item",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "바나나"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/item/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/item/12",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"item",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/items",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"basketId\": 2,\n        \"name\": \"바나나\",\n        \"quantity\": 12\n    },\n    {\n        \"basketId\": 2,\n        \"name\": \"노란 바나나\",\n        \"quantity\": 12\n    },\n    {\n        \"basketId\": 2,\n        \"name\": \"빨간 바나나\",\n        \"quantity\": 12\n    },\n    {\n        \"basketId\": 2,\n        \"name\": \"초록 바나나\",\n        \"quantity\": 12\n    },\n    {\n        \"basketId\": 2,\n        \"name\": \"파랑 바나나\",\n        \"quantity\": 12\n    },\n    {\n        \"basketId\": 2,\n        \"name\": \"바나나송이\",\n        \"quantity\": 12\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/items",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "staff",
+			"item": [
+				{
+					"name": "http://{{URL}}/api/v1/staffs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/staffs?offset=0&limit=100",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"staffs"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/staff",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNyIsImlzcyI6ImhhY2thcmVlciIsImlhdCI6MTYzNzkwMjA2OCwiZXhwIjoxNjM3OTAzODY4fQ.N2mFelWfrrVCjG8PZ3NsaM_iAgM31QhK3tNsTNRlR_iSAJIWVj1nGZXY6qgEErjMNvfusx9Yv_8vvoDTU_73sA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{URL}}/api/v1/staff",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://{{URL}}/api/v1/staff/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{URL}}/api/v1/staff/15",
+							"protocol": "http",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"staff",
+								"15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

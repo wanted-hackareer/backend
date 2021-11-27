@@ -59,6 +59,6 @@ public class ItemRepository {
         if (!StringUtils.hasText(name)) {
             return null;
         }
-        return QItem.item.name.like(name);
+        return QItem.item.name.contains(name);
     }
 }

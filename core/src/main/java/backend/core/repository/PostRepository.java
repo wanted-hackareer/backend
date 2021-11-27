@@ -45,6 +45,22 @@ public class PostRepository {
                         .getResultList());
     }
 
+    public Optional<List<Post>> findAllByTitle(String title) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QPost post = QPost.post;
+        QMember member = QMember.member;
+
+        List<Post> postList = query
+                .select(post)
+                .from(post)
+                .join(post.member, member)
+                .fetchJoin()
+                .where(titleLike(title), statusEq(PostStatus.ACCESS))
+                .limit(100)
+                .fetch();
+        return Optional.of(postList);
+    }
+
     public Optional<List<Post>> findAllBySearch(PostSearch postSearch) {
         JPAQueryFactory query = new JPAQueryFactory(em);
         QPost post = QPost.post;
@@ -56,7 +72,6 @@ public class PostRepository {
                 .join(post.member, member)
                 .fetchJoin()
                 .where(statusEq(postSearch.getStatus()),
-                        titleLike(postSearch.getTitle()),
                         streetLike(postSearch.getStreetA()).or(
                                 streetLike(postSearch.getStreetB())
                         ))
@@ -66,7 +81,7 @@ public class PostRepository {
     }
 
     private BooleanExpression streetLike(String street) {
-        if (!StringUtils.hasText(street)) {
+        if (street == null) {
             return null;
         }
         return QPost.post.address.street.like(street);

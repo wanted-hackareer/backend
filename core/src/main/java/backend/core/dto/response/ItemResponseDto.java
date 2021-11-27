@@ -20,4 +20,17 @@ public class ItemResponseDto {
         createdAt = entity.getCreatedAt();
         updatedAt = entity.getUpdatedAt();
     }
+
+    @Getter
+    public static class ItemInfoResponseDto {
+        private Long id;
+        private String name;
+        private int quantity;
+
+        public ItemInfoResponseDto(Item entity) {
+            id = entity.getId();
+            name = entity.getName();
+            quantity = entity.getQuantity();
+        }
+    }
 }

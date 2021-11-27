@@ -13,6 +13,7 @@ import java.util.List;
 
 import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
 import static backend.core.dto.request.ItemRequestDto.ItemUpdateRequestDto;
+import static backend.core.global.error.exception.ErrorCode.ITEM_EXIST;
 import static backend.core.global.error.exception.ErrorCode.ITEM_NOT_FOUND;
 
 @Slf4j
@@ -25,10 +26,18 @@ public class ItemService {
 
     @Transactional
     public Long save(ItemCreateRequestDto dto) {
+        validateItemName(dto);
         Item item = dto.toEntity();
         itemRepository.save(item);
 
         return item.getId();
+    }
+
+    private void validateItemName(ItemCreateRequestDto dto) {
+        List<Item> itemList = dto.getBasket().getItemList();
+        itemList.stream().filter(item -> item.getName().equals(dto.getName())).forEachOrdered(item -> {
+            throw new CustomException(ITEM_EXIST);
+        });
     }
 
     @Transactional

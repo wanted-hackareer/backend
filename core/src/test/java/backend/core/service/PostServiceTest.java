@@ -34,7 +34,7 @@ public class PostServiceTest {
         em.persist(member);
 
         //when
-        PostCreateRequestDto postCreateRequestDto = new PostCreateRequestDto("테스트 제목", "테스트 본문", member.getId(), 3, "월, 화, 수");
+        PostCreateRequestDto postCreateRequestDto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         postCreateRequestDto.setMember(member);
 
         Long postId = postService.save(postCreateRequestDto);

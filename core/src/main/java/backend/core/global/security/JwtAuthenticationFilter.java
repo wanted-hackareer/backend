@@ -1,5 +1,10 @@
 package backend.core.global.security;
 
+import backend.core.global.error.exception.ErrorCode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -17,6 +22,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 
 @Slf4j
 @Component
@@ -42,10 +49,43 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 securityContext.setAuthentication(authentication);
                 SecurityContextHolder.setContext(securityContext);
             }
-        } catch (Exception ex) {
-            log.error("Could not set user authentication in security context");
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+            log.info("expired token exception");
+            setErrorResponse(response, ErrorCode.EXPIRED_TOKEN);
+        } catch (UnsupportedJwtException | IllegalArgumentException e) {
+            e.printStackTrace();
+            log.info("invalid token exception");
+            setErrorResponse(response, ErrorCode.INVALID_TOKEN);
+        } catch (SecurityException | MalformedJwtException e) {
+            e.printStackTrace();
+            log.info("wrong token exception");
+            setErrorResponse(response, ErrorCode.WRONG_TOKEN);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         filterChain.doFilter(request, response);
+    }
+
+    private void setErrorResponse(HttpServletResponse response, ErrorCode errorCode) {
+        response.setStatus(errorCode.getHttpStatus().value());
+        response.setContentType("application/json; charset=UTF-8");
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            HashMap map = new HashMap();
+            map.put("status", errorCode.getHttpStatus().value());
+            map.put("error", errorCode.getHttpStatus().name());
+            map.put("code", errorCode.name());
+            map.put("message", errorCode.getDetail());
+
+            PrintWriter writer = response.getWriter();
+            writer.write(objectMapper.writeValueAsString(map));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private String parseBearerToken(HttpServletRequest request) {

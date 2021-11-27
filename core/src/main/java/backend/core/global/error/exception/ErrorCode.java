@@ -12,9 +12,14 @@ public enum ErrorCode {
     LOGIN_FAILED(BAD_REQUEST, "이메일 또는 비밀번호가 틀렸습니다"),
     EXIST_EMAIL(BAD_REQUEST, "이미 존재하는 이메일입니다"),
     EXIST_NICKNAME(BAD_REQUEST, "이미 존재하는 닉네임입니다"),
+    INVALID_TOKEN(BAD_REQUEST, "유효하지 않은 토큰입니다"),
+    EXPIRED_TOKEN(BAD_REQUEST, "토큰이 만료되었습니다"),
+    WRONG_TOKEN(BAD_REQUEST, "유효하지 않은 형식의 토큰입니다"),
+    ITEM_EXIST(BAD_REQUEST, "이미 존재하는 아이템입니다"),
 
     /* 401 UNAUTHORIZED : 인증되지 않은 사용자 */
     UNAUTHORIZED_USER(UNAUTHORIZED, "인증되지 않은 사용자입니다"),
+    UNAUTHORIZED_TOKEN(UNAUTHORIZED, "보안 컨텍스트에서 사용자 인증을 설정할 수 없습니다"),
 
     /* 407 NOT_ACCEPTABLE : 허용되지 않는 접근 */
     MEMBER_NOT_ACCEPTABLE(NOT_ACCEPTABLE, "작성자만 수정할 수 있습니다"),
@@ -30,6 +35,7 @@ public enum ErrorCode {
     TAG_NOT_FOUND(NOT_FOUND, "태그를 찾을 수 없습니다"),
     MESSAGE_NOT_FOUND(NOT_FOUND, "메시지를 찾을 수 없습니다"),
     STAFF_NOT_FOUND(NOT_FOUND, "구성원을 찾을 수 없습니다"),
+    TOKEN_NOT_FOUND(NOT_FOUND, "토큰을 찾을 수 없습니다"),
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
     DUPLICATE_RESOURCE(CONFLICT, "데이터가 이미 존재합니다"),

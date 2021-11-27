@@ -8,6 +8,8 @@ import lombok.Getter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static backend.core.dto.response.StaffResponseDto.StaffPostInfoResponseDto;
+
 @Getter
 public class MemberResponseDto {
 
@@ -18,7 +20,7 @@ public class MemberResponseDto {
     private Profile profile;
     // TODO: staffList, basket 추가
     private BasketResponseDto basket;
-    private List<StaffResponseDto> staffList;
+    private List<StaffPostInfoResponseDto> staffList;
 
     public MemberResponseDto(Member entity) {
         id = entity.getId();
@@ -29,7 +31,7 @@ public class MemberResponseDto {
 
         basket = new BasketResponseDto(entity.getBasket());
         staffList = entity.getStaffList().stream()
-                .map(staff -> new StaffResponseDto(staff))
+                .map(staff -> new StaffPostInfoResponseDto(staff))
                 .collect(Collectors.toList());
     }
 

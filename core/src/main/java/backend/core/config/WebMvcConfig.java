@@ -14,7 +14,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080", "chrome-extension://fgponpodhbmadfljofbimhhlengambbn")
+                .allowedOrigins("http://localhost:8080", "chrome-extension://fgponpodhbmadfljofbimhhlengambbn", "https://vue-project-733c5.web.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true)

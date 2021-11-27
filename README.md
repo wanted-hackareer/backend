@@ -8,14 +8,7 @@
 - 서비스에 필요한 API 개발
 - postman을 사용한 API 기능 테스트 [postman 테스트 자료(json)](https://github.com/wanted-hackareer/backend/blob/main/data/hackareer.postman_collection.json)
 
-🎯 {{URL}}은 서버의 url을 나타냅니다.
-|method|url|description|
-|-|-|-|
-|POST|http://{{URL}}/api/v1/sign-up|회원 가입|
-|POST|http://{{URL}}/api/v1/sign-in|로그인|
-
-
-### 프로젝트 진행 시 발생한 문제점
+### 프로젝트 진행 중 발생한 문제점
 #### QueryDsl을 사용하여 검색어와 비슷한 결과를 반환 오류
 Qpost.post.title.like(검색어)를 사용하였는데 다른 sql문의 like와는 다르게 QueryDsl에서는 검색어와 일치한 결과만 반환하였습니다. 따라서 contains를 사용하는 것을 문제를 해결하였습니다.
 
@@ -31,13 +24,14 @@ tag, item은 원래 1번에 하나의 값만 받아와서 저장하는 방식이
 
 ---
 
-
-
-#### 
+### 남은 해야 할 일
+- spring-websocket을 사용하여 게시글마다 채팅방을 하나씩 만들어서 websocket 통신으로 채팅 및 데이터베이스에 저장
+- restdocs 사용해여 controller 테스크 코드 작성 및 문서화
 
 ### 사용 기술
 - spring boot starter (validation, data-jpa, web, security)
 - jjwt
+- java 8
 - lombok
 - querydsl
 

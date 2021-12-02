@@ -51,8 +51,6 @@ public class MemberRequestDto {
         private Address address;
         private Profile profile;
 
-        private Basket basket;
-
         public MemberSignUpRequestDto(String email, String nickName, String password, Address address, Profile profile) {
             this.email = email;
             this.nickName = nickName;
@@ -61,7 +59,7 @@ public class MemberRequestDto {
             this.password = password;
         }
 
-        public Member toEntity() {
+        public Member toEntity(String password, Basket basket) {
             return Member.builder()
                     .email(email)
                     .profile(profile)
@@ -70,11 +68,6 @@ public class MemberRequestDto {
                     .nickName(nickName)
                     .basket(basket)
                     .build();
-        }
-
-        public void setPasswordAndBasket(String password) {
-            this.password = password;
-            this.basket = Basket.builder().build();
         }
     }
 }

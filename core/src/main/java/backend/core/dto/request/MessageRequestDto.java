@@ -18,9 +18,6 @@ public class MessageRequestDto {
         private Long memberId;
         private Long chatId;
 
-        private Member member;
-        private Chat chat;
-
         public MessageCreateRequestDto(String content, Long memberId, Long chatId, MessageStatus status) {
             this.content = content;
             this.memberId = memberId;
@@ -28,18 +25,13 @@ public class MessageRequestDto {
             this.status = status;
         }
 
-        public Message toEntity() {
+        public Message toEntity(Member member, Chat chat) {
             return Message.builder()
                     .content(content)
                     .member(member)
                     .chat(chat)
                     .status(status)
                     .build();
-        }
-
-        public void setMemberAndChat(Member member, Chat chat) {
-            this.member = member;
-            this.chat = chat;
         }
     }
 }

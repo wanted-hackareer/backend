@@ -1,5 +1,7 @@
 package backend.core.service;
 
+import backend.core.domain.Chat;
+import backend.core.domain.Member;
 import backend.core.domain.Message;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.MessageRepository;
@@ -13,16 +15,22 @@ import java.util.List;
 import static backend.core.dto.request.MessageRequestDto.MessageCreateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.MESSAGE_NOT_FOUND;
 
-@Slf4j @Service
+@Slf4j
+@Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MessageService {
 
     private final MessageRepository messageRepository;
+    private final MemberService memberService;
+    private final ChatService chatService;
 
     @Transactional
     public Long save(MessageCreateRequestDto dto) {
-        Message message = dto.toEntity();
+        Member member = memberService.findByIdOrThrow(dto.getMemberId());
+        Chat chat = chatService.findByIdOrThrow(dto.getChatId());
+
+        Message message = dto.toEntity(member, chat);
         messageRepository.save(message);
 
         return message.getId();

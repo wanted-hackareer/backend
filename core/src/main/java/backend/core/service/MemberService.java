@@ -1,12 +1,13 @@
 package backend.core.service;
 
+import backend.core.domain.Basket;
 import backend.core.domain.Member;
 import backend.core.dto.request.MemberRequestDto;
 import backend.core.global.error.exception.CustomException;
-import backend.core.repository.BasketRepository;
 import backend.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,14 +25,17 @@ import static backend.core.global.error.exception.ErrorCode.*;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final BasketRepository basketRepository;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Transactional
     public Long save(MemberSignUpRequestDto dto) {
         if (!(isValidEmailOrThrow(dto.getEmail()) && isValidNicknameOrThrow(dto.getNickName()))) {
             // FIXME: 임시로 error 처리 따로 경로 만들어서 클라이언트에서 처리할 예정
         }
-        Member member = dto.toEntity();
+        Member member = dto.toEntity(
+                passwordEncoder.encode(dto.getPassword()),
+                Basket.builder().build());
+
         memberRepository.save(member);
         return member.getId();
     }

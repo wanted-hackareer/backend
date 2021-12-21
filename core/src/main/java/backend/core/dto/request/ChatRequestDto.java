@@ -24,8 +24,9 @@ public class ChatRequestDto {
                     .build();
         }
 
-        public void setPost(Post post) {
+        public void setPostAndChatAddress(Post post, String chatAddress) {
             this.post = post;
+            this.chatAddress = chatAddress;
         }
     }
 }

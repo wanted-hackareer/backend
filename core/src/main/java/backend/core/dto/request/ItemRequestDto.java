@@ -15,24 +15,18 @@ public class ItemRequestDto {
         private String name;
         private int quantity;
 
-        private Basket basket;
-
         public ItemCreateRequestDto(Long basketId, String name, int quantity) {
             this.basketId = basketId;
             this.name = name;
             this.quantity = quantity;
         }
 
-        public Item toEntity() {
+        public Item toEntity(Basket basket) {
             return Item.builder()
                     .quantity(quantity)
                     .name(name)
                     .basket(basket)
                     .build();
-        }
-
-        public void setBasket(Basket basket) {
-            this.basket = basket;
         }
     }
 

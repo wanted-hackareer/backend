@@ -1,6 +1,5 @@
 package backend.core.controller;
 
-import backend.core.domain.Basket;
 import backend.core.domain.Item;
 import backend.core.dto.response.ItemResponseDto;
 import backend.core.global.response.ApiResponse;
@@ -74,9 +73,6 @@ public class ItemController {
     }
 
     private Item saveItem(ItemCreateRequestDto dto) {
-        Basket basket = basketService.findByIdOrThrow(dto.getBasketId());
-        dto.setBasket(basket);
-
         Long itemId = itemService.save(dto);
         Item item = itemService.findByIdOrThrow(itemId);
         return item;

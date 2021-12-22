@@ -1,5 +1,6 @@
 package backend.core.service;
 
+import backend.core.domain.Basket;
 import backend.core.domain.Item;
 import backend.core.global.error.exception.CustomException;
 import backend.core.repository.ItemRepository;
@@ -23,19 +24,21 @@ import static backend.core.global.error.exception.ErrorCode.ITEM_NOT_FOUND;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final BasketService basketService;
 
     @Transactional
     public Long save(ItemCreateRequestDto dto) {
-        validateItemName(dto);
-        Item item = dto.toEntity();
+        Basket basket = basketService.findByIdOrThrow(dto.getBasketId());
+        validateItemName(basket, dto.getName());
+        Item item = dto.toEntity(basket);
         itemRepository.save(item);
 
         return item.getId();
     }
 
-    private void validateItemName(ItemCreateRequestDto dto) {
-        List<Item> itemList = dto.getBasket().getItemList();
-        itemList.stream().filter(item -> item.getName().equals(dto.getName())).forEachOrdered(item -> {
+    private void validateItemName(Basket basket, String name) {
+        List<Item> itemList = basket.getItemList();
+        itemList.stream().filter(item -> item.getName().equals(name)).forEachOrdered(item -> {
             throw new CustomException(ITEM_EXIST);
         });
     }

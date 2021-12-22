@@ -35,7 +35,6 @@ public class ItemServiceTest {
 
         //when
         ItemCreateRequestDto dto = new ItemCreateRequestDto(basket.getId(), "사과", 3);
-        dto.setBasket(basket);
         Long itemId = itemService.save(dto);
 
         //then

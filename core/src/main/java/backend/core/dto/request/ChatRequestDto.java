@@ -10,23 +10,15 @@ public class ChatRequestDto {
     public static class ChatCreateRequestDto {
         private Long postId;
 
-        private String chatAddress;
-        private Post post;
-
         public ChatCreateRequestDto(Long postId) {
             this.postId = postId;
         }
 
-        public Chat toEntity() {
+        public Chat toEntity(Post post, String chatAddress) {
             return Chat.builder()
                     .post(post)
                     .chatAddress(chatAddress)
                     .build();
-        }
-
-        public void setPostAndChatAddress(Post post, String chatAddress) {
-            this.post = post;
-            this.chatAddress = chatAddress;
         }
     }
 }

@@ -1,5 +1,7 @@
 package backend.core.service;
 
+import backend.core.domain.Member;
+import backend.core.domain.Post;
 import backend.core.domain.Staff;
 import backend.core.domain.StaffStatus;
 import backend.core.global.error.exception.CustomException;
@@ -15,16 +17,22 @@ import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
 import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
 import static backend.core.global.error.exception.ErrorCode.STAFF_NOT_FOUND;
 
-@Slf4j @Service
+@Slf4j
+@Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class StaffService {
 
     private final StaffRepository staffRepository;
+    private final MemberService memberService;
+    private final PostService postService;
 
     @Transactional
     public Long save(StaffCreateRequestDto dto) {
-        Staff staff = dto.toEntity();
+        Member member = memberService.findByIdOrThrow(dto.getMemberId());
+        Post post = postService.findByIdOrThrow(dto.getPostId());
+
+        Staff staff = dto.toEntity(member, post);
         staffRepository.save(staff);
 
         return staff.getId();

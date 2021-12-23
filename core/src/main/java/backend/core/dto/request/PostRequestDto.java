@@ -17,8 +17,6 @@ public class PostRequestDto {
         private String dayOfTheWeek;
         private int maximum;
 
-        private Member member;
-
         public PostCreateRequestDto(String title, String description, int maximum, String dayOfTheWeek) {
             this.title = title;
             this.description = description;
@@ -26,17 +24,13 @@ public class PostRequestDto {
             this.dayOfTheWeek = dayOfTheWeek;
         }
 
-        public Post toEntity() {
+        public Post toEntity(Member member) {
             return Post.builder()
                     .member(member)
                     .title(title)
                     .description(description)
                     .dayOfTheWeek(dayOfTheWeek)
                     .maximum(maximum).build();
-        }
-
-        public void setMember(Member member) {
-            this.member = member;
         }
     }
 

@@ -1,6 +1,5 @@
 package backend.core.controller;
 
-import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.PostStatus;
 import backend.core.domain.StaffStatus;
@@ -8,7 +7,6 @@ import backend.core.dto.response.PostResponseDto;
 import backend.core.global.error.exception.CustomException;
 import backend.core.global.response.ApiResponse;
 import backend.core.repository.PostSearch;
-import backend.core.service.MemberService;
 import backend.core.service.PostService;
 import backend.core.service.StaffService;
 import lombok.RequiredArgsConstructor;
@@ -34,31 +32,26 @@ public class PostController {
 
     private final PostService postService;
     private final StaffService staffService;
-    private final MemberService memberService;
 
     @PostMapping("/post")
     public PostResponseDto save(
-            @AuthenticationPrincipal String userId,
+            @AuthenticationPrincipal String memberId,
             @Valid @RequestBody PostCreateRequestDto dto) {
-        Member member = memberService.findByIdOrThrow(Long.parseLong(userId));
-        dto.setMember(member);
-
-        Long postId = postService.save(dto);
+        Long id = Long.parseLong(memberId);
+        Long postId = postService.save(dto, id);
         Post post = postService.findByIdOrThrow(postId);
 
-        setAuthorToStaff(member, post);
-
+        setAuthorToStaff(id, postId);
         return new PostResponseDto(post);
     }
 
-    private void setAuthorToStaff(Member member, Post post) {
-        Long staffId = createStaff(member, post);
+    private void setAuthorToStaff(Long memberId, Long postId) {
+        Long staffId = createStaff(memberId, postId);
         updateStaffStatusToAccept(staffId);
     }
 
-    private Long createStaff(Member member, Post post) {
-        StaffCreateRequestDto createDto = new StaffCreateRequestDto(post.getId());
-        createDto.setMemberAndPost(member, post);
+    private Long createStaff(Long memberId, Long postId) {
+        StaffCreateRequestDto createDto = new StaffCreateRequestDto(postId, memberId);
         Long staffId = staffService.save(createDto);
         return staffId;
     }

@@ -1,5 +1,6 @@
 package backend.core.service;
 
+import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.PostStatus;
 import backend.core.global.error.exception.CustomException;
@@ -23,10 +24,12 @@ import static backend.core.global.error.exception.ErrorCode.POST_NOT_FOUND;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberService memberService;
 
     @Transactional
-    public Long save(PostCreateRequestDto dto) {
-        Post post = dto.toEntity();
+    public Long save(PostCreateRequestDto dto, Long memberId) {
+        Member member = memberService.findByIdOrThrow(memberId);
+        Post post = dto.toEntity(member);
         postRepository.save(post);
         return post.getId();
     }

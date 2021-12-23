@@ -19,10 +19,10 @@ public class StaffServiceTest {
 
     @Autowired
     private StaffService staffService;
-    
+
     @Autowired
     private EntityManager em;
-    
+
     @Test
     @DisplayName("staff 생성")
     public void create() {
@@ -39,8 +39,7 @@ public class StaffServiceTest {
         em.persist(post);
 
         //when
-        StaffCreateRequestDto staffCreateRequestDto = new StaffCreateRequestDto(post.getId());
-        staffCreateRequestDto.setMemberAndPost(member2, post);
+        StaffCreateRequestDto staffCreateRequestDto = new StaffCreateRequestDto(post.getId(), member2.getId());
         Long staffId = staffService.save(staffCreateRequestDto);
 
         //then

@@ -1,6 +1,7 @@
 package backend.core.service;
 
 import backend.core.domain.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +24,25 @@ public class PostServiceTest {
     @Autowired
     private EntityManager em;
 
+    private Member member;
+
+    @BeforeEach
+    public void setUp() {
+        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
+        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
+        Basket basket = Basket.builder().build();
+        member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
+        em.persist(member);
+    }
+
     @Test
     @DisplayName("post 생성")
     public void create() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
-        em.persist(member);
 
         //when
         PostCreateRequestDto postCreateRequestDto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        postCreateRequestDto.setMember(member);
-
-        Long postId = postService.save(postCreateRequestDto);
+        Long postId = postService.save(postCreateRequestDto, member.getId());
 
         //then
         assertThat(postService.findByIdOrThrow(postId).getTitle()).isEqualTo("테스트 제목");
@@ -50,21 +55,13 @@ public class PostServiceTest {
     @DisplayName("post 전체 조회")
     public void findAll() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
-        em.persist(member);
 
         //when
         PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        dto1.setMember(member);
-
         PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", 3, "월, 화, 수");
-        dto2.setMember(member);
 
-        postService.save(dto1);
-        postService.save(dto2);
+        postService.save(dto1, member.getId());
+        postService.save(dto2, member.getId());
 
         //then
         assertThat(postService.findAllOrThrow(0, 100).size()).isEqualTo(2);
@@ -74,21 +71,13 @@ public class PostServiceTest {
     @DisplayName("post 상태 조회")
     public void findByStatus() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
-        em.persist(member);
 
         //when
         PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        dto1.setMember(member);
-
         PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", 3, "월, 화, 수");
-        dto2.setMember(member);
 
-        postService.save(dto1);
-        postService.save(dto2);
+        postService.save(dto1, member.getId());
+        postService.save(dto2, member.getId());
 
         //then
         assertThat(postService.findByStatusOrThrow(PostStatus.ACCESS).size()).isEqualTo(2);
@@ -99,15 +88,8 @@ public class PostServiceTest {
     @DisplayName("post 수정 - title")
     public void updateTitle() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
-        em.persist(member);
-
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        dto.setMember(member);
-        Post post = postService.findByIdOrThrow(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto, member.getId()));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), "수정된 제목", post.getDescription(), post.getMaximum(), post.getPostStatus(), post.getDayOfTheWeek());
@@ -121,15 +103,9 @@ public class PostServiceTest {
     @DisplayName("post 수정 - description")
     public void updateDescription() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
-        em.persist(member);
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        dto.setMember(member);
-        Post post = postService.findByIdOrThrow(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto, member.getId()));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), "수정된 본문", post.getMaximum(), post.getPostStatus(), post.getDayOfTheWeek());
@@ -143,15 +119,9 @@ public class PostServiceTest {
     @DisplayName("post 수정 - Maximum")
     public void updateMaximum() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").basket(basket).address(address).nickName("테스트2").profile(profile).build();
-        em.persist(member);
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        dto.setMember(member);
-        Post post = postService.findByIdOrThrow(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto, member.getId()));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), post.getDescription(), 2, post.getPostStatus(), post.getDayOfTheWeek());
@@ -165,15 +135,8 @@ public class PostServiceTest {
     @DisplayName("post 수정 - status")
     public void updateStatus() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
-        em.persist(member);
-
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        dto.setMember(member);
-        Post post = postService.findByIdOrThrow(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto, member.getId()));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), post.getDescription(), post.getMaximum(), PostStatus.DONE, post.getDayOfTheWeek());
@@ -187,15 +150,8 @@ public class PostServiceTest {
     @DisplayName("post 수정 - DayOfWeek")
     public void updateDayOfWeek() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트2").profile(profile).build();
-        em.persist(member);
-
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
-        dto.setMember(member);
-        Post post = postService.findByIdOrThrow(postService.save(dto));
+        Post post = postService.findByIdOrThrow(postService.save(dto, member.getId()));
 
         //when
         PostUpdateRequestDto updateDto = new PostUpdateRequestDto(post.getId(), post.getTitle(), post.getDescription(), post.getMaximum(), post.getPostStatus(), "월, 화");

@@ -14,22 +14,16 @@ public class TagRequestDto {
         private Long postId;
         private String name;
 
-        private Post post;
-
         public TagCreateRequestDto(Long postId, String name) {
             this.postId = postId;
             this.name = name;
         }
 
-        public Tag toEntity() {
+        public Tag toEntity(Post post) {
             return Tag.builder()
                     .name(name)
                     .post(post)
                     .build();
-        }
-
-        public void setPost(Post post) {
-            this.post = post;
         }
     }
 }

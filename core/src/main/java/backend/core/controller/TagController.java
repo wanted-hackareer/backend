@@ -62,9 +62,6 @@ public class TagController {
     }
 
     private Tag saveTag(TagCreateRequestDto dto) {
-        Post post = postService.findByIdOrThrow(dto.getPostId());
-        dto.setPost(post);
-
         Long tagId = tagService.save(dto);
         Tag tag = tagService.findByIdOrThrow(tagId);
         return tag;

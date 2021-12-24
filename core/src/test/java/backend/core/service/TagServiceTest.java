@@ -1,6 +1,7 @@
 package backend.core.service;
 
 import backend.core.domain.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +23,25 @@ public class TagServiceTest {
     @Autowired
     private EntityManager em;
 
-    @Test
-    @DisplayName("Tag 생성")
-    public void create() {
-        //given
+    private Post post;
+
+    @BeforeEach
+    public void init() {
         Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
         Basket basket = Basket.builder().build();
         Member member = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트1").profile(profile).build();
-        Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member).dayOfTheWeek("월, 금").maximum(2).build();
+        post = Post.builder().title("테스트 제목").description("테스트 본문").member(member).dayOfTheWeek("월, 금").maximum(2).build();
         em.persist(post);
+    }
+
+    @Test
+    @DisplayName("Tag 생성")
+    public void create() {
+        //given
 
         //when
         TagCreateRequestDto dto = new TagCreateRequestDto(post.getId(), "아이언맨");
-        dto.setPost(post);
         Long tagId = tagService.save(dto);
 
         //then
@@ -48,12 +54,6 @@ public class TagServiceTest {
     @DisplayName("Tag 조회 - findAll")
     public void findAll() {
         //given
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        Basket basket = Basket.builder().build();
-        Member member = Member.builder().email("test1@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("테스트1").profile(profile).build();
-        Post post = Post.builder().title("테스트 제목").description("테스트 본문").member(member).dayOfTheWeek("월, 금").maximum(2).build();
-        em.persist(post);
 
         //when
         Tag tagA = Tag.builder().post(post).name("아이언맨").build();

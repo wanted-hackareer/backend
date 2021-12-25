@@ -22,6 +22,10 @@ public class ItemRepository {
         em.persist(item);
     }
 
+    public void delete(Item item) {
+        em.remove(item);
+    }
+
     public Optional<Item> findById(Long id) {
         List<Item> items = em.createQuery(
                         "select i from Item i" +

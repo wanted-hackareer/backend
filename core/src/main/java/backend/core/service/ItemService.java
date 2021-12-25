@@ -50,6 +50,13 @@ public class ItemService {
         return item.getId();
     }
 
+    @Transactional
+    public Long delete(Long id) {
+        Item item = findByIdOrThrow(id);
+        itemRepository.delete(item);
+        return item.getId();
+    }
+
     public Item findByIdOrThrow(Long id) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));

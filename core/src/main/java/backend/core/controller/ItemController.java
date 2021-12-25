@@ -3,6 +3,7 @@ package backend.core.controller;
 import backend.core.domain.Item;
 import backend.core.dto.response.ItemResponseDto;
 import backend.core.global.response.ApiResponse;
+import backend.core.repository.ItemRepository;
 import backend.core.repository.ItemSearch;
 import backend.core.service.BasketService;
 import backend.core.service.ItemService;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
 import static backend.core.dto.request.ItemRequestDto.ItemUpdateRequestDto;
+import static backend.core.dto.response.ItemResponseDto.*;
 
 @Slf4j
 @RestController
@@ -32,6 +34,12 @@ public class ItemController {
             @PathVariable Long id) {
         Item item = itemService.findByIdOrThrow(id);
         return new ItemResponseDto(item);
+    }
+
+    @DeleteMapping("/item/{id}")
+    public ItemDeleteResponseDto deleteItemV1(
+            @PathVariable Long id) {
+        return new ItemDeleteResponseDto(itemService.delete(id));
     }
 
     @GetMapping("/items")

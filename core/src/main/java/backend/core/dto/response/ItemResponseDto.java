@@ -33,4 +33,15 @@ public class ItemResponseDto {
             quantity = entity.getQuantity();
         }
     }
+
+    @Getter
+    public static class ItemDeleteResponseDto {
+        private Long id;
+        private LocalDateTime deletedAt;
+
+        public ItemDeleteResponseDto(Long id) {
+            this.id = id;
+            this.deletedAt = LocalDateTime.now();
+        }
+    }
 }

@@ -1,6 +1,8 @@
 package backend.core.service;
 
 import backend.core.domain.*;
+import backend.core.global.error.exception.CustomException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,9 +41,9 @@ public class TagServiceTest {
     @DisplayName("Tag 생성")
     public void create() {
         //given
+        TagCreateRequestDto dto = new TagCreateRequestDto(post.getId(), "아이언맨");
 
         //when
-        TagCreateRequestDto dto = new TagCreateRequestDto(post.getId(), "아이언맨");
         Long tagId = tagService.save(dto);
 
         //then
@@ -54,14 +56,30 @@ public class TagServiceTest {
     @DisplayName("Tag 조회 - findAll")
     public void findAll() {
         //given
-
-        //when
         Tag tagA = Tag.builder().post(post).name("아이언맨").build();
         Tag tagB = Tag.builder().post(post).name("캡틴 아메리카").build();
+
+        //when
         em.persist(tagA);
         em.persist(tagB);
 
         //then
         assertThat(tagService.findAllOrThrow(0, 100).size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("Tag 삭제 - delete")
+    public void delete() {
+        //given
+        Tag tag = Tag.builder().post(post).name("아이언맨").build();
+        em.persist(tag);
+
+        //when
+        Long id = tagService.delete(tag.getId());
+
+        //then
+        Assertions.assertThrows(CustomException.class, () -> {
+            tagService.findByIdOrThrow(id);
+        });
     }
 }

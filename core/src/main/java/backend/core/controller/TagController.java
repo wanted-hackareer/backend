@@ -1,6 +1,5 @@
 package backend.core.controller;
 
-import backend.core.domain.Post;
 import backend.core.domain.Tag;
 import backend.core.dto.response.TagResponseDto;
 import backend.core.global.response.ApiResponse;
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static backend.core.dto.request.TagRequestDto.TagCreateRequestDto;
+import static backend.core.dto.response.TagResponseDto.TagDeleteResponseDto;
 
 @RestController
 @Slf4j
@@ -37,6 +37,12 @@ public class TagController {
                 .collect(Collectors.toList());
 
         return ApiResponse.builder().count(result.size()).data(result).build();
+    }
+
+    @DeleteMapping("/tag/{id}")
+    public TagDeleteResponseDto deleteTagV1(
+            @PathVariable Long id) {
+        return new TagDeleteResponseDto(tagService.delete(id));
     }
 
     @GetMapping("/tag/{id}")

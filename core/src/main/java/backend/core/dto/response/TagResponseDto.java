@@ -29,4 +29,15 @@ public class TagResponseDto {
             name = entity.getName();
         }
     }
+
+    @Getter
+    public static class TagDeleteResponseDto {
+        private Long id;
+        private LocalDateTime deletedAt;
+
+        public TagDeleteResponseDto(Long id) {
+            this.id = id;
+            this.deletedAt = LocalDateTime.now();
+        }
+    }
 }

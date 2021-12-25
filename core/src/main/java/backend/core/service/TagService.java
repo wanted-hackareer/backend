@@ -32,6 +32,14 @@ public class TagService {
         return tag.getId();
     }
 
+    @Transactional
+    public Long delete(Long id) {
+        Tag tag = findByIdOrThrow(id);
+        tagRepository.delete(tag);
+
+        return tag.getId();
+    }
+
     public Tag findByIdOrThrow(Long id) {
         Tag tag = tagRepository.findById(id)
                 .orElseThrow(() -> new CustomException(TAG_NOT_FOUND));

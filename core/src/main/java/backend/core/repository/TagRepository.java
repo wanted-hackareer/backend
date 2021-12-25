@@ -18,6 +18,10 @@ public class TagRepository {
         em.persist(tag);
     }
 
+    public void delete(Tag tag) {
+        em.remove(tag);
+    }
+
     public Optional<Tag> findById(Long id) {
         List<Tag> tags = em.createQuery(
                         "select t from Tag t" +

@@ -4,13 +4,14 @@ import backend.core.domain.Basket;
 import backend.core.dto.response.BasketResponseDto;
 import backend.core.global.response.ApiResponse;
 import backend.core.service.BasketService;
-import backend.core.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static backend.core.dto.response.BasketResponseDto.BasketDeleteResponseDto;
 
 @RestController
 @Slf4j
@@ -19,6 +20,12 @@ import java.util.stream.Collectors;
 public class BasketController {
 
     private final BasketService basketService;
+
+    @DeleteMapping("/basket/{id}")
+    public BasketDeleteResponseDto deleteBasketV1(
+            @PathVariable Long id) {
+        return new BasketDeleteResponseDto(basketService.delete(id));
+    }
 
     @GetMapping("/baskets")
     public ApiResponse findAllBasketV1(

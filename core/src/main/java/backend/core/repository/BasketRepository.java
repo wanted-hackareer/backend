@@ -18,6 +18,15 @@ public class BasketRepository {
         em.persist(basket);
     }
 
+    public void deleteById(Long id) {
+        Basket basket = em.createQuery(
+                        "select b from Basket b" +
+                                " where b.id = :id", Basket.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        em.remove(basket);
+    }
+
     public Optional<Basket> findById(Long id) {
         List<Basket> baskets = em.createQuery(
                         "select b from Basket b" +
@@ -30,9 +39,9 @@ public class BasketRepository {
     public Optional<List<Basket>> findAll(int offset, int limit) {
         return Optional.of(
                 em.createQuery(
-                        "select b from Basket b", Basket.class)
-                .setFirstResult(offset)
-                .setMaxResults(limit)
-                .getResultList());
+                                "select b from Basket b", Basket.class)
+                        .setFirstResult(offset)
+                        .setMaxResults(limit)
+                        .getResultList());
     }
 }

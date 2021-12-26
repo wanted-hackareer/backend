@@ -18,7 +18,7 @@ public class Basket extends BaseTimeEntity {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "basket")
     private Member member;
 
-    @OneToMany(mappedBy = "basket")
+    @OneToMany(mappedBy = "basket", cascade = CascadeType.REMOVE)
     private List<Item> itemList = new ArrayList<>();
 
     //== 연관관계 메서드 ==//
@@ -26,6 +26,7 @@ public class Basket extends BaseTimeEntity {
         this.member = member;
     }
 
+    //== 비즈니스 로직 ==//
     @Builder
     public Basket() {
     }

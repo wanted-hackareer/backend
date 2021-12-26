@@ -38,4 +38,15 @@ public class BasketResponseDto {
                     .collect(Collectors.toList());
         }
     }
+
+    @Getter
+    public static class BasketDeleteResponseDto {
+        private Long id;
+        private LocalDateTime deletedAt;
+
+        public BasketDeleteResponseDto(Long id) {
+            this.id = id;
+            this.deletedAt = LocalDateTime.now();
+        }
+    }
 }

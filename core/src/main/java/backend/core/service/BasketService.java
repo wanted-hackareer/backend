@@ -27,10 +27,15 @@ public class BasketService {
         return basket.getId();
     }
 
+    @Transactional
+    public Long delete(Long id) {
+        basketRepository.deleteById(id);
+        return id;
+    }
+
     public Basket findByIdOrThrow(Long id) {
         Basket basket = basketRepository.findById(id)
                 .orElseThrow(() -> new CustomException(BASKET_NOT_FOUND));
-
         return basket;
     }
 

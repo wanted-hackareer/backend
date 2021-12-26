@@ -28,7 +28,7 @@ public class BasketService {
     }
 
     @Transactional
-    public Long delete(Long id) {
+    public Long deleteById(Long id) {
         basketRepository.deleteById(id);
         return id;
     }

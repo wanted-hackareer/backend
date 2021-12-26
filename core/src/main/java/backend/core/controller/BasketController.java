@@ -24,7 +24,7 @@ public class BasketController {
     @DeleteMapping("/basket/{id}")
     public BasketDeleteResponseDto deleteBasketV1(
             @PathVariable Long id) {
-        return new BasketDeleteResponseDto(basketService.delete(id));
+        return new BasketDeleteResponseDto(basketService.deleteById(id));
     }
 
     @GetMapping("/baskets")

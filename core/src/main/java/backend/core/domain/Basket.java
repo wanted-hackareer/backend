@@ -1,5 +1,6 @@
 package backend.core.domain;
 
+import backend.core.item.domain.Item;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -4,7 +4,7 @@ import backend.core.domain.Post;
 import backend.core.domain.PostStatus;
 import backend.core.domain.StaffStatus;
 import backend.core.dto.response.PostResponseDto;
-import backend.core.global.error.exception.CustomException;
+import backend.core.global.error.exception.group.MemberNotAcceptableException;
 import backend.core.global.response.ApiResponse;
 import backend.core.repository.PostSearch;
 import backend.core.service.PostService;
@@ -22,7 +22,6 @@ import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
 import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
 import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
 import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
-import static backend.core.global.error.exception.ErrorCode.MEMBER_NOT_ACCEPTABLE;
 
 @Slf4j
 @RestController
@@ -109,7 +108,7 @@ public class PostController {
 
     private void validateMemberIsAuthor(String userId, Post post) {
         if (!post.getMember().getId().equals(userId)) {
-            throw new CustomException(MEMBER_NOT_ACCEPTABLE);
+            throw new MemberNotAcceptableException();
         }
     }
 }

@@ -1,13 +1,13 @@
 package backend.core.dto.response;
 
 import backend.core.domain.Basket;
+import backend.core.item.dto.ItemInfoResponseDto;
+import backend.core.item.dto.ItemResponseDto;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static backend.core.dto.response.ItemResponseDto.ItemInfoResponseDto;
 
 @Getter
 public class BasketResponseDto {

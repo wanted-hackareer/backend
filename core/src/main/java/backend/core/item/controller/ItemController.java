@@ -1,12 +1,14 @@
-package backend.core.controller;
+package backend.core.item.controller;
 
-import backend.core.domain.Item;
-import backend.core.dto.response.ItemResponseDto;
 import backend.core.global.response.ApiResponse;
-import backend.core.repository.ItemRepository;
+import backend.core.item.domain.Item;
+import backend.core.item.dto.ItemCreateRequestDto;
+import backend.core.item.dto.ItemDeleteResponseDto;
+import backend.core.item.dto.ItemResponseDto;
+import backend.core.item.dto.ItemUpdateRequestDto;
+import backend.core.item.service.ItemService;
 import backend.core.repository.ItemSearch;
 import backend.core.service.BasketService;
-import backend.core.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,10 +18,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
-import static backend.core.dto.request.ItemRequestDto.ItemUpdateRequestDto;
-import static backend.core.dto.response.ItemResponseDto.*;
-
 @Slf4j
 @RestController
 @RequestMapping("/api/v1")
@@ -27,7 +25,6 @@ import static backend.core.dto.response.ItemResponseDto.*;
 public class ItemController {
 
     private final ItemService itemService;
-    private final BasketService basketService;
 
     @GetMapping("/item/{id}")
     public ItemResponseDto itemV1(

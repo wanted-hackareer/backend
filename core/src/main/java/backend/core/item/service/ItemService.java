@@ -1,21 +1,21 @@
-package backend.core.service;
+package backend.core.item.service;
 
 import backend.core.domain.Basket;
-import backend.core.domain.Item;
-import backend.core.global.error.exception.CustomException;
-import backend.core.repository.ItemRepository;
+import backend.core.item.domain.Item;
+import backend.core.item.dto.ItemCreateRequestDto;
+import backend.core.item.dto.ItemUpdateRequestDto;
+import backend.core.item.exception.ItemExistException;
+import backend.core.item.exception.ItemNotFoundException;
+import backend.core.item.repository.ItemRepository;
+import backend.core.item.repository.ItemSearchRepository;
 import backend.core.repository.ItemSearch;
+import backend.core.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
-import static backend.core.dto.request.ItemRequestDto.ItemUpdateRequestDto;
-import static backend.core.global.error.exception.ErrorCode.ITEM_EXIST;
-import static backend.core.global.error.exception.ErrorCode.ITEM_NOT_FOUND;
 
 @Slf4j
 @Service
@@ -24,6 +24,7 @@ import static backend.core.global.error.exception.ErrorCode.ITEM_NOT_FOUND;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final ItemSearchRepository itemSearchRepository;
     private final BasketService basketService;
 
     @Transactional
@@ -39,7 +40,7 @@ public class ItemService {
     private void validateItemName(Basket basket, String name) {
         List<Item> itemList = basket.getItemList();
         itemList.stream().filter(item -> item.getName().equals(name)).forEachOrdered(item -> {
-            throw new CustomException(ITEM_EXIST);
+            throw new ItemExistException();
         });
     }
 
@@ -59,19 +60,19 @@ public class ItemService {
 
     public Item findByIdOrThrow(Long id) {
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
+                .orElseThrow(() -> new ItemNotFoundException());
         return item;
     }
 
     public List<Item> findAllOrThrow(int offset, int limit) {
         List<Item> itemList = itemRepository.findAll(offset, limit)
-                .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
+                .orElseThrow(() -> new ItemNotFoundException());
         return itemList;
     }
 
     public List<Item> findAllBySearch(ItemSearch itemSearch) {
-        List<Item> itemList = itemRepository.findAllBySearch(itemSearch)
-                .orElseThrow(() -> new CustomException(ITEM_NOT_FOUND));
+        List<Item> itemList = itemSearchRepository.findAllBySearch(itemSearch)
+                .orElseThrow(() -> new ItemNotFoundException());
         return itemList;
     }
 }

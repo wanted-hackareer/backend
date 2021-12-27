@@ -1,7 +1,7 @@
 package backend.core.service;
 
 import backend.core.domain.Basket;
-import backend.core.global.error.exception.CustomException;
+import backend.core.global.error.exception.group.BasketNotFoundException;
 import backend.core.repository.BasketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static backend.core.global.error.exception.ErrorCode.BASKET_NOT_FOUND;
 
 @Slf4j
 @Service
@@ -35,13 +33,13 @@ public class BasketService {
 
     public Basket findByIdOrThrow(Long id) {
         Basket basket = basketRepository.findById(id)
-                .orElseThrow(() -> new CustomException(BASKET_NOT_FOUND));
+                .orElseThrow(() -> new BasketNotFoundException());
         return basket;
     }
 
     public List<Basket> findAllOrThrow(int offset, int limit) {
         List<Basket> baskets = basketRepository.findAll(offset, limit)
-                .orElseThrow(() -> new CustomException(BASKET_NOT_FOUND));
+                .orElseThrow(() -> new BasketNotFoundException());
         return baskets;
     }
 }

@@ -1,7 +1,8 @@
-package backend.core.repository;
+package backend.core.item.repository;
 
-import backend.core.domain.Item;
-import backend.core.domain.QItem;
+import backend.core.item.domain.Item;
+import backend.core.item.domain.QItem;
+import backend.core.repository.ItemSearch;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -14,36 +15,9 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class ItemRepository {
+public class ItemSearchRepository {
 
     private final EntityManager em;
-
-    public void save(Item item) {
-        em.persist(item);
-    }
-
-    public void delete(Item item) {
-        em.remove(item);
-    }
-
-    public Optional<Item> findById(Long id) {
-        List<Item> items = em.createQuery(
-                        "select i from Item i" +
-                                " where i.id = :id", Item.class)
-                .setParameter("id", id)
-                .getResultList();
-
-        return items.stream().findAny();
-    }
-
-    public Optional<List<Item>> findAll(int offset, int limit) {
-        return Optional.of(
-                em.createQuery(
-                                "select i from Item i", Item.class)
-                        .setFirstResult(offset)
-                        .setMaxResults(limit)
-                        .getResultList());
-    }
 
     public Optional<List<Item>> findAllBySearch(ItemSearch itemSearch) {
         JPAQueryFactory query = new JPAQueryFactory(em);

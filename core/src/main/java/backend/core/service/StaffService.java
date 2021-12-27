@@ -4,7 +4,7 @@ import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.Staff;
 import backend.core.domain.StaffStatus;
-import backend.core.global.error.exception.CustomException;
+import backend.core.global.error.exception.group.StaffNotFoundException;
 import backend.core.repository.StaffRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,6 @@ import java.util.List;
 
 import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
 import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
-import static backend.core.global.error.exception.ErrorCode.STAFF_NOT_FOUND;
 
 @Slf4j
 @Service
@@ -41,7 +40,7 @@ public class StaffService {
     @Transactional
     public Long updateOrThrow(StaffUpdateRequestDto dto) {
         Staff staff = staffRepository.findById(dto.getStaffId())
-                .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
+                .orElseThrow(() -> new StaffNotFoundException());
 
         staff.update(dto.getStatus());
         return staff.getId();
@@ -49,21 +48,21 @@ public class StaffService {
 
     public Staff findByIdOrThrow(Long id) {
         Staff staff = staffRepository.findById(id)
-                .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
+                .orElseThrow(() -> new StaffNotFoundException());
 
         return staff;
     }
 
     public List<Staff> findAllOrThrow(int offset, int limit) {
         List<Staff> staffs = staffRepository.findAll(offset, limit)
-                .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
+                .orElseThrow(() -> new StaffNotFoundException());
 
         return staffs;
     }
 
     public List<Staff> findByStatusOrThrow(StaffStatus status) {
         List<Staff> staffs = staffRepository.findByStatus(status)
-                .orElseThrow(() -> new CustomException(STAFF_NOT_FOUND));
+                .orElseThrow(() -> new StaffNotFoundException());
 
         return staffs;
     }

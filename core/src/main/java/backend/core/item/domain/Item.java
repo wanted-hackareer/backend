@@ -1,5 +1,7 @@
-package backend.core.domain;
+package backend.core.item.domain;
 
+import backend.core.domain.BaseTimeEntity;
+import backend.core.domain.Basket;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,7 +36,7 @@ public class Item extends BaseTimeEntity {
 
     //== 비즈니스 로직 ==//
     @Builder
-    public Item (String name, Basket basket, int quantity) {
+    public Item(String name, Basket basket, int quantity) {
         this.name = name;
         this.quantity = quantity;
         setBasket(basket);

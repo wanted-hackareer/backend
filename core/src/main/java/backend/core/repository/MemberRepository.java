@@ -19,13 +19,13 @@ public class MemberRepository {
     }
 
     public Optional<Member> findById(Long id) {
-        List<Member> member = em.createQuery(
+        Member member = em.createQuery(
                         "select m from Member m" +
                                 " join fetch m.basket b" +
                                 " where m.id = :id", Member.class)
                 .setParameter("id", id)
-                .getResultList();
-        return member.stream().findAny();
+                .getSingleResult();
+        return Optional.of(member);
     }
 
     public Optional<List<Member>> findAll(int offset, int limit) {

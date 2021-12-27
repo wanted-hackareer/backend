@@ -3,7 +3,10 @@ package backend.core.service;
 import backend.core.domain.Basket;
 import backend.core.domain.Member;
 import backend.core.dto.request.MemberRequestDto;
-import backend.core.global.error.exception.CustomException;
+import backend.core.global.error.exception.group.ExistEmailException;
+import backend.core.global.error.exception.group.ExistNicknameException;
+import backend.core.global.error.exception.group.MemberNotFoundException;
+import backend.core.global.error.exception.group.SignInFailedException;
 import backend.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +19,6 @@ import java.util.List;
 
 import static backend.core.dto.request.MemberRequestDto.MemberPasswordUpdateRequestDto;
 import static backend.core.dto.request.MemberRequestDto.MemberSignUpRequestDto;
-import static backend.core.global.error.exception.ErrorCode.*;
 
 @Slf4j
 @Service
@@ -57,31 +59,31 @@ public class MemberService {
 
     public Member findByCredentialsOrThrow(String email, String password, PasswordEncoder encoder) {
         Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new MemberNotFoundException());
 
         if (encoder.matches(password, member.getPassword())) {
             return member;
         }
 
-        throw new CustomException(LOGIN_FAILED);
+        throw new SignInFailedException();
     }
 
     public Member findByIdOrThrow(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new MemberNotFoundException());
         return member;
     }
 
     public List<Member> findAllOrThrow(int offset, int limit) {
         List<Member> members = memberRepository.findAll(offset, limit)
-                .orElseThrow(() -> new CustomException(MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new MemberNotFoundException());
         return members;
     }
 
     public Boolean isValidEmailOrThrow(String email) {
         memberRepository.findByEmail(email)
                 .ifPresent(e -> {
-                    throw new CustomException(EXIST_EMAIL);
+                    throw new ExistEmailException();
                 });
         return true;
     }
@@ -89,7 +91,7 @@ public class MemberService {
     public Boolean isValidNicknameOrThrow(String nickName) {
         memberRepository.findByNickName(nickName)
                 .ifPresent(e -> {
-                    throw new CustomException(EXIST_NICKNAME);
+                    throw new ExistNicknameException();
                 });
         return true;
     }

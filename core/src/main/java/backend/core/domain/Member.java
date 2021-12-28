@@ -1,5 +1,6 @@
 package backend.core.domain;
 
+import backend.core.basket.domain.Basket;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

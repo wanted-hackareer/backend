@@ -1,4 +1,4 @@
-package backend.core.item.controller;
+package backend.core.item;
 
 import backend.core.global.response.ApiResponse;
 import backend.core.item.domain.Item;
@@ -6,9 +6,9 @@ import backend.core.item.dto.ItemCreateRequestDto;
 import backend.core.item.dto.ItemDeleteResponseDto;
 import backend.core.item.dto.ItemResponseDto;
 import backend.core.item.dto.ItemUpdateRequestDto;
+import backend.core.item.service.ItemSearchService;
 import backend.core.item.service.ItemService;
 import backend.core.repository.ItemSearch;
-import backend.core.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 public class ItemController {
 
     private final ItemService itemService;
+    private final ItemSearchService itemSearchService;
 
     @GetMapping("/item/{id}")
     public ItemResponseDto itemV1(
@@ -54,7 +55,7 @@ public class ItemController {
     @GetMapping("/item/search")
     public ApiResponse itemSearchV1(
             @RequestParam(name = "name", defaultValue = "") String name) {
-        List<Item> itemList = itemService.findAllBySearch(new ItemSearch(name));
+        List<Item> itemList = itemSearchService.findAllBySearch(new ItemSearch(name));
 
         List<ItemResponseDto> result = itemList.stream()
                 .map(item -> new ItemResponseDto(item))

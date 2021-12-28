@@ -1,6 +1,6 @@
 package backend.core.item.dto;
 
-import backend.core.domain.Basket;
+import backend.core.basket.domain.Basket;
 import backend.core.item.domain.Item;
 import lombok.AccessLevel;
 import lombok.Getter;

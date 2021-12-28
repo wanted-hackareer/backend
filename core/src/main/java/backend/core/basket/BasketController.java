@@ -1,17 +1,16 @@
-package backend.core.controller;
+package backend.core.basket;
 
-import backend.core.domain.Basket;
-import backend.core.dto.response.BasketResponseDto;
+import backend.core.basket.domain.Basket;
+import backend.core.basket.dto.BasketDeleteResponseDto;
+import backend.core.basket.dto.BasketResponseDto;
+import backend.core.basket.service.BasketService;
 import backend.core.global.response.ApiResponse;
-import backend.core.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static backend.core.dto.response.BasketResponseDto.BasketDeleteResponseDto;
 
 @RestController
 @Slf4j

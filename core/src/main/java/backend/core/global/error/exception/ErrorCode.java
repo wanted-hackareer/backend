@@ -1,5 +1,6 @@
 package backend.core.global.error.exception;
 
+import backend.core.basket.exception.BasketNotFoundException;
 import backend.core.global.error.exception.group.*;
 import backend.core.item.exception.ItemExistException;
 import backend.core.item.exception.ItemNotFoundException;

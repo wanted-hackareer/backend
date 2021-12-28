@@ -1,6 +1,6 @@
-package backend.core.repository;
+package backend.core.basket.repository;
 
-import backend.core.domain.Basket;
+import backend.core.basket.domain.Basket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

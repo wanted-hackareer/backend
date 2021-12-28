@@ -1,6 +1,5 @@
 package backend.core.service;
 
-import backend.core.domain.Basket;
 import backend.core.domain.Member;
 import backend.core.dto.request.MemberRequestDto;
 import backend.core.global.error.exception.group.ExistEmailException;

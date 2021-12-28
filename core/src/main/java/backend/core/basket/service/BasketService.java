@@ -1,8 +1,8 @@
-package backend.core.service;
+package backend.core.basket.service;
 
-import backend.core.domain.Basket;
-import backend.core.global.error.exception.group.BasketNotFoundException;
-import backend.core.repository.BasketRepository;
+import backend.core.basket.domain.Basket;
+import backend.core.basket.exception.BasketNotFoundException;
+import backend.core.basket.repository.BasketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

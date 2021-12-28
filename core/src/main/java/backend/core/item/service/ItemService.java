@@ -1,15 +1,12 @@
 package backend.core.item.service;
 
-import backend.core.domain.Basket;
 import backend.core.item.domain.Item;
 import backend.core.item.dto.ItemCreateRequestDto;
 import backend.core.item.dto.ItemUpdateRequestDto;
 import backend.core.item.exception.ItemExistException;
 import backend.core.item.exception.ItemNotFoundException;
 import backend.core.item.repository.ItemRepository;
-import backend.core.item.repository.ItemSearchRepository;
-import backend.core.repository.ItemSearch;
-import backend.core.service.BasketService;
+import backend.core.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,7 +21,6 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    private final ItemSearchRepository itemSearchRepository;
     private final BasketService basketService;
 
     @Transactional
@@ -66,12 +62,6 @@ public class ItemService {
 
     public List<Item> findAllOrThrow(int offset, int limit) {
         List<Item> itemList = itemRepository.findAll(offset, limit)
-                .orElseThrow(() -> new ItemNotFoundException());
-        return itemList;
-    }
-
-    public List<Item> findAllBySearch(ItemSearch itemSearch) {
-        List<Item> itemList = itemSearchRepository.findAllBySearch(itemSearch)
                 .orElseThrow(() -> new ItemNotFoundException());
         return itemList;
     }

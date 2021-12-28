@@ -1,7 +1,7 @@
 package backend.core.item.domain;
 
+import backend.core.basket.domain.Basket;
 import backend.core.domain.BaseTimeEntity;
-import backend.core.domain.Basket;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

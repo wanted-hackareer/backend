@@ -1,4 +1,4 @@
-package backend.core.config;
+package backend.core.global.config;
 
 import backend.core.global.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;

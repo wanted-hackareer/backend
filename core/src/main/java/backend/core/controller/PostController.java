@@ -4,7 +4,7 @@ import backend.core.domain.Post;
 import backend.core.domain.PostStatus;
 import backend.core.domain.StaffStatus;
 import backend.core.dto.response.PostResponseDto;
-import backend.core.global.error.exception.group.MemberNotAcceptableException;
+import backend.core.member.exception.MemberNotAcceptableException;
 import backend.core.global.response.ApiResponse;
 import backend.core.repository.PostSearch;
 import backend.core.service.PostService;

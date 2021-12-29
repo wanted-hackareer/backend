@@ -1,10 +1,13 @@
-package backend.core.controller;
+package backend.core.member;
 
-import backend.core.domain.Member;
-import backend.core.dto.response.MemberResponseDto;
 import backend.core.global.response.ApiResponse;
 import backend.core.global.security.TokenProvider;
-import backend.core.service.MemberService;
+import backend.core.member.domain.Member;
+import backend.core.member.dto.MemberResponseDto;
+import backend.core.member.dto.MemberSignInRequestDto;
+import backend.core.member.dto.MemberSignInResponseDto;
+import backend.core.member.dto.MemberSignUpRequestDto;
+import backend.core.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,10 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static backend.core.dto.request.MemberRequestDto.MemberSignInRequestDto;
-import static backend.core.dto.request.MemberRequestDto.MemberSignUpRequestDto;
-import static backend.core.dto.response.MemberResponseDto.MemberSignInResponseDto;
 
 @Slf4j
 @RestController

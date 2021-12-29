@@ -1,6 +1,8 @@
 package backend.core;
 
+import backend.core.basket.domain.Basket;
 import backend.core.domain.*;
+import backend.core.item.domain.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +16,7 @@ public class InitDB {
 
     private final InitService initService;
 
-//    @PostConstruct
+    @PostConstruct
     public void init() {
         initService.dbInit();
     }

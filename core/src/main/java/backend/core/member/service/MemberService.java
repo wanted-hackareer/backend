@@ -1,12 +1,15 @@
-package backend.core.service;
+package backend.core.member.service;
 
-import backend.core.domain.Member;
-import backend.core.dto.request.MemberRequestDto;
-import backend.core.global.error.exception.group.ExistEmailException;
-import backend.core.global.error.exception.group.ExistNicknameException;
-import backend.core.global.error.exception.group.MemberNotFoundException;
-import backend.core.global.error.exception.group.SignInFailedException;
-import backend.core.repository.MemberRepository;
+import backend.core.basket.domain.Basket;
+import backend.core.member.domain.Member;
+import backend.core.member.dto.MemberPasswordUpdateRequestDto;
+import backend.core.member.dto.MemberSignUpRequestDto;
+import backend.core.member.dto.MemberUpdateRequestDto;
+import backend.core.member.exception.ExistEmailException;
+import backend.core.member.exception.ExistNicknameException;
+import backend.core.member.exception.MemberNotFoundException;
+import backend.core.member.exception.SignInFailedException;
+import backend.core.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,9 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static backend.core.dto.request.MemberRequestDto.MemberPasswordUpdateRequestDto;
-import static backend.core.dto.request.MemberRequestDto.MemberSignUpRequestDto;
 
 @Slf4j
 @Service
@@ -50,7 +50,7 @@ public class MemberService {
     }
 
     @Transactional
-    public Long updateOrThrow(MemberRequestDto.MemberUpdateRequestDto dto) {
+    public Long updateOrThrow(MemberUpdateRequestDto dto) {
         Member member = findByIdOrThrow(dto.getId());
         member.update(dto.getProfile(), dto.getNickName(), dto.getAddress());
         return member.getId();

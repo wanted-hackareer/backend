@@ -1,6 +1,7 @@
-package backend.core.domain;
+package backend.core.member.domain;
 
 import backend.core.basket.domain.Basket;
+import backend.core.domain.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,9 +1,9 @@
 package backend.core.service;
 
-import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.PostStatus;
 import backend.core.global.error.exception.group.PostNotFoundException;
+import backend.core.member.service.MemberService;
 import backend.core.repository.PostRepository;
 import backend.core.repository.PostSearch;
 import lombok.RequiredArgsConstructor;

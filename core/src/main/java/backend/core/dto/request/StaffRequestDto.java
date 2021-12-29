@@ -1,6 +1,5 @@
 package backend.core.dto.request;
 
-import backend.core.domain.Member;
 import backend.core.domain.Post;
 import backend.core.domain.Staff;
 import backend.core.domain.StaffStatus;

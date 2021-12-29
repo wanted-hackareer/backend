@@ -1,9 +1,8 @@
 package backend.core.controller;
 
-import backend.core.domain.Member;
 import backend.core.domain.Profile;
-import backend.core.dto.request.MemberRequestDto;
-import backend.core.service.MemberService;
+import backend.core.member.dto.MemberUpdateRequestDto;
+import backend.core.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,7 +52,7 @@ public class ProfileController {
 
     private void findMemberAndUpdateProfile(Long memberId, Profile profile) {
         Member member = memberService.findByIdOrThrow(memberId);
-        MemberRequestDto.MemberUpdateRequestDto dto = new MemberRequestDto.MemberUpdateRequestDto(member.getId(), profile, member.getNickName(), member.getAddress());
+        MemberUpdateRequestDto dto = new MemberUpdateRequestDto(member.getId(), profile, member.getNickName(), member.getAddress());
         memberService.updateOrThrow(dto);
     }
 

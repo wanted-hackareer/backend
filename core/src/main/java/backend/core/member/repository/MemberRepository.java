@@ -1,6 +1,6 @@
-package backend.core.repository;
+package backend.core.member.repository;
 
-import backend.core.domain.Member;
+import backend.core.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

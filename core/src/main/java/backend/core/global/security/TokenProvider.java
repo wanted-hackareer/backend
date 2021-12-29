@@ -1,6 +1,6 @@
 package backend.core.global.security;
 
-import backend.core.domain.Member;
+import backend.core.member.domain.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

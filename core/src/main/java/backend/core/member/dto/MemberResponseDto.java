@@ -1,9 +1,9 @@
-package backend.core.dto.response;
+package backend.core.member.dto;
 
 import backend.core.basket.dto.BasketResponseDto;
 import backend.core.domain.Address;
-import backend.core.domain.Member;
 import backend.core.domain.Profile;
+import backend.core.member.domain.Member;
 import lombok.Getter;
 
 import java.util.List;
@@ -34,18 +34,5 @@ public class MemberResponseDto {
         staffList = entity.getStaffList().stream()
                 .map(staff -> new StaffPostInfoResponseDto(staff))
                 .collect(Collectors.toList());
-    }
-
-    @Getter
-    public static class MemberSignInResponseDto {
-        private Long id;
-        private String email;
-        private String token;
-
-        public MemberSignInResponseDto(Member entity, String token) {
-            id = entity.getId();
-            email = entity.getEmail();
-            this.token = token;
-        }
     }
 }

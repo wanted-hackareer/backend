@@ -1,4 +1,4 @@
-package backend.core.global.error.exception.group;
+package backend.core.member.exception;
 
 import backend.core.global.error.exception.CustomException;
 

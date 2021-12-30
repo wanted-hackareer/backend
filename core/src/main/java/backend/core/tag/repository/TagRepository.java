@@ -1,6 +1,6 @@
-package backend.core.repository;
+package backend.core.tag.repository;
 
-import backend.core.domain.Tag;
+import backend.core.tag.domain.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

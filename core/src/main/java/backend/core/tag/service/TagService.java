@@ -1,17 +1,17 @@
-package backend.core.service;
+package backend.core.tag.service;
 
 import backend.core.domain.Post;
-import backend.core.domain.Tag;
-import backend.core.global.error.exception.group.TagNotFoundException;
-import backend.core.repository.TagRepository;
+import backend.core.service.PostService;
+import backend.core.tag.domain.Tag;
+import backend.core.tag.dto.TagCreateRequestDto;
+import backend.core.tag.exception.TagNotFoundException;
+import backend.core.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static backend.core.dto.request.TagRequestDto.TagCreateRequestDto;
 
 @Slf4j
 @Service

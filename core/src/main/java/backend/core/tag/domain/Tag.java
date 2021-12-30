@@ -1,5 +1,7 @@
-package backend.core.domain;
+package backend.core.tag.domain;
 
+import backend.core.domain.BaseTimeEntity;
+import backend.core.domain.Post;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,11 +9,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity @Getter
+@Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tag extends BaseTimeEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String name;

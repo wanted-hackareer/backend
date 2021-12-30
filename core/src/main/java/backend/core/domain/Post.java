@@ -1,5 +1,7 @@
 package backend.core.domain;
 
+import backend.core.member.domain.Member;
+import backend.core.tag.domain.Tag;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,7 +55,7 @@ public class Post extends BaseTimeEntity {
         this.member = member;
     }
 
-     public void setChat(Chat chat) {
+    public void setChat(Chat chat) {
         this.chat = chat;
     }
 

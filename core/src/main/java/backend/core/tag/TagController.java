@@ -1,10 +1,12 @@
-package backend.core.controller;
+package backend.core.tag;
 
-import backend.core.domain.Tag;
-import backend.core.dto.response.TagResponseDto;
 import backend.core.global.response.ApiResponse;
 import backend.core.service.PostService;
-import backend.core.service.TagService;
+import backend.core.tag.domain.Tag;
+import backend.core.tag.dto.TagCreateRequestDto;
+import backend.core.tag.dto.TagDeleteResponseDto;
+import backend.core.tag.dto.TagResponseDto;
+import backend.core.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,9 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static backend.core.dto.request.TagRequestDto.TagCreateRequestDto;
-import static backend.core.dto.response.TagResponseDto.TagDeleteResponseDto;
 
 @RestController
 @Slf4j

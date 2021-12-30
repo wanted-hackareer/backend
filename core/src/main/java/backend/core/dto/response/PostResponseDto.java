@@ -2,6 +2,7 @@ package backend.core.dto.response;
 
 import backend.core.basket.dto.BasketResponseDto;
 import backend.core.domain.Post;
+import backend.core.tag.dto.TagResponseDto;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

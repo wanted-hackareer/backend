@@ -1,7 +1,7 @@
 package backend.core.tag;
 
 import backend.core.global.response.ApiResponse;
-import backend.core.service.PostService;
+import backend.core.post.service.PostService;
 import backend.core.tag.domain.Tag;
 import backend.core.tag.dto.TagCreateRequestDto;
 import backend.core.tag.dto.TagDeleteResponseDto;

@@ -1,8 +1,8 @@
 package backend.core.service;
 
 import backend.core.domain.Chat;
-import backend.core.domain.Post;
 import backend.core.global.error.exception.group.ChatNotFoundException;
+import backend.core.post.service.PostService;
 import backend.core.repository.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

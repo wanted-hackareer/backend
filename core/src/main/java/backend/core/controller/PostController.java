@@ -1,13 +1,15 @@
 package backend.core.controller;
 
-import backend.core.domain.Post;
-import backend.core.domain.PostStatus;
 import backend.core.domain.StaffStatus;
-import backend.core.dto.response.PostResponseDto;
-import backend.core.member.exception.MemberNotAcceptableException;
 import backend.core.global.response.ApiResponse;
-import backend.core.repository.PostSearch;
-import backend.core.service.PostService;
+import backend.core.member.exception.MemberNotAcceptableException;
+import backend.core.post.domain.Post;
+import backend.core.post.domain.PostStatus;
+import backend.core.post.dto.PostCreateRequestDto;
+import backend.core.post.dto.PostResponseDto;
+import backend.core.post.dto.PostUpdateRequestDto;
+import backend.core.post.repository.PostSearch;
+import backend.core.post.service.PostService;
 import backend.core.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +20,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
-import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
 import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
 import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
 

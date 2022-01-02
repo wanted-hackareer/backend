@@ -1,12 +1,13 @@
 package backend.core.item.service;
 
+import backend.core.basket.domain.Basket;
+import backend.core.basket.service.BasketService;
 import backend.core.item.domain.Item;
 import backend.core.item.dto.ItemCreateRequestDto;
 import backend.core.item.dto.ItemUpdateRequestDto;
 import backend.core.item.exception.ItemExistException;
 import backend.core.item.exception.ItemNotFoundException;
 import backend.core.item.repository.ItemRepository;
-import backend.core.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

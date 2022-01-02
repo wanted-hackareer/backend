@@ -1,9 +1,9 @@
-package backend.core.repository;
+package backend.core.post.repository;
 
-import backend.core.domain.Post;
-import backend.core.domain.PostStatus;
-import backend.core.domain.QMember;
-import backend.core.domain.QPost;
+import backend.core.member.domain.QMember;
+import backend.core.post.domain.Post;
+import backend.core.post.domain.PostStatus;
+import backend.core.post.domain.QPost;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

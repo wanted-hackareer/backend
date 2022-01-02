@@ -1,5 +1,7 @@
 package backend.core.domain;
 
+import backend.core.member.domain.Member;
+import backend.core.post.domain.Post;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,7 +1,8 @@
-package backend.core.dto.response;
+package backend.core.post.dto;
 
 import backend.core.basket.dto.BasketResponseDto;
-import backend.core.domain.Post;
+import backend.core.dto.response.StaffResponseDto;
+import backend.core.post.domain.Post;
 import backend.core.tag.dto.TagResponseDto;
 import lombok.Getter;
 
@@ -41,20 +42,5 @@ public class PostResponseDto {
         tagList = entity.getTagList().stream()
                 .map(tag -> new TagResponseDto(tag))
                 .collect(Collectors.toList());
-    }
-
-    @Getter
-    public static class PostInfoResponseDto {
-        private Long id;
-        private String title;
-        private String description;
-        private String dayOfTheWeek;
-
-        public PostInfoResponseDto(Post entity) {
-            id = entity.getId();
-            title = entity.getTitle();
-            description = entity.getDescription();
-            dayOfTheWeek = entity.getDayOfTheWeek();
-        }
     }
 }

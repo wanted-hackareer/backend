@@ -1,6 +1,6 @@
 package backend.core.tag.dto;
 
-import backend.core.domain.Post;
+import backend.core.post.domain.Post;
 import backend.core.tag.domain.Tag;
 import lombok.AccessLevel;
 import lombok.Getter;

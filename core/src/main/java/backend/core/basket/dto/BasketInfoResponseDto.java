@@ -1,5 +1,6 @@
 package backend.core.basket.dto;
 
+import backend.core.basket.domain.Basket;
 import backend.core.item.dto.ItemInfoResponseDto;
 import lombok.Getter;
 

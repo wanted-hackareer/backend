@@ -1,10 +1,10 @@
 package backend.core.service;
 
-import backend.core.domain.Post;
 import backend.core.domain.Staff;
 import backend.core.domain.StaffStatus;
 import backend.core.global.error.exception.group.StaffNotFoundException;
 import backend.core.member.service.MemberService;
+import backend.core.post.service.PostService;
 import backend.core.repository.StaffRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

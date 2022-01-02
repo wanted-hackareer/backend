@@ -1,6 +1,6 @@
-package backend.core.repository;
+package backend.core.post.repository;
 
-import backend.core.domain.PostStatus;
+import backend.core.post.domain.PostStatus;
 import lombok.Getter;
 
 @Getter

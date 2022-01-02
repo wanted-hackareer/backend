@@ -1,4 +1,4 @@
-package backend.core.domain;
+package backend.core.post.domain;
 
 import lombok.AllArgsConstructor;
 
@@ -10,3 +10,4 @@ public enum PostStatus {
 
     private String description;
 }
+

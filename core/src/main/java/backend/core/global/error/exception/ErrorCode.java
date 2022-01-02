@@ -5,6 +5,7 @@ import backend.core.global.error.exception.group.*;
 import backend.core.item.exception.ItemExistException;
 import backend.core.item.exception.ItemNotFoundException;
 import backend.core.member.exception.*;
+import backend.core.post.exception.PostNotFoundException;
 import backend.core.tag.exception.TagNotFoundException;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package backend.core.dto.request;
 
 import backend.core.domain.Chat;
-import backend.core.domain.Post;
+import backend.core.post.domain.Post;
 import lombok.Getter;
 
 public class ChatRequestDto {

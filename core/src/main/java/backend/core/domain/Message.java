@@ -1,5 +1,6 @@
 package backend.core.domain;
 
+import backend.core.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

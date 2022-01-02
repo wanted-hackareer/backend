@@ -1,7 +1,6 @@
 package backend.core.tag.service;
 
-import backend.core.domain.Post;
-import backend.core.service.PostService;
+import backend.core.post.service.PostService;
 import backend.core.tag.domain.Tag;
 import backend.core.tag.dto.TagCreateRequestDto;
 import backend.core.tag.exception.TagNotFoundException;

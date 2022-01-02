@@ -1,20 +1,20 @@
-package backend.core.service;
+package backend.core.post.service;
 
-import backend.core.domain.Post;
-import backend.core.domain.PostStatus;
-import backend.core.global.error.exception.group.PostNotFoundException;
+import backend.core.member.domain.Member;
 import backend.core.member.service.MemberService;
-import backend.core.repository.PostRepository;
-import backend.core.repository.PostSearch;
+import backend.core.post.domain.Post;
+import backend.core.post.domain.PostStatus;
+import backend.core.post.dto.PostCreateRequestDto;
+import backend.core.post.dto.PostUpdateRequestDto;
+import backend.core.post.exception.PostNotFoundException;
+import backend.core.post.repository.PostRepository;
+import backend.core.post.repository.PostSearch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
-import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
 
 @Slf4j
 @Service

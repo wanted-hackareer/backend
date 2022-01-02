@@ -3,6 +3,7 @@ package backend.core.dto.request;
 import backend.core.domain.Chat;
 import backend.core.domain.Message;
 import backend.core.domain.MessageStatus;
+import backend.core.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

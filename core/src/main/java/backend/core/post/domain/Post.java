@@ -1,5 +1,6 @@
-package backend.core.domain;
+package backend.core.post.domain;
 
+import backend.core.domain.*;
 import backend.core.member.domain.Member;
 import backend.core.tag.domain.Tag;
 import lombok.AccessLevel;

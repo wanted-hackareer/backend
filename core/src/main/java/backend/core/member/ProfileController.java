@@ -1,6 +1,7 @@
-package backend.core.controller;
+package backend.core.member;
 
 import backend.core.domain.Profile;
+import backend.core.member.domain.Member;
 import backend.core.member.dto.MemberUpdateRequestDto;
 import backend.core.member.service.MemberService;
 import lombok.RequiredArgsConstructor;

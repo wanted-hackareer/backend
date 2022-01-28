@@ -1,4 +1,4 @@
-package backend.core.controller;
+package backend.core.post;
 
 import backend.core.domain.StaffStatus;
 import backend.core.global.response.ApiResponse;

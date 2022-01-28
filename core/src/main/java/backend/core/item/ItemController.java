@@ -8,7 +8,7 @@ import backend.core.item.dto.ItemResponseDto;
 import backend.core.item.dto.ItemUpdateRequestDto;
 import backend.core.item.service.ItemSearchService;
 import backend.core.item.service.ItemService;
-import backend.core.repository.ItemSearch;
+import backend.core.item.repository.ItemSearch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

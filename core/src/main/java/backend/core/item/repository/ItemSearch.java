@@ -1,4 +1,4 @@
-package backend.core.repository;
+package backend.core.item.repository;
 
 import lombok.Getter;
 

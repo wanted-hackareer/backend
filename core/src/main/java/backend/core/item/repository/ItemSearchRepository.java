@@ -2,7 +2,6 @@ package backend.core.item.repository;
 
 import backend.core.item.domain.Item;
 import backend.core.item.domain.QItem;
-import backend.core.repository.ItemSearch;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

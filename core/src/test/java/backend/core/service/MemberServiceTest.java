@@ -1,9 +1,13 @@
 package backend.core.service;
 
 import backend.core.domain.Address;
-import backend.core.domain.Member;
 import backend.core.domain.Profile;
 import backend.core.global.error.exception.CustomException;
+import backend.core.member.domain.Member;
+import backend.core.member.dto.MemberPasswordUpdateRequestDto;
+import backend.core.member.dto.MemberSignUpRequestDto;
+import backend.core.member.dto.MemberUpdateRequestDto;
+import backend.core.member.service.MemberService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import static backend.core.dto.request.MemberRequestDto.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -163,12 +166,12 @@ public class MemberServiceTest {
         Address address = Address.builder().city("부산광역시").district("강서구").street("아무로").build();
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-dsada.jpg").uploadFileName("프로필 이미지").build();
 
-        MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test15@gmail.com", "테스트15", "DF#Q$FWAD", address, profile);
+        MemberSignUpRequestDto dtoA = new MemberSignUpRequestDto("test15@gmail.com", "테스트15", "DF#Q$FWAD", address, profile);
+        Long memberId = memberService.save(dtoA);
 
         //when
-        Long memberId = memberService.save(dto);
-        MemberPasswordUpdateRequestDto memberPasswordUpdateRequestDto = new MemberPasswordUpdateRequestDto(memberId, "newPassword");
-        memberService.updatePasswordOrThrow(memberPasswordUpdateRequestDto, passwordEncoder);
+        MemberPasswordUpdateRequestDto dtoB = new MemberPasswordUpdateRequestDto(memberId, "newPassword");
+        memberService.updatePasswordOrThrow(dtoB, passwordEncoder);
 
         //then
         Assertions.assertTrue(passwordEncoder.matches("newPassword", memberService.findByIdOrThrow(memberId).getPassword()));

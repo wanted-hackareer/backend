@@ -1,18 +1,16 @@
 package backend.core.service;
 
-import backend.core.domain.Basket;
-import backend.core.dto.request.ItemRequestDto;
+import backend.core.basket.service.BasketService;
 import backend.core.global.error.exception.CustomException;
+import backend.core.item.dto.ItemCreateRequestDto;
+import backend.core.item.service.ItemService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-
-import static backend.core.dto.request.ItemRequestDto.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

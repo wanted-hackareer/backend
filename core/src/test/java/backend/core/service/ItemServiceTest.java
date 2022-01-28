@@ -1,7 +1,11 @@
 package backend.core.service;
 
-import backend.core.domain.*;
+import backend.core.domain.Address;
+import backend.core.domain.Profile;
 import backend.core.global.error.exception.CustomException;
+import backend.core.item.domain.Item;
+import backend.core.item.dto.ItemCreateRequestDto;
+import backend.core.item.service.ItemService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static backend.core.dto.request.ItemRequestDto.ItemCreateRequestDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

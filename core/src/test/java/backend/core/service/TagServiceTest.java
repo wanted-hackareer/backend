@@ -1,7 +1,14 @@
 package backend.core.service;
 
-import backend.core.domain.*;
+import backend.core.basket.domain.Basket;
+import backend.core.domain.Address;
+import backend.core.domain.Profile;
 import backend.core.global.error.exception.CustomException;
+import backend.core.member.domain.Member;
+import backend.core.post.domain.Post;
+import backend.core.tag.domain.Tag;
+import backend.core.tag.dto.TagCreateRequestDto;
+import backend.core.tag.service.TagService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static backend.core.dto.request.TagRequestDto.TagCreateRequestDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

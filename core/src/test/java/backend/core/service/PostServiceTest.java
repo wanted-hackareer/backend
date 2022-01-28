@@ -1,6 +1,14 @@
 package backend.core.service;
 
-import backend.core.domain.*;
+import backend.core.basket.domain.Basket;
+import backend.core.domain.Address;
+import backend.core.domain.Profile;
+import backend.core.member.domain.Member;
+import backend.core.post.domain.Post;
+import backend.core.post.domain.PostStatus;
+import backend.core.post.dto.PostCreateRequestDto;
+import backend.core.post.dto.PostUpdateRequestDto;
+import backend.core.post.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static backend.core.dto.request.PostRequestDto.PostCreateRequestDto;
-import static backend.core.dto.request.PostRequestDto.PostUpdateRequestDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

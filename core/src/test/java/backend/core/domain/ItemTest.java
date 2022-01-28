@@ -1,5 +1,6 @@
 package backend.core.domain;
 
+import backend.core.item.domain.Item;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -59,7 +60,7 @@ public class ItemTest {
         assertThat(item.getQuantity()).isEqualTo(2);
         assertThat(item.getBasket().getItemList().size()).isEqualTo(1);
     }
-    
+
     @Test
     @DisplayName("Item 삭제")
     public void deleteItem() {
@@ -69,10 +70,10 @@ public class ItemTest {
         Member member = Member.builder().email("test2@gmail.com").password("DF#Q$FWAD").address(address).basket(basket).nickName("와바라바덥덥").build();
 
         Item item = Item.builder().name("사과").basket(basket).quantity(1).build();
-        
+
         //when
         item.delete();
-        
+
         //then
         assertThat(item.getBasket().getItemList().isEmpty()).isTrue();
     }

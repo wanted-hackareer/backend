@@ -77,7 +77,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             map.put("status", errorCode.getHttpStatus().value());
             map.put("error", errorCode.getHttpStatus().name());
             map.put("code", errorCode.name());
-            map.put("message", errorCode.getDetail());
+            map.put("message", errorCode.getMessage());
 
             PrintWriter writer = response.getWriter();
             writer.write(objectMapper.writeValueAsString(map));

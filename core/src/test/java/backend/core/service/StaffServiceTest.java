@@ -1,6 +1,13 @@
 package backend.core.service;
 
-import backend.core.domain.*;
+import backend.core.Staff.domain.Staff;
+import backend.core.Staff.domain.StaffStatus;
+import backend.core.Staff.service.StaffService;
+import backend.core.basket.domain.Basket;
+import backend.core.domain.Address;
+import backend.core.domain.Profile;
+import backend.core.member.domain.Member;
+import backend.core.post.domain.Post;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
-import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
+import static backend.core.Staff.dto.StaffRequestDto.StaffCreateRequestDto;
+import static backend.core.Staff.dto.StaffRequestDto.StaffUpdateRequestDto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest

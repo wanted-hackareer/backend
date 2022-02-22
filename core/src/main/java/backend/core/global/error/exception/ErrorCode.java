@@ -1,7 +1,7 @@
 package backend.core.global.error.exception;
 
+import backend.core.Staff.exception.StaffNotFoundException;
 import backend.core.basket.exception.BasketNotFoundException;
-import backend.core.global.error.exception.group.*;
 import backend.core.item.exception.ItemExistException;
 import backend.core.item.exception.ItemNotFoundException;
 import backend.core.member.exception.*;
@@ -37,12 +37,10 @@ public enum ErrorCode {
     //    RATING_INFO_NOT_FOUND(NOT_FOUND, "평가 내용을 찾을 수 없습니다"),
     //    RATING_NOT_FOUND(NOT_FOUND, "사용자 평가를 찾을 수 없습니다"),
     MEMBER_NOT_FOUND(NOT_FOUND, "사용자를 찾을 수 없습니다", MemberNotFoundException.class),
-    CHAT_NOT_FOUND(NOT_FOUND, "채팅방을 찾을 수 없습니다", ChatNotFoundException.class),
     POST_NOT_FOUND(NOT_FOUND, "게시글을 찾을 수 없습니다", PostNotFoundException.class),
     BASKET_NOT_FOUND(NOT_FOUND, "장바구니를 찾을 수 없습니다", BasketNotFoundException.class),
     ITEM_NOT_FOUND(NOT_FOUND, "아이템을 찾을 수 없습니다", ItemNotFoundException.class),
     TAG_NOT_FOUND(NOT_FOUND, "태그를 찾을 수 없습니다", TagNotFoundException.class),
-    MESSAGE_NOT_FOUND(NOT_FOUND, "메시지를 찾을 수 없습니다", MessageNotFoundException.class),
     STAFF_NOT_FOUND(NOT_FOUND, "구성원을 찾을 수 없습니다", StaffNotFoundException.class),
     TOKEN_NOT_FOUND(NOT_FOUND, "토큰을 찾을 수 없습니다", TokenNotFoundException.class),
 
@@ -64,6 +62,6 @@ public enum ErrorCode {
         return Arrays.stream(ErrorCode.values())
                 .filter(code -> code.klass.equals(klass))
                 .findAny()
-                .orElseThrow(() -> new NotFoundClassException());
+                .orElseThrow(NotFoundClassException::new);
     }
 }

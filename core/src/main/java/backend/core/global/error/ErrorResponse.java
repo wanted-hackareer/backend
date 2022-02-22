@@ -1,15 +1,11 @@
 package backend.core.global.error;
 
 import backend.core.global.error.exception.ErrorCode;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Builder
@@ -28,7 +24,7 @@ public class ErrorResponse {
                         .status(errorCode.getHttpStatus().value())
                         .error(errorCode.getHttpStatus().name())
                         .code(errorCode.name())
-                        .message(errorCode.getDetail())
+                        .message(errorCode.getMessage())
                         .build());
     }
 

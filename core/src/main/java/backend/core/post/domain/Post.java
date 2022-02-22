@@ -1,6 +1,8 @@
 package backend.core.post.domain;
 
-import backend.core.domain.*;
+import backend.core.Staff.domain.Staff;
+import backend.core.domain.Address;
+import backend.core.domain.BaseTimeEntity;
 import backend.core.member.domain.Member;
 import backend.core.tag.domain.Tag;
 import lombok.AccessLevel;
@@ -39,14 +41,8 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "post")
-    private Chat chat;
-
     @OneToMany(mappedBy = "post")
     private List<Staff> staffList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "post")
-    private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "post")
     private List<Tag> tagList = new ArrayList<>();
@@ -54,10 +50,6 @@ public class Post extends BaseTimeEntity {
     //== 연관관계 메서드 ==//
     public void setMember(Member member) {
         this.member = member;
-    }
-
-    public void setChat(Chat chat) {
-        this.chat = chat;
     }
 
     //== 비즈니스 로직 ==//

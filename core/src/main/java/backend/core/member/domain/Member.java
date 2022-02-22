@@ -1,7 +1,11 @@
 package backend.core.member.domain;
 
+import backend.core.Staff.domain.Staff;
 import backend.core.basket.domain.Basket;
-import backend.core.domain.*;
+import backend.core.domain.Address;
+import backend.core.domain.BaseTimeEntity;
+import backend.core.domain.Profile;
+import backend.core.domain.Role;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

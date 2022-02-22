@@ -1,5 +1,6 @@
 package backend.core.tag.service;
 
+import backend.core.post.domain.Post;
 import backend.core.post.service.PostService;
 import backend.core.tag.domain.Tag;
 import backend.core.tag.dto.TagCreateRequestDto;

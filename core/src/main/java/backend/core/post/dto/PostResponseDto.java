@@ -1,7 +1,7 @@
 package backend.core.post.dto;
 
 import backend.core.basket.dto.BasketResponseDto;
-import backend.core.dto.response.StaffResponseDto;
+import backend.core.Staff.dto.StaffResponseDto;
 import backend.core.post.domain.Post;
 import backend.core.tag.dto.TagResponseDto;
 import lombok.Getter;

@@ -1,6 +1,7 @@
 package backend.core.post;
 
-import backend.core.domain.StaffStatus;
+import backend.core.Staff.domain.StaffStatus;
+import backend.core.Staff.service.StaffService;
 import backend.core.global.response.ApiResponse;
 import backend.core.member.exception.MemberNotAcceptableException;
 import backend.core.post.domain.Post;
@@ -10,7 +11,6 @@ import backend.core.post.dto.PostResponseDto;
 import backend.core.post.dto.PostUpdateRequestDto;
 import backend.core.post.repository.PostSearch;
 import backend.core.post.service.PostService;
-import backend.core.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,8 +20,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
-import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
+import static backend.core.Staff.dto.StaffRequestDto.StaffCreateRequestDto;
+import static backend.core.Staff.dto.StaffRequestDto.StaffUpdateRequestDto;
 
 @Slf4j
 @RestController

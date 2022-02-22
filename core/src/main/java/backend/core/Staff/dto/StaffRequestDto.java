@@ -1,7 +1,7 @@
-package backend.core.dto.request;
+package backend.core.Staff.dto;
 
-import backend.core.domain.Staff;
-import backend.core.domain.StaffStatus;
+import backend.core.Staff.domain.Staff;
+import backend.core.Staff.domain.StaffStatus;
 import backend.core.member.domain.Member;
 import backend.core.post.domain.Post;
 import lombok.AccessLevel;

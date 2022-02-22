@@ -1,11 +1,13 @@
-package backend.core.service;
+package backend.core.Staff.service;
 
-import backend.core.domain.Staff;
-import backend.core.domain.StaffStatus;
-import backend.core.global.error.exception.group.StaffNotFoundException;
+import backend.core.Staff.domain.Staff;
+import backend.core.Staff.domain.StaffStatus;
+import backend.core.Staff.exception.StaffNotFoundException;
+import backend.core.Staff.repository.StaffRepository;
+import backend.core.member.domain.Member;
 import backend.core.member.service.MemberService;
+import backend.core.post.domain.Post;
 import backend.core.post.service.PostService;
-import backend.core.repository.StaffRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static backend.core.dto.request.StaffRequestDto.StaffCreateRequestDto;
-import static backend.core.dto.request.StaffRequestDto.StaffUpdateRequestDto;
+import static backend.core.Staff.dto.StaffRequestDto.StaffCreateRequestDto;
+import static backend.core.Staff.dto.StaffRequestDto.StaffUpdateRequestDto;
 
 @Slf4j
 @Service

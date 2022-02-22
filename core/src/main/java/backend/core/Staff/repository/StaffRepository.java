@@ -1,7 +1,7 @@
-package backend.core.repository;
+package backend.core.Staff.repository;
 
-import backend.core.domain.Staff;
-import backend.core.domain.StaffStatus;
+import backend.core.Staff.domain.Staff;
+import backend.core.Staff.domain.StaffStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

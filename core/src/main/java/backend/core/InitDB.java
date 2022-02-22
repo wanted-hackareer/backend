@@ -1,8 +1,14 @@
 package backend.core;
 
+import backend.core.Staff.domain.Staff;
+import backend.core.Staff.domain.StaffStatus;
 import backend.core.basket.domain.Basket;
-import backend.core.domain.*;
+import backend.core.domain.Address;
+import backend.core.domain.Profile;
 import backend.core.item.domain.Item;
+import backend.core.member.domain.Member;
+import backend.core.post.domain.Post;
+import backend.core.tag.domain.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

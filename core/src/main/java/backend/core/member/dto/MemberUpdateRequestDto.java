@@ -1,7 +1,7 @@
 package backend.core.member.dto;
 
-import backend.core.domain.Address;
-import backend.core.domain.Profile;
+import backend.core.global.domain.Address;
+import backend.core.global.domain.Profile;
 import lombok.Getter;
 
 @Getter

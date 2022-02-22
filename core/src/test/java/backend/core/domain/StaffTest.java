@@ -1,6 +1,7 @@
 package backend.core.domain;
 
 
+import backend.core.global.domain.Address;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

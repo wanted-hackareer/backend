@@ -1,6 +1,6 @@
 package backend.core.global.file;
 
-import backend.core.domain.Profile;
+import backend.core.global.domain.Profile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

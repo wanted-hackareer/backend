@@ -1,7 +1,7 @@
 package backend.core.Staff.dto;
 
 import backend.core.Staff.domain.Staff;
-import backend.core.domain.Address;
+import backend.core.global.domain.Address;
 import lombok.Getter;
 
 @Getter

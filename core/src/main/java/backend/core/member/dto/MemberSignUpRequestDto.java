@@ -1,8 +1,8 @@
 package backend.core.member.dto;
 
 import backend.core.basket.domain.Basket;
-import backend.core.domain.Address;
-import backend.core.domain.Profile;
+import backend.core.global.domain.Address;
+import backend.core.global.domain.Profile;
 import backend.core.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -2,7 +2,6 @@ package backend.core.Staff.dto;
 
 import backend.core.Staff.domain.Staff;
 import backend.core.Staff.domain.StaffStatus;
-import backend.core.domain.Address;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

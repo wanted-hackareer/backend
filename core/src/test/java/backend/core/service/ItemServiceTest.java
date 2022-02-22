@@ -1,7 +1,7 @@
 package backend.core.service;
 
-import backend.core.domain.Address;
-import backend.core.domain.Profile;
+import backend.core.global.domain.Address;
+import backend.core.global.domain.Profile;
 import backend.core.global.error.exception.CustomException;
 import backend.core.item.domain.Item;
 import backend.core.item.dto.ItemCreateRequestDto;

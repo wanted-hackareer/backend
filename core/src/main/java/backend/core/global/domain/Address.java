@@ -1,4 +1,4 @@
-package backend.core.domain;
+package backend.core.global.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;

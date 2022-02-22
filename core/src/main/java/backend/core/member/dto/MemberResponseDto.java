@@ -2,8 +2,8 @@ package backend.core.member.dto;
 
 import backend.core.Staff.dto.StaffPostInfoResponseDto;
 import backend.core.basket.dto.BasketResponseDto;
-import backend.core.domain.Address;
-import backend.core.domain.Profile;
+import backend.core.global.domain.Address;
+import backend.core.global.domain.Profile;
 import backend.core.member.domain.Member;
 import lombok.Getter;
 

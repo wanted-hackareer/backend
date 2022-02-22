@@ -1,6 +1,6 @@
 package backend.core.tag.domain;
 
-import backend.core.domain.BaseTimeEntity;
+import backend.core.global.domain.BaseTimeEntity;
 import backend.core.post.domain.Post;
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package backend.core.controller;
 
-import backend.core.domain.Address;
-import backend.core.domain.Profile;
+import backend.core.global.domain.Address;
+import backend.core.global.domain.Profile;
 import backend.core.member.domain.Member;
 import backend.core.member.dto.MemberSignUpRequestDto;
 import backend.core.member.service.MemberService;

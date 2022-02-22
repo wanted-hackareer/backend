@@ -1,8 +1,8 @@
 package backend.core.service;
 
 import backend.core.basket.domain.Basket;
-import backend.core.domain.Address;
-import backend.core.domain.Profile;
+import backend.core.global.domain.Address;
+import backend.core.global.domain.Profile;
 import backend.core.global.error.exception.CustomException;
 import backend.core.member.domain.Member;
 import backend.core.post.domain.Post;

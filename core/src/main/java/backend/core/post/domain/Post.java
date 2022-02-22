@@ -1,8 +1,8 @@
 package backend.core.post.domain;
 
 import backend.core.Staff.domain.Staff;
-import backend.core.domain.Address;
-import backend.core.domain.BaseTimeEntity;
+import backend.core.global.domain.Address;
+import backend.core.global.domain.BaseTimeEntity;
 import backend.core.member.domain.Member;
 import backend.core.tag.domain.Tag;
 import lombok.AccessLevel;

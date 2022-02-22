@@ -1,7 +1,9 @@
 package backend.core.domain;
 
+import backend.core.basket.domain.Basket;
 import backend.core.global.domain.Address;
 import backend.core.global.domain.Profile;
+import backend.core.member.domain.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +30,7 @@ public class MemberTest {
         assertThat(member.getAddress()).isEqualTo(address);
         assertThat(member.getProfile()).isEqualTo(profile);
     }
-    
+
     @Test
     @DisplayName("member 수정 - address")
     public void updateAddress() {
@@ -37,11 +39,11 @@ public class MemberTest {
         Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
         Basket basket = Basket.builder().build();
         Member member = Member.builder().email("test@gmail.com").password("DF#Q$FWAD").address(address).nickName("테스트2").basket(basket).profile(profile).build();
-        
+
         //when
         Address updateAddress = Address.builder().city("서울시").district("강남구").street("강남로").build();
         member.update(member.getProfile(), member.getNickName(), updateAddress);
-        
+
         //then
         assertThat(member.getAddress().getCity()).isEqualTo(updateAddress.getCity());
         assertThat(member.getAddress().getDistrict()).isEqualTo(updateAddress.getDistrict());

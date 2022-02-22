@@ -1,8 +1,15 @@
 package backend.core.domain;
 
+import backend.core.basket.domain.Basket;
 import backend.core.global.domain.Address;
+import backend.core.member.domain.Member;
+import backend.core.post.domain.Post;
+import backend.core.tag.domain.Tag;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class TagTest {
 

@@ -1,5 +1,6 @@
 package backend.core.service;
 
+import backend.core.basket.domain.Basket;
 import backend.core.basket.service.BasketService;
 import backend.core.global.error.exception.CustomException;
 import backend.core.item.dto.ItemCreateRequestDto;

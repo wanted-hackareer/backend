@@ -1,11 +1,13 @@
 package backend.core.service;
 
+import backend.core.basket.domain.Basket;
 import backend.core.global.domain.Address;
 import backend.core.global.domain.Profile;
 import backend.core.global.error.exception.CustomException;
 import backend.core.item.domain.Item;
 import backend.core.item.dto.ItemCreateRequestDto;
 import backend.core.item.service.ItemService;
+import backend.core.member.domain.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

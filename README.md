@@ -24,9 +24,11 @@ tag, item은 원래 1번에 하나의 값만 받아와서 저장하는 방식이
 
 ---
 
+#### AuthenticationPrincipal 통합 테스트 코드 작성
+WithSecurityContextFactory 인터페이스를 구현한 WithAuthMemberSecurityContextFactory 클래스를 만들어 WithAuthMember 어노테이션에 저장된 값을 기준으로 회원 정보를 SecurityContext에 저장하는 것으로 문제를 해결하였습니다.
+
 ### 남은 해야 할 일
-- spring-websocket을 사용하여 게시글마다 채팅방을 하나씩 만들어서 websocket 통신으로 채팅 및 데이터베이스에 저장
-- restdocs 사용해여 controller 테스크 코드 작성 및 문서화
+- restdocs 사용하여 controller 테스크 코드 작성 및 문서화
 
 ### 사용 기술
 - spring boot starter (validation, data-jpa, web, security)

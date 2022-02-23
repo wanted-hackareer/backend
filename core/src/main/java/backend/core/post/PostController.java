@@ -34,13 +34,12 @@ public class PostController {
 
     @PostMapping("/post")
     public PostResponseDto save(
-            @AuthenticationPrincipal String memberId,
+            @AuthenticationPrincipal Long memberId,
             @Valid @RequestBody PostCreateRequestDto dto) {
-        Long id = Long.parseLong(memberId);
-        Long postId = postService.save(dto, id);
+        Long postId = postService.save(dto, memberId);
         Post post = postService.findByIdOrThrow(postId);
 
-        setAuthorToStaff(id, postId);
+        setAuthorToStaff(memberId, postId);
         return new PostResponseDto(post);
     }
 
@@ -51,8 +50,7 @@ public class PostController {
 
     private Long createStaff(Long memberId, Long postId) {
         StaffCreateRequestDto createDto = new StaffCreateRequestDto(postId, memberId);
-        Long staffId = staffService.save(createDto);
-        return staffId;
+        return staffService.save(createDto);
     }
 
     private void updateStaffStatusToAccept(Long staffId) {
@@ -96,7 +94,7 @@ public class PostController {
 
     @PutMapping("/post/{id}")
     public PostResponseDto postV1(
-            @AuthenticationPrincipal String userId,
+            @AuthenticationPrincipal Long userId,
             @PathVariable Long id,
             @Valid @RequestBody PostUpdateRequestDto dto) {
         Post post = postService.findByIdOrThrow(id);
@@ -106,7 +104,7 @@ public class PostController {
         return new PostResponseDto(post);
     }
 
-    private void validateMemberIsAuthor(String userId, Post post) {
+    private void validateMemberIsAuthor(Long userId, Post post) {
         if (!post.getMember().getId().equals(userId)) {
             throw new MemberNotAcceptableException();
         }

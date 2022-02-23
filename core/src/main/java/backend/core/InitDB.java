@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 
 @Component
 @RequiredArgsConstructor
+@org.springframework.context.annotation.Profile("local")
 public class InitDB {
 
     private final InitService initService;

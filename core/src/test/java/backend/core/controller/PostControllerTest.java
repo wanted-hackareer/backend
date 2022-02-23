@@ -1,31 +1,32 @@
 package backend.core.controller;
 
-import backend.core.global.domain.Address;
-import backend.core.global.domain.Profile;
+import backend.core.controller.security.auth.WithAuthMember;
 import backend.core.member.domain.Member;
-import backend.core.member.dto.MemberSignUpRequestDto;
 import backend.core.member.service.MemberService;
+import backend.core.post.domain.PostStatus;
 import backend.core.post.dto.PostCreateRequestDto;
+import backend.core.post.dto.PostUpdateRequestDto;
 import backend.core.post.service.PostService;
-import org.junit.Before;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+@Slf4j
 @Transactional
 public class PostControllerTest extends ApiDocumentationTest {
 
@@ -35,19 +36,9 @@ public class PostControllerTest extends ApiDocumentationTest {
     @Autowired
     private MemberService memberService;
 
-    private Member member;
-
-    @Before // @BeforeEach -> Junit5
-    public void init() {
-        Address address = Address.builder().city("서울시").district("강동구").street("미아로").build();
-        Profile profile = Profile.builder().storeFileName("ASDAS-asDASDAS-aSDSA.jpg").uploadFileName("프로필 이미지").build();
-        MemberSignUpRequestDto dto = new MemberSignUpRequestDto("test@gmail.com", "테스트", "12312311", address, profile);
-        Long id = memberService.save(dto);
-        member = memberService.findByIdOrThrow(id);
-    }
-
     @Test
     @DisplayName("[api] post 저장")
+    @WithAuthMember(email = "test1@gmail.com")
     public void save() throws Exception {
         //given
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
@@ -56,31 +47,31 @@ public class PostControllerTest extends ApiDocumentationTest {
         ResultActions result = mockMvc.perform(post("/api/v1/post")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content("memberId:" + member.getId())
                 .content(objectMapper.writeValueAsString(dto))
                 .accept(MediaType.APPLICATION_JSON));
 
         //then
         result.andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value(dto.getTitle()))
-                .andExpect(jsonPath("$.author").value(member.getNickName()))
-                .andDo(document("post-생성",
+                .andExpect(jsonPath("$.description").value(dto.getDescription()))
+                .andDo(document("post_생성",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("title").type(JsonFieldType.STRING).description("게시글 제목"),
                                 fieldWithPath("description").type(JsonFieldType.STRING).description("게시글 설명글"),
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("작성 회원 id"),
                                 fieldWithPath("maximum").type(JsonFieldType.NUMBER).description("게시글 모집 인원"),
                                 fieldWithPath("dayOfTheWeek").type(JsonFieldType.STRING).description("가능한 요일 정보")
                         )));
     }
 
-    //TODO 전체 조회, id 조회, 수정, 검색 테스트
     @Test
-    @DisplayName("[api] post 조회")
+    @DisplayName("[api] post id 조회")
+    @WithAuthMember(email = "test@gmail.com", password = "12312311")
     public void findById() throws Exception {
         //given
+        Member member = getAuthenticationMember();
+
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         Long postId = postService.save(dto, member.getId());
 
@@ -95,8 +86,76 @@ public class PostControllerTest extends ApiDocumentationTest {
                 .andExpect(jsonPath("$.author").value(member.getNickName()))
                 .andExpect(jsonPath("$.title").value(dto.getTitle()))
                 .andExpect(jsonPath("$.dayOfTheWeek").value(dto.getDayOfTheWeek()))
-                .andDo(document("post-id로 조회",
+                .andDo(document("post_id_조회",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    @DisplayName("[api] post 전체 조회")
+    @WithAuthMember(email = "test@gmail.com", password = "12312311")
+    public void findAll() throws Exception {
+        //given
+        Member member = getAuthenticationMember();
+
+        PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목1", "테스트 본문1", 2, "월, 화");
+        PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", 3, "월, 화, 수");
+        postService.save(dto1, member.getId());
+        postService.save(dto2, member.getId());
+
+        //when
+        ResultActions result = mockMvc.perform(get("/api/v1/posts")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.count").value(2))
+                .andDo(document("post_전체_조회",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())));
+    }
+
+    @Test
+    @DisplayName("[api] post 수정")
+    @WithAuthMember(email = "test@gmail.com", password = "12312311")
+    public void updatePost() throws Exception {
+        //given
+        Member authMember = getAuthenticationMember();
+
+        PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목1", "테스트 본문1", 2, "월, 화");
+        Long postId = postService.save(dto, authMember.getId());
+
+        //when
+        PostUpdateRequestDto updateDto = new PostUpdateRequestDto(postId, "수정된 제목1", "수정된 본문1", 3, PostStatus.ACCESS, dto.getDayOfTheWeek());
+        ResultActions result = mockMvc.perform(put("/api/v1/post/" + postId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(objectMapper.writeValueAsString(updateDto)));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(postId))
+                .andExpect(jsonPath("$.title").value(updateDto.getTitle()))
+                .andExpect(jsonPath("$.author").value(authMember.getNickName()))
+                .andExpect(jsonPath("$.description").value(updateDto.getDescription()))
+                .andExpect(jsonPath("$.dayOfTheWeek").value(updateDto.getDayOfTheWeek()))
+                .andDo(document("post_수정",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        requestFields(
+                                fieldWithPath("postId").type(JsonFieldType.NUMBER).description("게시글 id"),
+                                fieldWithPath("title").type(JsonFieldType.STRING).description("게시글 제목"),
+                                fieldWithPath("description").type(JsonFieldType.STRING).description("게시글 설명"),
+                                fieldWithPath("maximum").type(JsonFieldType.NUMBER).description("게시글 참여 최대 인원"),
+                                fieldWithPath("status").type(JsonFieldType.STRING).description("게시글 상태"),
+                                fieldWithPath("dayOfTheWeek").type(JsonFieldType.STRING).description("장보기 가능 날짜")
+                        )));
+    }
+
+    private Member getAuthenticationMember() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Long principal = (Long) context.getAuthentication().getPrincipal();
+        return memberService.findByIdOrThrow(principal);
     }
 }

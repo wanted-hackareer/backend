@@ -36,19 +36,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = parseBearerToken(request);
-            log.info("Filter is running...");
+            String memberId = tokenProvider.validateAndGetUserId(token);
 
-            if (token != null && !token.equalsIgnoreCase("null")) {
-                String memberId = tokenProvider.validateAndGetUserId(token);
-                log.info("Authenticated member ID: {}", memberId);
+            AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberId, null, AuthorityUtils.NO_AUTHORITIES);
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(memberId, null, AuthorityUtils.NO_AUTHORITIES);
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
-                securityContext.setAuthentication(authentication);
-                SecurityContextHolder.setContext(securityContext);
-            }
+            SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
+            securityContext.setAuthentication(authentication);
+            SecurityContextHolder.setContext(securityContext);
         } catch (ExpiredJwtException e) {
             e.printStackTrace();
             log.info("expired token exception");

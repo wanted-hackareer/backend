@@ -53,8 +53,8 @@ public class MemberController {
 
     @GetMapping("/member")
     public MemberResponseDto memberV1(
-            @AuthenticationPrincipal String userId) {
-        Member member = memberService.findByIdOrThrow(Long.parseLong(userId));
+            @AuthenticationPrincipal Long userId) {
+        Member member = memberService.findByIdOrThrow(userId);
 
         log.info("Authenticated userId = {}", userId);
         return new MemberResponseDto(member);

@@ -1,5 +1,6 @@
 package backend.core.controller;
 
+import backend.core.controller.security.auth.TestAuthMemberService;
 import backend.core.controller.security.auth.WithAuthMember;
 import backend.core.member.domain.Member;
 import backend.core.member.service.MemberService;
@@ -13,8 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +34,9 @@ public class PostControllerTest extends ApiDocumentationTest {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private TestAuthMemberService testAuthMemberService;
 
     @Test
     @DisplayName("[api] post 저장")
@@ -70,7 +72,7 @@ public class PostControllerTest extends ApiDocumentationTest {
     @WithAuthMember(email = "test@gmail.com", password = "12312311")
     public void findById() throws Exception {
         //given
-        Member member = getAuthenticationMember();
+        Member member = testAuthMemberService.getAuthenticationMember();
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목", "테스트 본문", 3, "월, 화, 수");
         Long postId = postService.save(dto, member.getId());
@@ -96,7 +98,7 @@ public class PostControllerTest extends ApiDocumentationTest {
     @WithAuthMember(email = "test@gmail.com", password = "12312311")
     public void findAll() throws Exception {
         //given
-        Member member = getAuthenticationMember();
+        Member member = testAuthMemberService.getAuthenticationMember();
 
         PostCreateRequestDto dto1 = new PostCreateRequestDto("테스트 제목1", "테스트 본문1", 2, "월, 화");
         PostCreateRequestDto dto2 = new PostCreateRequestDto("테스트 제목2", "테스트 본문2", 3, "월, 화, 수");
@@ -121,7 +123,7 @@ public class PostControllerTest extends ApiDocumentationTest {
     @WithAuthMember(email = "test@gmail.com", password = "12312311")
     public void updatePost() throws Exception {
         //given
-        Member authMember = getAuthenticationMember();
+        Member authMember = testAuthMemberService.getAuthenticationMember();
 
         PostCreateRequestDto dto = new PostCreateRequestDto("테스트 제목1", "테스트 본문1", 2, "월, 화");
         Long postId = postService.save(dto, authMember.getId());
@@ -151,11 +153,5 @@ public class PostControllerTest extends ApiDocumentationTest {
                                 fieldWithPath("status").type(JsonFieldType.STRING).description("게시글 상태"),
                                 fieldWithPath("dayOfTheWeek").type(JsonFieldType.STRING).description("장보기 가능 날짜")
                         )));
-    }
-
-    private Member getAuthenticationMember() {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Long principal = (Long) context.getAuthentication().getPrincipal();
-        return memberService.findByIdOrThrow(principal);
     }
 }

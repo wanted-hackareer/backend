@@ -31,11 +31,11 @@ public class TokenProvider {
                 .compact();
     }
 
-    public String validateAndGetUserId(String token) {
+    public Long validateAndGetUserId(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token).getBody();
 
-        return claims.getSubject();
+        return Long.parseLong(claims.getSubject());
     }
 }
